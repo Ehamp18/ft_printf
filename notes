@@ -1,0 +1,234 @@
+distribution table in c
+
+
+/*SIDE INFORMATION*/
+
+** Make sure the code is clean and easy to read by the end
+** The archieve file will be called libftprintf.a
+** No errors (like usual)  (Segmentation fault, bus error, double free, etc).
+
+
+/*MAIN INFORMATION*/
+
+** Your function will be called ft_printf and will be prototyped similarly 
+-- to printf.
+
+** You won’t do the buffer management in the printf function.
+** Have to handle the conversion csp
+** Have to handle the conversion diouxX with flags: hh, h, l, ll
+** Have to handle the conversion f with flags l, L
+** %% (??)
+** Must handle the flags #, 0, -, + and space
+** Must handle the minimum field-width (??)
+** Must handle the precision (the amount of numbers shown after decimal point)
+-- EX. “%.5f”,789.65328578392 == 789.65329
+-- A floating-point variable can represent a wider range of numbers than a
+-- fixed-point variable of the same bit width at the cost of precision. A signed
+-- 32-bit integer variable has a maximum value of 231 − 1 = 2,147,483,647,
+-- whereas an IEEE 754 32-bit base-2 floating-point variable has a maximum value
+-- of (2 − 2−23) × 2127 ≈ 3.4028235 × 1038.
+
+** man 3 printf (starts on line 43 & ends on line 56)
+** man 3 stdarg 
+
+
+/* BONUS INFORMATION*/
+
+** conversion management e & g
+-- [Be careful, your L flag must works with both of them to validate this bonus]
+
+** Detailed flags *, $, '
+** non-existing flags management
+-- %b to print in binary
+-- %r to print a string of non-printable characters
+-- %k to print a date in any ordinary ISO format etc.
+
+** Management of alter tools for colors, fd or other fun stuff like that
+
+/* MAN PAGE INFORMATION */
+
+** The printf utility formats and prints its arguments, after the first,
+-- under control of the format.
+
+** The format is a character string which contains three types of objects:
+-- plain characters, which are simply copied to standard output,
+-- character escape sequences which are converted and copied to the standard
+-- output,
+-- format specifications, each of which causes printing of the next
+-- successive argument
+
+**  The arguments after the first are treated as strings if the corresponding
+-- format is either c, b or s; otherwise it is evaluated as a C constant, with
+-- the following extensions:
+	o A leading plus or minus sign is allowed.
+	o If the leading character is a single or double quote, the value is the
+	--character code of the next character.
+
+** The format string is composed of zero or more directives: ordinary characters
+-- (not %), which are copied unchanged to the output stream; and con-version 
+-- specifications, each of which results in fetching zero or more subsequent 
+-- arguments.
+
+** Each conversion specification is introduced by the % character.
+-- The arguments must correspond properly (after type promotion) with the
+-- conversion specifier.
+
+** An optional field, consisting of a decimal digit string followed by a $,
+-- specifying the next argument to access.  If this field is not provided, the
+-- argument following the last argument accessed will be used.  Arguments are
+-- numbered starting at 1.  If unaccessed arguments in the format string are
+-- interspersed with ones that are accessed the results will be indeterminate.
+
+** `#':  The value should be converted to an ``alternate form''.
+-- For c, d, i, n, p, s, and u conversions, this option has no effect.
+-- For o conversions, the precision of the number is increased to force the
+-- first character of the output string to a zero.  For x and X conversions, a
+-- non-zero result has the string `0x' (or `0X' for X conversions) prepended to
+-- it.  For a, A, e, E, f, F, g, and G conversions, the result will always
+-- contain a decimal point, even if no digits follow it (normally, a decimal
+-- point appears in the results of those conversions only if a digit follows).
+-- For g and G conversions, trailing zeros are not removed from the result as
+-- they would otherwise be.
+
+** `0' (zero):  Zero padding.
+-- For all conversions except n, the converted value is padded on the left with
+-- zeros rather than blanks.  If aprecision is given with a numeric conversion 
+-- (d, i, o, u, i, x, and X), the 0 flag is ignored.
+
+** `-`:  A negative field width flag; the converted value is to be left adjusted
+-- on the field boundary.  Except for n conversions, the converted value is
+-- padded on the right with blanks, rather than on the left with blanks or zeros
+-- .  A - overrides a 0 if both are given.
+
+** ` ' (space):  A blank should be left before a positive number produced by a
+-- signed conversion (a, A, d, e, E, f, F, g, G, or i).
+
+** `+':  A sign must always be placed before a number produced by a signed
+-- conversion.  A + overrides a space if both are used.
+
+** `'' (apostrophe)
+-- Decimal conversions (d, u, or i) or the integral portion of a floating point
+-- conversion (f or F) should be grouped and sepa-rated by thousands using the
+-- non-monetary separator returned by localeconv(3).
+
+** An optional decimal digit string specifying a minimum field width.  If the
+-- converted value has fewer characters than the field width, it ill be padded
+-- with spaces on the left (or right, if the left-adjustment flag has been given
+-- ) to fill out the field width.
+
+** An optional precision, in the form of a period . followed by an optional
+-- digit string.  If the digit string is omitted, the precision is taken as
+-- zero.  This gives the minimum number of digits to appear for d, i, o, u, x,
+-- and X conversions, the number of digits to appear after the decimal-point
+-- for a, A, e, E, f, and F conversions, the maximum number of significant
+-- digits for g and G conversions, or the maximum number of characters to be
+-- printed from a string for s conversions.
+
+** An optional length modifier, that specifies the size of the argument.  The
+-- following length modifiers are valid for the d, i, n, o, u, x, or X
+-- conversion:
+
+-- ** Modifier			d, i			o, u, x, X				n
+-- ** hh				signed char		unsigned char			signed char *
+-- ** h					short			unsigned short			short *
+-- ** l (ell)			long			unsigned long			long *
+-- ** ll (ell ell)		long long 		unsigned long long		long long *
+-- ** j					intmax_t 		uintmax_t				intmax_t *
+-- ** t					ptrdiff_t		(see note)				ptrdiff_t *
+-- ** z					(see 199)		size_t					(see note)
+-- ** q (deprecated)	quad_t			u_quad_t				quad_t *
+
+** length modifier is valid for the a, A, e, E, f, F, g, or G conversion:
+-- l (ell):	double (ignored, same behavior as without it) 
+-- L:		long double
+
+** The following length modifier is valid for the c or s conversion:
+-- Modifier		c			s
+-- l (ell)		wint_t		wchar_t *
+
+** va_start
+-- enables access to variadic function arguments
+
+** va_arg
+-- accesses the next variadic function argument
+
+** va_copy (C99)
+-- makes a copy of the variadic function arguments
+
+** va_end
+-- ends traversal of the variadic function arguments
+-- (function macro)
+
+** va_list
+-- holds the information needed by va_start, va_arg, va_end, and va_copy
+-- (typedef)
+
+** %% means to print a percent sign
+
+** The triple dots in the function call are called ellipsis
+
+
+/* ENDING character*/
+
+** \a      Write a <bell> character.
+** \b      Write a <backspace> character.
+** \c      Ignore remaining characters in this string.
+** \f      Write a <form-feed> character.
+** \n      Write a <new-line> character.
+** \r      Write a <carriage return> character.
+** \t      Write a <tab> character.
+** \v      Write a <vertical tab> character.
+** \'      Write a <single quote> character.
+** \\      Write a backslash character.
+** \num    Write a byte whose value is the 1-, 2-, or 3-digit octal number num.
+-- Multibyte characters can be constructed using multiple \num sequences.
+
+/* FORMAT CHARACTERS */
+** diouXx:  The argument is printed as a signed decimal (d or i), unsigned
+-- octal, unsigned decimal, or unsigned hexadecimal (X or x), respectively.
+
+** fF:  The argument is printed in the style `[-]ddd.ddd' where the number of
+-- d's after the decimal point is equal to the precision specification for the
+-- argument.  If the precision is missing, 6 digits are given; if the precision
+-- is explicitly 0, no digits and no decimal point are printed.
+-- The values infinity and NaN are printed as `inf' and `nan', respectively.
+
+** eE:  The argument is printed in the style e `[-d.ddd+-dd]' where there is one
+-- digit before the decimal point and the number after is equal to the precision
+-- specification for the argument; when the precision is missing, 6 digits are 
+-- produced.  The values infinity and NaN areprinted as `inf' and `nan',
+--respectively.
+
+** gG:  The argument is printed in style f (F) or in style e (E) whichever gives
+-- full precision in minimum space.
+
+** aA:  The argument is printed in style `[-h.hhh+-pd]' where there is one digit
+-- before the hexadecimal point and the number after is equal to  the precision
+-- specification for the argument; when the precision is missing, enough digits
+-- are produced to convey the argument's exact  double-precision floating-point
+-- representation.  The values infinity and NaN are printed as `inf' and `nan'
+-- respectively.
+
+** c:  The first byte of argument is printed.
+
+** s:  Bytes from the string argument are printed until the end is reached or
+-- until the number of bytes indicated by the precision specifica- tion is
+-- reached; however if the precision is 0 or missing, the string is printed
+-- entirely.
+
+** b:  As for s, but interpret character escapes in backslash notation in the 
+-- string argument.  The permitted escape sequences are slightly different in 
+-- that octal escapes are \0num instead of \num.
+
+** n$:  Allows reordering of the output according to argument.
+
+** %:  Print a `%'; no argument is used.
+
+/* NOTES */
+
+** Note: the t modifier, when applied to a o, u, x, or X conversion, indicates
+-- that the argument is of an unsigned type equivalent in size to a ptrdiff_t.
+-- The z modifier, when applied to a d or i conversion, indicates that the
+-- argument is of a signed type equivalent in size to a size_t.  Similarly, when
+-- applied to an n conversion, it indicates that the argument is a pointer to a
+-- signed type equivalent in size to a size_t.
