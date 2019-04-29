@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/04/28 21:18:19 by elhampto         ###   ########.fr       */
+/*   Created: 2019/04/28 19:14:16 by elhampto          #+#    #+#             */
+/*   Updated: 2019/04/28 21:24:45 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __FT_PRINTF_H__
-# define __FT_PRINTF_H__
+#include "ft_printf.h"
+#include <stdio.h>
 
-# include "libft/libft.h"
-# include <stdarg.h>
+int			main(void)
+{
+	int		i;
 
-/*
-** Create a macro for error messages
-
-# define ERR_MESS 
-*/
-
-int				ft_printf(const char *format, ...);
-
-#endif
+	i = '3';
+	printf("real: %d\n", i);
+	ft_printf("mine: %d", i);
+	return (0);
+}

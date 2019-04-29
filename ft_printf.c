@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 18:37:14 by elhampto          #+#    #+#             */
-/*   Updated: 2019/04/18 18:57:21 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/04/28 21:26:18 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,19 @@
 ** -- Have the case so that the correct function type can be called and used
 */
 
-int			printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
-	char	type{'d', 's', 'c', 'li', 'p', 'i', 'o', 'u', 'x', 'X'};
-	int		i;
-	int		h;
+	const char	*form;
+	va_list		options;
 
-	i = 0;
-	h = 0;
-	while (format[i] != '%')
+	form = format;
+	va_start(options, format);
+	while (*form != '%')
 	{
-		ft_putchar(format[i]);
-		i++;
+		ft_putchar(*form);
+		form++;
 	}
-	/*
-	** If ther is a % then check next char
-	** -- If the char is a %%
-	** -- if the char is a char then check for the corresponding matching formula
-	*/
-	/*
-	** Parse the input
-	*/
+	va_arg(options, char); /* Idk where to use this right now */
+	va_end(options);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:05:39 by elhampto          #+#    #+#              #
-#    Updated: 2019/04/06 03:31:06 by elhampto         ###   ########.fr        #
+#    Updated: 2019/04/28 21:44:15 by elhampto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ ft_strtrim.c ft_strsplit.c ft_itoa.c ft_putchar.c ft_putstr.c\
 ft_putendl.c ft_putnbr.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c\
 ft_putnbr_fd.c\
 ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c\
-ft_atoc.c ft_is_space.c ft_itoa_base.c ft_wordcount.c
+ft_atoc.c ft_is_space.c ft_itoa_base.c ft_wordcount.c\
+get_next_line.c
 
 OFI = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o\
 ft_memchr.o ft_memcmp.o ft_strlen.o ft_strdup.o ft_strcpy.o ft_strncpy.o\
@@ -38,7 +39,8 @@ ft_strtrim.o ft_strsplit.o ft_itoa.o ft_putchar.o ft_putstr.o\
 ft_putendl.o ft_putnbr.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o\
 ft_putnbr_fd.o\
 ft_lstnew.o ft_lstdelone.o ft_lstdel.o ft_lstadd.o ft_lstiter.o ft_lstmap.o\
-ft_atoc.o ft_is_space.o ft_itoa_base.o ft_wordcount.o
+ft_atoc.o ft_is_space.o ft_itoa_base.o ft_wordcount.o\
+get_next_line.o
 
 CG = gcc
 
