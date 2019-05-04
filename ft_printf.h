@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/04/28 21:18:19 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/02 22:59:38 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@
 # define ERR_MESS 
 */
 
+/*
+** typedef	conver_check
+** {
+** 		
+** };			conver
+*/
+
 int				ft_printf(const char *format, ...);
+int				con_d(int d);
 
 #endif

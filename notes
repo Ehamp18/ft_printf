@@ -232,3 +232,24 @@ distribution table in c
 -- argument is of a signed type equivalent in size to a size_t.  Similarly, when
 -- applied to an n conversion, it indicates that the argument is a pointer to a
 -- signed type equivalent in size to a size_t.
+
+** C uses backslash (virgule, \) as an escape character to change the meaning of
+-- the next character after it. Thus, to print a double- quote you type in
+-- backslash double-quote. To print a backslash, you must escape it by typing
+-- another backslash in front of it. The first backslash means “give the next
+-- character its alternate meaning.” The second backslash has an alternate
+-- meaning of “print a backslash.”
+
+** 
+-- \a	audible alert (bell)
+-- \b	backspace
+-- \f	form feed
+-- \n	newline (linefeed)
+-- \r	carriage return
+-- \t	tab
+-- \v	vertical tab
+
+** Precision is seperated from field width with a period (.).
+
+** A number indicating the precision for a real value (this is the number of
+-- digits after the decimal point).
