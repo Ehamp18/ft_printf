@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 19:14:16 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/02 21:42:03 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/08 13:43:57 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int			main(void)
 {
-	printf("real: %1d\n", 3);
+	printf("real: %3d\n", 3);
 	ft_printf("mine: %1d\n", 3);
 	return (0);
 }

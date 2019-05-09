@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 18:37:14 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/02 21:42:32 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/06 00:14:41 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,6 @@ int				ft_printf(const char *format, ...)
 			ft_putchar('%');
 		else if (format[i] == 'd')
 			con_d(va_arg(options, int));
-/*
-		** if (*format == 'c')
-		** 	con_c(va_arg(options, char*));
-		** else if (format[i] == 's')
-		** 	con_s(va_arg(options, char*));
-		** else if (format[i] == 'p')
-		** 	con_p(va_arg(options, void*));
-		** else if (format[i] == 'i')
-		** 	con_i(va_arg(options, int));
-		** else if (format[i] == 'o')
-		** 	con_o(va_arg(options, int));
-		** else if (format[i] == 'u')
-		** 	con_u(va_arg(options, int));
-		** else if (format[i] == 'x')
-		** 	con_x(va_arg(options, int));
-		** else if (format[i] == 'X')
-		** 	con_X(va_arg(options, int));
-*/
 		else if (format[i] == '\n')
 			ft_putchar('\n');
 	}

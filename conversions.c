@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 09:44:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/02 21:16:59 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/08 13:45:03 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,26 @@ int				con_d(int d)
 	return (d);
 }
 
-// int				con_i(int i)
-// {}
+int				con_i(int i)
+{}
 
-// char			con_c(char c)
-// {}
+char			con_c(char c)
+{}
 
-// char			con_s(char *s)
-// {}
+char			con_s(char *s)
+{}
 
-// int				con_x(int x)
-// {}
+int				con_x(int x)
+{}
 
-// int				con_X(int X)
-// {}
+int				con_X(int X)
+{}
 
-// void			*con_p(char *p)
-// {}
+void			*con_p(char *p)
+{}
 
-// int				con_o(unsigned )
-// {}
+int				con_o(unsigned int o)
+{}
 
-// int				con_u(unsigned int u)
-// {}
+int				con_u(unsigned int u)
+{}

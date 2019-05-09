@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/02 22:59:38 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/08 13:45:00 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,20 @@
 # include "libft/libft.h"
 # include <stdarg.h>
 
-/*
-** Create a macro for error messages
+typedef		void(*Charat)(char *conversions);
 
-# define ERR_MESS 
-*/
-
-/*
-** typedef	conver_check
-** {
-** 		
-** };			conver
-*/
+typedef	struct	g_conver_check[] =
+{
+	{'d', &con_d},
+	{'i', &con_i},
+	{'c', &con_c},
+	{'s', &con_s}
+	{'x', &con_x},
+	{'X', &con_X},
+	{'p', &con_p},
+	{'o', &con_o},
+	{'u', &con_u}
+};
 
 int				ft_printf(const char *format, ...);
 int				con_d(int d);
