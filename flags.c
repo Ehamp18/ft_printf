@@ -6,11 +6,24 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:09:30 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/08 14:50:13 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/09 10:40:14 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+check	g_conver_check[] =
+{
+	{'d', &con_d},
+	{'i', &con_i},
+	{'c', &con_c},
+	{'s', &con_s},
+	{'x', &con_x},
+	{'X', &con_X},
+	{'p', &con_p},
+	{'o', &con_o},
+	{'u', &con_u}
+};
 
 /*
 ** Width
@@ -23,6 +36,23 @@
 ** ** -- -- the number of charaters inputed.
 ** ** -- -- IF the width is lower then the number of characters, then just print
 ** ** -- -- the characters.
+** char			width(int wid, char *s)
+** ** -- int	i;
+** ** -- 
+** ** -- i = ft_srtlen(s);
+** ** -- if (!wid)
+** ** --	return (0);
+** ** -- if (!(wid < i) && *s)
+** ** -- {
+** ** --	ft_putchar(*s);
+** ** --	s++;
+** ** --	wid--;
+** ** -- }
+** ** -- if (!(wid < i) && *s)
+** ** -- {
+** ** --	ft_putchar(' ');
+** ** --	wid--;
+** ** -- }
 ** 
 ** Precision
 ** -- precision: if it is zero or less it is ignored, if it's bigger than the

@@ -6,16 +6,15 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/28 19:14:16 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/08 13:43:57 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/09 10:40:15 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+// #include "ft_printf.h"
 #include <stdio.h>
 
 int			main(void)
 {
-	printf("real: %3d\n", 3);
-	ft_printf("mine: %1d\n", 3);
+	printf("real: %d\n", 3325434);
 	return (0);
 }

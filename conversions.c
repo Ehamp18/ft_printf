@@ -6,13 +6,13 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 09:44:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/08 13:45:03 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/09 10:40:10 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int				con_d(int d)
+char				con_d(int d)
 {
 	if (!d)
 		return (-1);
@@ -20,26 +20,58 @@ int				con_d(int d)
 	return (d);
 }
 
-int				con_i(int i)
-{}
+char				con_i(int i)
+{
+	if (!i)
+		return (-1);
+	return (i);
+}
 
 char			con_c(char c)
-{}
+{
+	if (!c)
+		return (-1);
+	return (c);
+}
 
 char			con_s(char *s)
-{}
+{
+	if (!s || !*s)
+		return (-1);
+	return (*s);
+}
 
-int				con_x(int x)
-{}
+char			con_x(int x)
+{
+	if (!x)
+		return (-1);
+	return (x);
+}
 
-int				con_X(int X)
-{}
+char			con_X(int X)
+{
+	if (!X)
+		return (-1);
+	return (X);
+}
 
-void			*con_p(char *p)
-{}
+char			*con_p(char *p)
+{
+	if (!p || !*p)
+		return NULL;
+	return (p);
+}
 
-int				con_o(unsigned int o)
-{}
+char			con_o(unsigned int o)
+{
+	if (!o)
+		return (-1);
+	return (o);
+}
 
-int				con_u(unsigned int u)
-{}
+char			con_u(unsigned int u)
+{
+	if (!u)
+		return (-1);
+	return (u);
+}

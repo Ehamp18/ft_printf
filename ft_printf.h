@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/08 13:45:00 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/09 10:40:11 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,23 @@
 # include "libft/libft.h"
 # include <stdarg.h>
 
-typedef		void(*Charat)(char *conversions);
+typedef	void(*charat)(char *conversions);
 
-typedef	struct	g_conver_check[] =
+typedef struct	conv_check
 {
-	{'d', &con_d},
-	{'i', &con_i},
-	{'c', &con_c},
-	{'s', &con_s}
-	{'x', &con_x},
-	{'X', &con_X},
-	{'p', &con_p},
-	{'o', &con_o},
-	{'u', &con_u}
-};
+	char		op;
+	charat		kl;
+}				check;
 
 int				ft_printf(const char *format, ...);
-int				con_d(int d);
+char			con_d(int d);
+char			con_i(int i);
+char			con_c(char c);
+char			con_s(char *s);
+char			con_x(int x);
+char			con_X(int X);
+char			*con_p(char *p);
+char			con_o(unsigned int o);
+char			con_u(unsigned int u);
 
 #endif
