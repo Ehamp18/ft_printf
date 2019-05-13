@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 18:37:14 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/06 00:14:41 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/12 20:54:48 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,21 @@ int				ft_printf(const char *format, ...)
 	int			i;
 	va_list		options;
 
-	i = 1;
+	i = 0;
 	va_start(options, format);
 	while (*format != '%' && *format)
 		ft_putchar(*format++);
-	if (*format == '%' && *format && format[i])
+	while (*format && format[i])
 	{
-		if (*format == '%' && format[i] == '%')
+		if (*format == '%' && format[1] == '%')
 			ft_putchar('%');
-		else if (format[i] == 'd')
-			con_d(va_arg(options, int));
+		else if (ft_is_space(*format) == 1)
+			ft_putchar(*format);
+		else if (*format == '%' && ft_isalpha(format[1]) == 1)
+			g_conver_check[i]->(va_arg(options, char*));
 		else if (format[i] == '\n')
 			ft_putchar('\n');
+		format++;
 	}
 	va_end(options);
 	ft_putchar('\n');

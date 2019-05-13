@@ -6,20 +6,20 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:09:30 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/09 10:40:14 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/12 18:28:10 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-check	g_conver_check[] =
+t_check	g_conver_check[] =
 {
 	{'d', &con_d},
 	{'i', &con_i},
 	{'c', &con_c},
 	{'s', &con_s},
 	{'x', &con_x},
-	{'X', &con_X},
+	{'X', &con_xa},
 	{'p', &con_p},
 	{'o', &con_o},
 	{'u', &con_u}
@@ -36,24 +36,30 @@ check	g_conver_check[] =
 ** ** -- -- the number of charaters inputed.
 ** ** -- -- IF the width is lower then the number of characters, then just print
 ** ** -- -- the characters.
-** char			width(int wid, char *s)
-** ** -- int	i;
-** ** -- 
-** ** -- i = ft_srtlen(s);
-** ** -- if (!wid)
-** ** --	return (0);
-** ** -- if (!(wid < i) && *s)
-** ** -- {
-** ** --	ft_putchar(*s);
-** ** --	s++;
-** ** --	wid--;
-** ** -- }
-** ** -- if (!(wid < i) && *s)
-** ** -- {
-** ** --	ft_putchar(' ');
-** ** --	wid--;
-** ** -- }
-** 
+*/
+char			width(int wid, char *s)
+{
+	int	i;
+
+	i = ft_strlen(s) - 1;
+	if (!wid)
+		return (0);
+	if (wid < i)
+		return (0);
+	while ((wid > i) && s[i])
+	{
+		ft_putchar(s[i]);
+		i--;
+		wid--;
+	}
+	while ((wid > 0))
+	{
+		ft_putchar(' ');
+		wid--;
+	}
+	return (0);
+}
+/*
 ** Precision
 ** -- precision: if it is zero or less it is ignored, if it's bigger than the
 ** -- string it's ignored: s
