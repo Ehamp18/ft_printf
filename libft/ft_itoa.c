@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:17:07 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/02 21:12:25 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/16 17:47:01 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,13 @@ char				*ft_itoa(int n)
 		a /= 10;
 	}
 	a = n;
-	if (a < 0)
-		a *= -1;
-	if (!(asc = ft_strnew(len)))
-		return (0);
+	NEG_CHECK(a);
+	ZERO(!(asc = ft_strnew(len)));
 	while (len--)
 	{
 		asc[len] = index[a % 10];
 		a /= 10;
 	}
-	if (n < 0)
-		asc[0] = '-';
+	NEG_SI_PRNT(n, asc[0]);
 	return (asc);
 }

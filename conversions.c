@@ -6,77 +6,57 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 09:44:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/12 20:47:04 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/16 17:47:52 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char				con_d(char *d)
+void				con_d(va_list *options)
 {
-	int		k;
-	char	*i;
+	char	*com;
 
-	k = (int)*d;
-	if (!d)
-		return (-1);
-	i = ft_itoa(k);
-	return (*i);
-}
-/*
-char				con_i(char *i)
-{
-	if (!i)
-		return (-1);
-	return (i);
+	com = ft_itoa(va_arg(*options, int));
+	ft_putstr(com);
+	free(com);
 }
 
-char			con_c(char *c)
+void				con_i(va_list *options)
 {
-	if (!c)
-		return (-1);
-	return (c);
+	char	*com;
+
+	com = ft_itoa(va_arg(*options, int));
+	ft_putstr(com);
+	free(com);
 }
 
-char			con_s(char *s)
+void			con_c(va_list *options)
 {
-	if (!s || !*s)
-		return (-1);
-	return (*s);
+	char	com;
+
+	com = (char)va_arg(*options, int);
+	ft_putchar(com);
 }
 
-char			con_x(char *x)
+void			con_s(va_list *options)
 {
-	if (!x)
-		return (-1);
-	return (x);
+	char		*com;
+
+	com = va_arg(*options, char*);
+	ft_putstr(com);
 }
 
-char			con_xa(char *X)
-{
-	if (!X)
-		return (-1);
-	return (X);
-}
+// void			con_x(va_list *options)
+// {}
 
-char			con_p(char *p)
-{
-	if (!p || !*p)
-		return (0);
-	return (p);
-}
+// void			con_X(va_list *options)
+// {}
 
-char			con_o(char *o)
-{
-	if (!o)
-		return (-1);
-	return (o);
-}
+// void			con_p(va_list *options)
+// {}
 
-char			con_u(char *u)
-{
-	if (!u)
-		return (-1);
-	return (u);
-}
-*/
+// void			con_o(va_list *options)
+// {}
+
+// void			con_u(va_list *options)
+// {}

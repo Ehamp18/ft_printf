@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/12 20:48:45 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/16 17:20:44 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 # include "libft/libft.h"
 # include <stdarg.h>
 
-typedef	char	(*t_charat)(char *conversions);
+# define BREAK(x) if (x) break
+# define ZERO(x) if (x) return (0)
+
+typedef	void	(*t_charat)(va_list *conversions);
 
 typedef struct	s_conv_check
 {
@@ -27,14 +30,14 @@ typedef struct	s_conv_check
 extern t_check	g_conver_check[];
 
 int				ft_printf(const char *format, ...);
-char			con_d(char *d);
-char			con_i(char *i);
-char			con_c(char *c);
-char			con_s(char *s);
-char			con_x(char *x);
-char			con_xa(char *X);
-char			con_p(char *p);
-char			con_o(char *o);
-char			con_u(char *u);
+void			con_d(va_list *options);
+void			con_i(va_list *options);
+void			con_c(va_list *options);
+void			con_s(va_list *options);
+// void			con_x(va_list *options);
+// void			con_X(va_list *options);
+// void			con_p(va_list *options);
+// void			con_o(va_list *options);
+// void			con_u(va_list *options);
 
 #endif

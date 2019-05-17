@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:55:15 by elhampto          #+#    #+#             */
-/*   Updated: 2019/04/28 21:32:20 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/16 17:43:25 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+
+# define ZERO(x) if (x) return (0)
+# define NEG_CHECK(x) if (x < 0) x *= -1
+# define NEG_SI_PRNT(x, y) if (x < 0) y = '-'
+# define FREE(x, y, z) y = ft_strjoin(x, z); free(x); x = y;
 
 /*
 ** link list
