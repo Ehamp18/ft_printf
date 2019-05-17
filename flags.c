@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:09:30 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/16 17:21:23 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/16 19:55:09 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ t_check	g_conver_check[] =
 	{'i', &con_i},
 	{'c', &con_c},
 	{'s', &con_s},
-	// {"x", &con_x},
-	// {"X", &con_xa},
-	// {"p", &con_p},
-	// {"o", &con_o},
-	// {"u", &con_u}
+	{'x', &con_x},
+	{'X', &con_xa},
+	{'p', &con_p},
+	{'o', &con_o},
+	{'u', &con_u}
 };
 
 /*
