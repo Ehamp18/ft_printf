@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_unsigned.c                                 :+:      :+:    :+:   */
+/*   ft_tabs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/16 19:37:02 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/22 03:20:36 by elhampto         ###   ########.fr       */
+/*   Created: 2019/05/20 13:34:50 by elhampto          #+#    #+#             */
+/*   Updated: 2019/05/20 13:37:12 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char				*ft_itoa_unsigned(uint64_t n)
+int			ft_tabs(char c)
 {
-	const char	index[10] = "0123456789";
-	int			len;
-	uint64_t	a;
-	char		*asc;
-
-	a = n;
-	len = 0;
-	while (a)
-	{
-		len++;
-		a /= 10;
-	}
-	a = n;
-	if (!(asc = ft_strnew(len)))
-		return (0);
-	while (len--)
-	{
-		asc[len] = index[a % 10];
-		a /= 10;
-	}
-	return (asc);
+	if (c == '\r' || c == '\f' || c == '\v' || c == '\t' ||
+		c == '\n')
+		return (1);
+	return (0);
 }

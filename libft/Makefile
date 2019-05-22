@@ -6,7 +6,7 @@
 #    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/17 21:05:39 by elhampto          #+#    #+#              #
-#    Updated: 2019/05/16 20:05:51 by elhampto         ###   ########.fr        #
+#    Updated: 2019/05/21 21:11:00 by elhampto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ ft_putnbr_fd.c\
 ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c\
 ft_atoc.c ft_is_space.c ft_itoa_base.c ft_wordcount.c\
 get_next_line.c ft_itoa_x.c ft_itoa_cx.c ft_itoa_base_unsigned.c\
-ft_itoa_unsigned.c ft_itoa_o_unsigned.c ft_itoa_u_p.c
+ft_itoa_unsigned.c ft_itoa_o_unsigned.c ft_itoa_u_p.c ft_tabs.c\
+ft_itoa_float.c ft_itoa_long.c
 
 OFI = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o\
 ft_memchr.o ft_memcmp.o ft_strlen.o ft_strdup.o ft_strcpy.o ft_strncpy.o\
@@ -42,7 +43,8 @@ ft_putnbr_fd.o\
 ft_lstnew.o ft_lstdelone.o ft_lstdel.o ft_lstadd.o ft_lstiter.o ft_lstmap.o\
 ft_atoc.o ft_is_space.o ft_itoa_base.o ft_wordcount.o\
 get_next_line.o ft_itoa_x.o ft_itoa_cx.o ft_itoa_base_unsigned.o\
-ft_itoa_unsigned.o ft_itoa_o_unsigned.o ft_itoa_u_p.o
+ft_itoa_unsigned.o ft_itoa_o_unsigned.o ft_itoa_u_p.o ft_tabs.o\
+ft_itoa_float.o ft_itoa_long.o
 
 CG = gcc
 
@@ -67,4 +69,5 @@ fclean: clean
 	@echo "\x1b[34mThe A file deleted"
 
 re: fclean all
+
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:55:15 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/16 20:05:23 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/22 03:19:02 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,17 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
+# define BUFF_SIZE 1
+# define MAX_FD 4865
 
 # define ZERO(x) if (x) return (0)
 # define NEG_CHECK(x) if (x < 0) x *= -1
 # define NEG_SI_PRNT(x, y) if (x < 0) y = '-'
-# define FREE(x, y, z) y = ft_strjoin(x, z); free(x); x = y;
+# define FREE(x, y, z) z = ft_strjoin(x, y); free(x); x = z;
 
 /*
 ** link list
@@ -115,6 +121,7 @@ char				ft_atoc(unsigned int asc);
 int					ft_is_space(char c);
 char				*ft_itoa_base(int n, int base);
 size_t				ft_wordcount(char const *s, char c);
+int					ft_tabs(char c);
 
 /*
 ** Itoa conversions non-decimal
@@ -126,5 +133,7 @@ char				*ft_itoa_base_unsigned(uint64_t n, int base);
 char				*ft_itoa_unsigned(uint64_t n);
 char				*ft_itoa_o_unsigned(uint64_t n);
 char				*ft_itoa_u_p(uint64_t n);
+char				*ft_itoa_float(int n);
+char				*ft_itoa_long(long n);
 
 #endif
