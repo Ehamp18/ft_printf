@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:09:30 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/22 12:51:53 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/23 11:34:45 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,13 +164,12 @@ char			plus_flag(char *a)
 	{
 		*s = '+';
 		s++;
-		// FREE(s, a, res);
-		res = ft_strcpy(s, a);
+		res = ft_strjoin(s, a);
 		return (*res);
 	}
 	*s = '-';
 	s++;
-	FREE(s, a, res);
+	res = ft_strjoin(s, a);
 	return (*res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 09:44:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/22 12:44:33 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/23 18:08:20 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,24 @@
 void			con_d(va_list options)
 {
 	t_flags		flags;
-	// t_wiprel	wiprel;
 	char		*com;
 
 	com = ft_itoa(va_arg(options, int));
-	// if (ft_strcmp(wiprel.length, "l") == 0)
+	// if (ft_strcmp(flags.length, "l") == 0)
 	// 	*com = l_flag(va_arg(options, long));
-	// // if (ft_strcmp(wiprel.length, "ll") == 0)
+	// // if (ft_strcmp(flags.length, "ll") == 0)
 	// // 	*com = l_flag(va_arg(options, long));
-	// // if (ft_strcmp(wiprel.length, "h") == 0)
+	// // if (ft_strcmp(flags.length, "h") == 0)
 	// // 	*com = l_flag(va_arg(options, long));
-	// // if (ft_strcmp(wiprel.length, "hh") == 0)
+	// // if (ft_strcmp(flags.length, "hh") == 0)
 	// // 	*com = l_flag(va_arg(options, long));
-	// // if (wiprel.precis == 1)
+	// // if (flags.precis == 1)
 	// // 	*com = precision(com);
-	// if (wiprel.width == 1)
-	// 	*com = width(wiprel.width, com);
+	// if (flags.width == 1)
+	// 	*com = width(flags.width, com);
 	// if (flags.minus == 1)
 	// 	*com = minus_flag(com);
-	if (flags.plus == 0)
+	if (flags.plus == 1)
 		*com = plus_flag(com);
 	// if (flags.zero == 1)
 	// 	*com = zero_flag(com);

@@ -1,100 +1,101 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checks.c                                           :+:      :+:    :+:   */
+/*   flags->checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 23:37:28 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/22 12:21:09 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/23 17:30:28 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int				flags(const char *format, int check)
+static void			flags_1(const char *format, t_flags *flags)
 {
-	t_flags				*flags;
-
-	flags = (t_flags*)malloc(sizeof(t_flags));
-	if (format[check] == '-')
+	if (format[flags->check] == '-')
 	{
 		flags->minus = 1;
-		check++;
+		flags->check++;
 	}
-	else if (format[check] == '+')
+	else if (format[flags->check] == '+')
 	{
 		flags->plus = 1;
-		check++;
+		flags->check++;
 	}
-	else if (format[check] == '0')
+	else if (format[flags->check] == '0')
 	{
 		flags->zero = 1;
-		check++;
+		flags->check++;
 	}
-	else if (format[check] == ' ')
+	else if (format[flags->check] == ' ')
 	{
 		flags->space = 1;
-		check++;
+		flags->check++;
 	}
-	else if (format[check] == '#')
+	else if (format[flags->check] == '#')
 	{
 		flags->hash = 1;
-		check++;
+		flags->check++;
 	}
-	free(flags);
-	return (check);
 }
 
-static int				flags_2(const char *format, int check)
+static void			flags_2(const char *format, t_flags *flags)
 {
-	t_wiprel			*confer;
+	int					point;
 
-	confer = (t_wiprel*)malloc(sizeof(t_wiprel));
-	if (ft_isdigit(format[check]) == 1)
+	point = flags->check + 1;
+	if (ft_isdigit(format[flags->check]) == 1)
 	{
-		confer->width = format[check];
-		check++;
+		flags->width = format[flags->check];
+		flags->check++;
 	}
-	if (format[check] == '.' && ft_isdigit(format[check]) == 1)
+	if (format[flags->check] == '.' && ft_isdigit(format[point]) == 1)
 	{
-		confer->precis = 1;
-		check++;
+		flags->precis = 1;
+		flags->prec_num = ft_atoi(&format[flags->check]);
+		flags->check += ft_numlen(ft_atoi(&format[flags->check]));
 	}
-	if (format[check] == 'l' || format[check] == 'h')
+	if (format[flags->check] == 'l' || format[flags->check] == 'h')
 	{
-		if (format[check] == 'l' && format[check + 1] == 'l')
-			confer->length = "ll";
-		else if (format[check] == 'h' && format[check + 1] == 'h')
-			confer->length = "hh";
-		else if (format[check] == 'l')
-			confer->length = "l";
-		else if (format[check] == 'h')
-			confer->length = "h";
-		check++;
+		if (format[flags->check] == 'l' && format[point] == 'l')
+		{
+			flags->length = "ll";
+			flags->check++;
+		}
+		else if (format[flags->check] == 'h' && format[point] == 'h')
+		{
+			flags->length = "hh";
+			flags->check++;
+		}
+		else if (format[flags->check] == 'l')
+			flags->length = "l";
+		else if (format[flags->check] == 'h')
+			flags->length = "h";
+		flags->check++;
 	}
-	free(confer);
-	return (check);
 }
 
-int					checks(va_list options, const char *format)
+int						checks(va_list options, const char *format)
 {
-	int					check;
+	t_flags				*flags;
 	int					i;
 
 	i = -1;
-	check = 1;
-	while (*format == '%' && format[check])
+	flags = (t_flags*)malloc(sizeof(t_flags));
+	flags->check = 1;
+	while (*format == '%' && format[flags->check])
 	{
-		check = flags(format, check);
-		check = flags_2(format, check);
-		if (g_conver_check[++i].op == format[check])
+		flags_1(format, flags);
+		flags_2(format,flags);
+		if (g_conver_check[++i].op == format[flags->check])
 		{
 			g_conver_check[i].kl(options);
 			i = -1;
 			break ;
 		}
 	}
-	check++;
-	return (check);
+	flags->check++;
+	return (flags->check);
 }

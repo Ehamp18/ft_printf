@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/22 12:08:55 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/23 16:28:56 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,12 @@ typedef struct	s_flags
 	int			zero;
 	int			space;
 	int			hash;
-}				t_flags;
-
-typedef struct	s_wiprel
-{
+	int			check;
 	int			width;
 	int			precis;
+	int			prec_num;
 	char		*length;
-}				t_wiprel;
+}				t_flags;
 
 extern t_check	g_conver_check[];
 

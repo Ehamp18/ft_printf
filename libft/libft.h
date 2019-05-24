@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:55:15 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/22 03:19:02 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/23 16:40:40 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int					ft_is_space(char c);
 char				*ft_itoa_base(int n, int base);
 size_t				ft_wordcount(char const *s, char c);
 int					ft_tabs(char c);
+int					ft_numlen(int num);
 
 /*
 ** Itoa conversions non-decimal
