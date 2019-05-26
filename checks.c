@@ -48,7 +48,7 @@ static void			flags_2(const char *format, t_flags *flags)
 	point = flags->check + 1;
 	if (ft_isdigit(format[flags->check]) == 1)
 	{
-		flags->width = format[flags->check];
+		flags->width = ft_atoi(&format[flags->check]);
 		flags->check++;
 	}
 	if (format[flags->check] == '.' && ft_isdigit(format[point]) == 1)
@@ -83,7 +83,7 @@ int						checks(va_list options, const char *format)
 	int					i;
 
 	i = -1;
-	flags = (t_flags*)malloc(sizeof(t_flags));
+	flags = (t_flags*)ft_memalloc(sizeof(t_flags));
 	flags->check = 1;
 	while (*format == '%' && format[flags->check])
 	{
@@ -91,7 +91,7 @@ int						checks(va_list options, const char *format)
 		flags_2(format,flags);
 		if (g_conver_check[++i].op == format[flags->check])
 		{
-			g_conver_check[i].kl(options);
+			g_conver_check[i].kl(options, flags);
 			i = -1;
 			break ;
 		}

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 04:44:46 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/22 11:09:26 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/24 21:24:18 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 int			main(void)
 {
-	printf("real d: %+d aadaf\n", 999999999);
-	ft_printf("mine d: %+d aadaf\n", 999999999);
+	printf("real d: %5d aadaf\n", 999999999);
+	ft_printf("mine d: %5d aadaf\n", 999999999);
 
 	ft_putchar('\n');
 

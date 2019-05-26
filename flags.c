@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:09:30 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/23 11:34:45 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/24 21:37:43 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,24 @@ t_check	g_conver_check[] =
 ** Width
 ** -- min-width: is the total width, if width is smaller than min width,
 ** -- its filled with empty spaces: s, c, p, X, x, o, u, d
-**
-** ** declare the function(with paramitors)f
-** ** -- check IF width is given or specified
-** ** -- -- IF width is speciefed then check if the string or number
-** ** -- -- --inputed is greater then
-** ** -- -- the number of charaters inputed.
-** ** -- -- IF the width is lower then the number of characters, then just print
-** ** -- -- the characters.
 */
 
-char			width(int wid, char *s)
+char			*width(int wid, char *s)
 {
 	int			i;
 	char		*ans;
 
-	ans = ft_strnew(ft_strlen(s));
-	i = ft_strlen(s) - 1;
+	ans = ft_strnew(ft_numlen(wid));
+	ft_memset(ans, '0', ft_strlen(ans));
+	i = ft_strlen(s);
 	if (!wid)
 		return (0);
 	if (wid < i)
 		return (0);
+	i -= 1;
 	while ((wid > i) && s[i])
 	{
-		ans[i] = (s[i]);
+		ans[i] = s[i];
 		i--;
 	}
 	while ((wid > 0))
@@ -62,7 +56,7 @@ char			width(int wid, char *s)
 		wid--;
 		i--;
 	}
-	return (*ans);
+	return (ans);
 }
 
 /*
@@ -117,33 +111,33 @@ char			width(int wid, char *s)
 ** -- to right-align the output.)
 */
 
-char			minus_flag(char *m)
+char			*minus_flag(char *m)
 {
-	int			j[3];
+	int			j;
+	int			i;
 	char		*res;
 
-	j[0] = 0;
-	j[1] = 0;
+	j = 0;
+	i = 0;
 	res = ft_strnew(ft_strlen(m));
 	while (ft_is_space(*m) == 1)
 	{
-		j[0]++;
+		j++;
 		m++;
 	}
 	while (*m)
 	{
-		res[j[0]] = *m;
+		res[i] = *m;
 		m++;
-		j[0]++;
+		i++;
 	}
-	while (j[0] > 0)
+	while (j >= 0)
 	{
-		res[j[1]] = m[0];
-		j[1]++;
-		j[0]--;
+		res[j] = m[0];
+		j--;
 	}
-	res[j[0]] = '\0';
-	return (*res);
+	res[j] = '\0';
+	return (res);
 }
 
 /*
@@ -152,25 +146,22 @@ char			minus_flag(char *m)
 ** -- (The default doesn't prepend anything in front of positive numbers.)
 */
 
-char			plus_flag(char *a)
+char			*plus_flag(char *a)
 {
-	int			i;
 	char		*s;
 	char		*res;
 
-	i = 0;
 	s = ft_strnew(ft_strlen(a));
-	if (a > 0)
+	if (a[0] != '-')
 	{
 		*s = '+';
-		s++;
 		res = ft_strjoin(s, a);
-		return (*res);
+		return (res);
 	}
 	*s = '-';
 	s++;
 	res = ft_strjoin(s, a);
-	return (*res);
+	return (res);
 }
 
 /*
@@ -179,27 +170,22 @@ char			plus_flag(char *a)
 ** -- (The default doesn't prepend anything in front of positive numbers.)
 */
 
-char			space_flag(char *a)
+char			*space_flag(char *a)
 {
-	int			i;
 	char		*s;
 	char		*res;
 
-	i = 0;
-	s = NULL;
-	if (a > 0)
+	s = ft_strnew(ft_strlen(a));
+	if (a[0] != '-')
 	{
 		*s = ' ';
-		s++;
-		FREE(s, a, res);
-		ft_putstr(res);
-		return (0);
+		res = ft_strjoin(s, a);
+		return (res);
 	}
 	*s = '-';
 	s++;
-	FREE(s, a, res);
-	ft_putstr(res);
-	return (0);
+	res = ft_strjoin(s, a);
+	return (res);
 }
 
 /*
@@ -209,7 +195,7 @@ char			space_flag(char *a)
 ** -- in 0003.
 */
 
-char			zero_flag(char *a)
+char			*zero_flag(char *a)
 {
 	int			i;
 
@@ -221,8 +207,7 @@ char			zero_flag(char *a)
 		a[i] = '0';
 		i--;
 	}
-	ft_putstr(a);
-	return (0);
+	return (a);
 }
 
 /*
@@ -242,12 +227,12 @@ char			zero_flag(char *a)
 ** l
 */
 
-char			l_flag(long k)
+char			*l_flag(long k)
 {
 	char		*l;
 
 	l = ft_itoa_long(k);
-	return (*l);
+	return (l);
 }
 
 /*
