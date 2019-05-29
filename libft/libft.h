@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 14:55:15 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/23 16:40:40 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/28 15:35:27 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,10 @@ char				*ft_itoa_base_unsigned(uint64_t n, int base);
 char				*ft_itoa_unsigned(uint64_t n);
 char				*ft_itoa_o_unsigned(uint64_t n);
 char				*ft_itoa_u_p(uint64_t n);
-char				*ft_itoa_float(int n);
 char				*ft_itoa_long(long n);
+char				*ft_itoa_ll(long long n);
+int					ft_atoi_h(short str);
+int					ft_atoi_hh(char str);
+double				*ft_itoa_float(double flo);
 
 #endif

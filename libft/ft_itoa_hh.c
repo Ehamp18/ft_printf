@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_long.c                                     :+:      :+:    :+:   */
+/*   ft_itoa_hh.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 21:07:20 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/27 16:21:31 by elhampto         ###   ########.fr       */
+/*   Created: 2019/05/28 14:51:18 by elhampto          #+#    #+#             */
+/*   Updated: 2019/05/28 15:16:25 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char				*ft_itoa_long(long n)
+int					ft_atoi_hh(char str)
 {
-	const char	index[10] = "0123456789";
-	long		len;
-	long		a;
-	char		*asc;
+	int				sign;
+	int				finish;
 
-	a = n;
-	len = (n <= 0) ? 1 : 0;
-	while (a)
+	sign = 1;
+	finish = 0;
+	if (str == '-' || str == '+')
 	{
-		len++;
-		a /= 10;
+		if (str == '-')
+			sign = -1;
 	}
-	a = n;
-	NEG_CHECK(a);
-	ZERO(!(asc = ft_strnew(len)));
-	while (len--)
-	{
-		asc[len] = index[a % 10];
-		a /= 10;
-	}
-	NEG_SI_PRNT(n, asc[0]);
-	return (asc);
+	while (str >= '0' && str <= '9')
+		finish = (finish * 10) + (str - '0');
+	return (sign * finish);
 }
