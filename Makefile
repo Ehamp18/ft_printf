@@ -6,7 +6,7 @@
 #    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 17:30:33 by elhampto          #+#    #+#              #
-#    Updated: 2019/05/28 16:13:05 by elhampto         ###   ########.fr        #
+#    Updated: 2019/05/29 10:47:57 by elhampto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ ft_printf \
 flags_2 \
 
 LIBFT_D = ./libft/
-LIB = libft.a
+LIB = libft/libft.a
 
-INC = ft_printf.h 
+INC = ft_printf.h
 
 VPATH = libft:files:inclu
 
@@ -46,7 +46,7 @@ $(OBJ_DOR):
 $(OBJ_DOR)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(LIB) $(OBJ)
+$(NAME): $(OBJ)
 	@echo "\033[32mmaking lib...\033[0m"
 	@ar -rcs $@ $^
 

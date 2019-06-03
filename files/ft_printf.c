@@ -6,11 +6,11 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 18:37:14 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/28 14:17:07 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/03 14:56:36 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../inclu/ft_printf.h"
+#include "../inclu/ft_printf.h"
 
 int				ft_printf(const char *format, ...)
 {
@@ -29,8 +29,7 @@ int				ft_printf(const char *format, ...)
 		num = checks(options, format);
 		if (*format == '%')
 			format += num;
-		else
-			format++;
+		format++;
 	}
 	va_end(options);
 	return (0);

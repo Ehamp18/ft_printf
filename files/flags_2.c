@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 19:25:21 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/28 15:47:04 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/03 13:36:59 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ char			*zero_flag(char *a)
 ** -- For o, x, X types, the text 0, 0x, 0X, respectively, is prepended to
 ** -- non-zero numbers.
 */
-
-
 
 /*
 ** h

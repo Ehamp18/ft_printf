@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 03:29:47 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/28 15:36:15 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/02 14:46:55 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			con_f(va_list options, t_flags *flags)
 
 	com = (char*)ft_itoa_float(va_arg(options, int));
 	if (flags->plus == 1)
-		com = plus_flag(com);
+		com = plus_flag(com, flags->sign);
 	if (flags->space == 0)
 		com = space_flag(com);
 	ft_putstr(com);

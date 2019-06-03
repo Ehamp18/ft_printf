@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/28 15:31:11 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/05/30 10:38:38 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_flags
 	int			check;
 	int			width;
 	int			precis;
+	int			sign;
 	char		*length;
 }				t_flags;
 
@@ -57,7 +58,7 @@ void			con_f(va_list options, t_flags *flags);
 int				checks(va_list options, const char *format);
 char			*width(int wid, char *s);
 char			*minus_flag(char *m);
-char			*plus_flag(char *a);
+char			*plus_flag(char *a, int i);
 char			*space_flag(char *a);
 char			*zero_flag(char *a);
 char			*l_flag(long k);

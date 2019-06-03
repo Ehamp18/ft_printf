@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:09:30 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/28 14:14:28 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/02 11:57:39 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char			*minus_flag(char *m)
 	return (res);
 }
 
-char			*plus_flag(char *a)
+char			*plus_flag(char *a, int i)
 {
 	char		*s;
 	char		*res;
@@ -123,18 +123,24 @@ char			*plus_flag(char *a)
 	s = ft_strnew(ft_strlen(a));
 	while (ft_isdigit(*a) == 0)
 	{
-		if (*a == '-')
+		if (a[j] == '-')
 		{
 			a++;
-			s[j] = '-';
+			*s = '-';
 			res = ft_strjoin(s, a);
 			return (res);
 		}
-		s[j] = *a;
 		a++;
-		j++;
 	}
-	j == 0 ? (s[j] = '+') : (s[j - 1] = '+');
+	if (i == 1)
+	{
+		a++;
+		*s = '-';
+		res = ft_strjoin(s, a);
+		return (res);
+	}
+	a++;
+	*s = '+';
 	res = ft_strjoin(s, a);
 	return (res);
 }

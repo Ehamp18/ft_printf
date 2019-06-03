@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 13:23:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/05/28 14:13:12 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/03 13:08:18 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,32 +69,24 @@ static void				flags_2(const char *format, t_flags *flags)
 		l = (char*)ft_memalloc(ft_strlen(format) + 1);
 		while (format[flags->check] == '.' && ft_isdigit(format[point]) == 1)
 		{
-			l[j] = format[point];
+			l[j] = format[point++];
 			j++;
-			point++;
 		}
 		flags->precis = ft_atoi(l);
 		free(l);
-		j += 1;
-		flags->check += j;
+		flags->check += ++j;
 	}
 	if (format[flags->check] == 'l' || format[flags->check] == 'h')
 	{
 		if (format[flags->check] == 'l' && format[point] == 'l')
-		{
 			flags->length = "ll";
-			flags->check++;
-		}
 		else if (format[flags->check] == 'h' && format[point] == 'h')
-		{
 			flags->length = "hh";
-			flags->check++;
-		}
 		else if (format[flags->check] == 'l')
 			flags->length = "l";
 		else if (format[flags->check] == 'h')
 			flags->length = "h";
-		flags->check++;
+		(ft_strlen(flags->length) >= 2) ? flags->check + 2 : flags->check++;
 	}
 }
 
