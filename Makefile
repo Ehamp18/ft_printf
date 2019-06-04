@@ -6,7 +6,7 @@
 #    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 17:30:33 by elhampto          #+#    #+#              #
-#    Updated: 2019/05/29 10:47:57 by elhampto         ###   ########.fr        #
+#    Updated: 2019/06/03 22:51:03 by elhampto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,25 +19,49 @@ flags \
 ft_printf \
 flags_2 \
 
-LIBFT_D = ./libft/
-LIB = libft/libft.a
+LIB = ft_atoi \
+	ft_is_space \
+	ft_isdigit \
+	ft_itoa_base_unsigned \
+	ft_itoa_base \
+	ft_itoa_cx \
+	ft_itoa_float \
+	ft_itoa_h \
+	ft_itoa_hh \
+	ft_itoa_ll \
+	ft_itoa_long \
+	ft_itoa_o_unsigned \
+	ft_itoa_u_p \
+	ft_itoa_unsigned \
+	ft_itoa_x \
+	ft_itoa \
+	ft_memalloc \
+	ft_numlen \
+	ft_putchar \
+	ft_putnbr \
+	ft_putstr \
+	ft_strcat \
+	ft_strcmp \
+	ft_strcpy \
+	ft_strjoin \
+	ft_strlen \
+	ft_strnew \
+	ft_tabs
 
 INC = ft_printf.h
 
-VPATH = libft:files:inclu
+VPATH = lib_fun:files:inclu
 
 OBJ_DOR = obj
 
 OBJ = $(addsuffix .o, $(addprefix $(OBJ_DOR)/, $(SRC)))
+OBJ += $(addsuffix .o, $(addprefix $(OBJ_DOR)/, $(LIB)))
 
 CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra -I $(INC)
 
-all: $(LIB) $(OBJ_DOR) $(NAME)
-
-$(LIB):
-	@make -C $(LIBFT_D)
+all: $(OBJ_DOR) $(NAME)
 
 $(OBJ_DOR):
 	@echo "\033[32mmaking objects...\033[0m"
@@ -52,13 +76,11 @@ $(NAME): $(OBJ)
 
 clean:
 	@echo "\033[33mcleaning libft repository...\033[0m"
-	@make clean -C $(LIBFT_D)
-	@/bin/rm -rf $(OBJ_DOR) $(DEP)
+	@/bin/rm -rf $(OBJ_DOR)
 
 fclean: clean
 	@echo "\033[33mremoving libft library file...\033[0m"
-	@make fclean -C $(LIBFT_D)
-	@/bin/rm -rf $(OBJ_DIR)
+	@/bin/rm -rf $(OBJ_DOR)
 	@/bin/rm -rf $(NAME)
 
 re: fclean all
