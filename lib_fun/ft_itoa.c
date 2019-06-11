@@ -6,17 +6,17 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:17:07 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/03 22:44:56 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/10 01:24:59 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-char			*ft_itoa(int n)
+char			*ft_itoa(int64_t n)
 {
 	const char	index[10] = "0123456789";
 	int			len;
-	long		a;
+	int64_t		a;
 	char		*asc;
 
 	a = n;

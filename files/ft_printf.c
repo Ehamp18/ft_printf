@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 18:37:14 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/03 14:56:36 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/09 23:12:28 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,24 @@ int				ft_printf(const char *format, ...)
 {
 	va_list		options;
 	int			num;
+	t_val		*val;
 
 	va_start(options, format);
+	val = (t_val*)ft_memalloc(sizeof(t_val));
+	val->k = 0;
 	while (*format)
 	{
-		if (*format != '%' && *format && *format != '\n')
+		if (*format != '%')
+		{
 			ft_putchar(*format);
-		if (*format == '%' && format[1] == '%')
-			ft_putchar('%');
-		else if (ft_tabs(*format) == 1)
-			ft_putchar(*format);
-		num = checks(options, format);
+			val->k++;
+		}
+		else
+			num = checks(options, format, val);
 		if (*format == '%')
 			format += num;
 		format++;
 	}
 	va_end(options);
-	return (0);
+	return (val->k);
 }

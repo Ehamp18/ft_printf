@@ -6,13 +6,13 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 18:40:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/03 22:44:44 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/10 16:21:27 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-char			*ft_itoa_x(int n)
+char			*ft_itoa_x(int64_t n)
 {
 	const char	index[16] = "0123456789abcdef";
 	int			len;

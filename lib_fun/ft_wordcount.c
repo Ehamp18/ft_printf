@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_float.c                                    :+:      :+:    :+:   */
+/*   ft_wordcount.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 19:18:36 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/10 19:57:29 by elhampto         ###   ########.fr       */
+/*   Created: 2019/02/25 19:25:31 by elhampto          #+#    #+#             */
+/*   Updated: 2019/06/10 18:24:25 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-static int				ft_numcount(double *in)
+size_t			ft_wordcount(char const *s, char c)
 {
-	int					j;
+	int			i;
+	int			count;
 
-	j = 0;
-	while (in[j])
-		j++;
-	return (j);
-}
-
-char					*ft_itoa_float(double flo)
-{
-	double				len;
-	char				**test;
-	int					i;
-	static char			*l = NULL;
-
-	*test = (char*)ft_memalloc(sizeof(ft_numlen(flo)));
-	**test = flo;
 	i = 0;
-	len = ft_numcount(&flo);
-	*test = *ft_strsplit(*test, '.');
-	return (l);
+	count = 0;
+	if (!s || !*s)
+		return (0);
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i] && s[i] != c)
+			count++;
+		while (s[i] != c && s[i])
+			i++;
+	}
+	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 09:41:51 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/03 22:45:10 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/09 23:42:25 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void			*set(void *b, int c, size_t len)
 	return (b);
 }
 
-void			*ft_memalloc(size_t size)
+void				*ft_memalloc(size_t size)
 {
 	void			*fresh;
 

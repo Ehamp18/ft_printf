@@ -6,22 +6,33 @@
 #    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 17:30:33 by elhampto          #+#    #+#              #
-#    Updated: 2019/06/03 22:51:03 by elhampto         ###   ########.fr        #
+#    Updated: 2019/06/10 18:28:37 by elhampto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 SRC = checks \
-convers_dicsx \
-convers_poufx \
-flags \
-ft_printf \
-flags_2 \
+	dispatch \
+	ft_printf \
+
+CON = con_% \
+	con_b \
+	con_c \
+	con_d \
+	con_f \
+	con_i \
+	con_o \
+	con_p \
+	con_s \
+	con_u \
+	con_x \
+	con_xa
 
 LIB = ft_atoi \
 	ft_is_space \
 	ft_isdigit \
+	ft_itoa_b \
 	ft_itoa_base_unsigned \
 	ft_itoa_base \
 	ft_itoa_cx \
@@ -46,20 +57,24 @@ LIB = ft_atoi \
 	ft_strjoin \
 	ft_strlen \
 	ft_strnew \
-	ft_tabs
+	ft_strsplit \
+	ft_strsub \
+	ft_tabs \
+	ft_wordcount
 
-INC = ft_printf.h
+INC = -I ft_printf.h
 
-VPATH = lib_fun:files:inclu
+VPATH = lib_fun:files:inclu:conversions
 
 OBJ_DOR = obj
 
 OBJ = $(addsuffix .o, $(addprefix $(OBJ_DOR)/, $(SRC)))
 OBJ += $(addsuffix .o, $(addprefix $(OBJ_DOR)/, $(LIB)))
+OBJ += $(addsuffix .o, $(addprefix $(OBJ_DOR)/, $(CON)))
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -I $(INC)
+CFLAGS = -Wall -Werror -Wextra $(INC)
 
 all: $(OBJ_DOR) $(NAME)
 
@@ -80,7 +95,6 @@ clean:
 
 fclean: clean
 	@echo "\033[33mremoving libft library file...\033[0m"
-	@/bin/rm -rf $(OBJ_DOR)
 	@/bin/rm -rf $(NAME)
 
 re: fclean all

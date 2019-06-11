@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_float.c                                    :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 19:18:36 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/10 19:57:29 by elhampto         ###   ########.fr       */
+/*   Created: 2019/02/24 15:03:56 by elhampto          #+#    #+#             */
+/*   Updated: 2019/06/10 18:25:39 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-static int				ft_numcount(double *in)
+char				*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	int					j;
+	unsigned int	i;
+	char			*sub;
 
-	j = 0;
-	while (in[j])
-		j++;
-	return (j);
-}
-
-char					*ft_itoa_float(double flo)
-{
-	double				len;
-	char				**test;
-	int					i;
-	static char			*l = NULL;
-
-	*test = (char*)ft_memalloc(sizeof(ft_numlen(flo)));
-	**test = flo;
 	i = 0;
-	len = ft_numcount(&flo);
-	*test = *ft_strsplit(*test, '.');
-	return (l);
+	if (!s)
+		return (0);
+	if (!(sub = ft_strnew(len)))
+		return (NULL);
+	while (s[start] != '\0' && i < len)
+	{
+		sub[i] = s[start + i];
+		i++;
+	}
+	sub[i] = '\0';
+	return (sub);
 }

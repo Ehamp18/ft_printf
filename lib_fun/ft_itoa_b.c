@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_float.c                                    :+:      :+:    :+:   */
+/*   ft_itoa_b.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 19:18:36 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/10 19:57:29 by elhampto         ###   ########.fr       */
+/*   Created: 2019/06/07 00:51:16 by elhampto          #+#    #+#             */
+/*   Updated: 2019/06/07 00:57:29 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-static int				ft_numcount(double *in)
+char			*ft_itoa_b(int n)
 {
-	int					j;
+	const char	index[16] = "0123456789abcdef";
+	int			len;
+	long		a;
+	char		*asc;
 
-	j = 0;
-	while (in[j])
-		j++;
-	return (j);
-}
-
-char					*ft_itoa_float(double flo)
-{
-	double				len;
-	char				**test;
-	int					i;
-	static char			*l = NULL;
-
-	*test = (char*)ft_memalloc(sizeof(ft_numlen(flo)));
-	**test = flo;
-	i = 0;
-	len = ft_numcount(&flo);
-	*test = *ft_strsplit(*test, '.');
-	return (l);
+	a = n;
+	len = (n <= 0) ? 1 : 0;
+	while (a)
+	{
+		len++;
+		a /= 2;
+	}
+	a = n;
+	if (a < 0)
+		a *= -1;
+	if (!(asc = ft_strnew(len)))
+		return (0);
+	while (len--)
+	{
+		asc[len] = index[a % 2];
+		a /= 2;
+	}
+	if (n < 0)
+		asc[0] = '-';
+	return (asc);
 }
