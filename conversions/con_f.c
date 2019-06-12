@@ -6,40 +6,11 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:05 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/10 17:37:26 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/11 19:11:44 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
-
-static char			*width_f(int wid, char *s)
-{
-	int				i;
-	char			*ans;
-	int				j;
-
-	ans = ft_strnew(ft_numlen(wid));
-	j = ft_numlen(wid);
-	i = ft_strlen(s);
-	if (!wid)
-		return (s);
-	if (wid < i)
-		return (s);
-	wid -= i;
-	while (i >= 0)
-	{
-		ans[j] = s[i];
-		i--;
-		j--;
-	}
-	while ((wid > 0))
-	{
-		ans[j] = (' ');
-		wid--;
-		j--;
-	}
-	return (ans);
-}
 
 static char			*space_flag_f(char *a)
 {
@@ -56,22 +27,8 @@ static char			*space_flag_f(char *a)
 	*s = '-';
 	s++;
 	res = ft_strjoin(s, a);
+	free(s);
 	return (res);
-}
-
-static char			*zero_flag_f(char *a)
-{
-	int				i;
-
-	i = ft_strlen(a) - 1;
-	while ((ft_isdigit(a[i]) == 1) || (a[i] == '-'))
-		i--;
-	while ((ft_is_space(a[i]) == 1) && a[i])
-	{
-		a[i] = '0';
-		i--;
-	}
-	return (a);
 }
 
 static char			*plus_flag_f(char *a, int i)
@@ -106,35 +63,6 @@ static char			*plus_flag_f(char *a, int i)
 	return (res);
 }
 
-static char			*minus_flag_f(char *m)
-{
-	int				j;
-	int				i;
-	char			*res;
-
-	j = 0;
-	i = 0;
-	res = ft_strnew(ft_strlen(m));
-	while (ft_is_space(*m) == 1)
-	{
-		j++;
-		m++;
-	}
-	while (*m)
-	{
-		res[i] = *m;
-		m++;
-		i++;
-	}
-	while (j)
-	{
-		res[i] = ' ';
-		j--;
-		i++;
-	}
-	return (res);
-}
-
 void				con_f(va_list options, t_flags *flags, t_val *val)
 {
 	double			a;
@@ -152,6 +80,9 @@ void				con_f(va_list options, t_flags *flags, t_val *val)
 		flags->sign = 1;
 		com++;
 	}
+	/*if(flags->hash == 1)
+	**	com = hash_f(com);
+	*/
 	if (flags->width > 0)
 		com = width_f(flags->width, com);
 	if (flags->zero == 1)

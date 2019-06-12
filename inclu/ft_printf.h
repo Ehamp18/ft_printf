@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/10 18:25:12 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/11 19:49:37 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			con_xa(va_list options, t_flags *flags, t_val *val);
 void			con_p(va_list options, t_flags *flags, t_val *val);
 void			con_o(va_list options, t_flags *flags, t_val *val);
 void			con_u(va_list options, t_flags *flags, t_val *val);
-void			con_f(va_list options, t_flags *flags, t_val *val);
+// void			con_f(va_list options, t_flags *flags, t_val *val);
 void			con_per(t_flags *flags, t_val *val);
 int				checks(va_list options, const char *format, t_val *val);
 
@@ -93,7 +93,7 @@ char			*ft_itoa_b(int n);
 char			*ft_itoa_base_unsigned(uint64_t n, int base);
 char			*ft_itoa_base(int n, int base);
 char			*ft_itoa_cx(int64_t n);
-char			*ft_itoa_float(double flo);
+// char			*ft_itoa_float(double flo);
 int				ft_atoi_h(short str);
 int				ft_atoi_hh(char str);
 char			*ft_itoa_ll(long long n);
