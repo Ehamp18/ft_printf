@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:38 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/14 00:26:36 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/14 00:37:35 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 {
 	int				h;
 
-	while (wid > 0 && flag->minus == 0 && flag->width >= 1)
+	while (wid >= 0 && flag->minus == 0 && flag->width >= 1)
 	{
 		ans[wid] = ' ';
 		wid--;
 	}
 	flag->width = 0;
-	h = -1;
-	while (i && flag->minus == 1)
+	h = ft_strlen(ans);
+	while (i >= 0 && flag->minus == 1)
 	{
 		ans[++h] = ' ';
 		i--;
@@ -77,19 +77,20 @@ static char			*wid_zer_min_d(int wid, char *s, t_flags *flag)
 	if (flag->minus == 1)
 		i = -1;
 	else
-		i = ft_strlen(s) + 1;
+		i = ft_strlen(s);
+	wid--;
 	while (flag->minus == 1 || flag->width >= 1 || flag->zero == 1)
 	{
-		if (ft_strlen(ans) < ft_strlen(s))
+		if (wid < (int)ft_strlen(s))
 			return (s);
 		if (i == -1)
 		{
-			while (++s[i])
+			while (s[++i])
 				ans[i] = s[i];
 			wid -= i;
 		}
 		else
-			while (s[--i])
+			while (i-- > 0)
 			{
 				ans[wid] = s[i];
 				wid--;
