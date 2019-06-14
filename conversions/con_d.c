@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:38 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/14 00:37:35 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/14 00:41:15 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 	h = ft_strlen(ans);
 	while (i >= 0 && flag->minus == 1)
 	{
-		ans[++h] = ' ';
+		ans[h++] = ' ';
 		i--;
 	}
 	flag->minus = 0;
@@ -116,9 +116,9 @@ static char			*spac_plus_d(char *a, t_flags *flag)
 	}
 	else
 	{
-		a++;
-		*s = '+';
-		if (flag->sign == 1)
+		if (*s != '-')
+			*s = '+';
+		else
 			*s = '-';
 		res = ft_strjoin(s, a);
 	}
