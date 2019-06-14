@@ -6,43 +6,11 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/10 00:52:55 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/14 00:54:33 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
-
-static int			h_flag_u(short k)
-{
-	int				h;
-
-	h = ft_atoi_h(k);
-	return (h);
-}
-
-static int			hh_flag_u(char k)
-{
-	int				hh;
-
-	hh = ft_atoi_hh(k);
-	return (hh);
-}
-
-static char			*l_flag_u(long k)
-{
-	char			*l;
-
-	l = ft_itoa_long(k);
-	return (l);
-}
-
-static char			*ll_flag_u(long long k)
-{
-	char			*ll;
-
-	ll = ft_itoa_ll(k);
-	return (ll);
-}
 
 static char			*precision_u(int perc, char *point)
 {
@@ -72,98 +40,104 @@ static char			*precision_u(int perc, char *point)
 	}
 	return (res);
 }
+static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
+{
+	int				h;
 
-static char			*width_u(int wid, char *s)
+	while (wid >= 0 && flag->minus == 0 && flag->width >= 1)
+	{
+		ans[wid] = ' ';
+		wid--;
+	}
+	flag->width = 0;
+	h = ft_strlen(ans);
+	while (i >= 0 && flag->minus == 1)
+	{
+		ans[h++] = ' ';
+		i--;
+	}
+	flag->minus = 0;
+	h = ft_strlen(ans) - 1;
+	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1)
+		h--;
+	while (ans[h] && flag->zero == 1)
+	{
+		ans[h] = '0';
+		h--;
+	}
+	flag->zero = 0;
+	return (ans);
+}
+
+static char			*wid_zer_min_u(int wid, char *s, t_flags *flag)
 {
 	int				i;
 	char			*ans;
-	int				j;
 
-	ans = ft_strnew(ft_numlen(wid));
-	j = ft_numlen(wid);
-	i = ft_strlen(s);
-	if (!wid)
-		return (s);
-	if (wid < i)
-		return (s);
-	wid -= i;
-	while (i >= 0)
+	ans = ft_strnew(wid);
+	if (flag->minus == 1)
+		i = -1;
+	else
+		i = ft_strlen(s);
+	wid--;
+	while (flag->minus == 1 || flag->width >= 1 || flag->zero == 1)
 	{
-		ans[j] = s[i];
-		i--;
-		j--;
-	}
-	while ((wid > 0))
-	{
-		ans[j] = (' ');
-		wid--;
-		j--;
+		if (wid < (int)ft_strlen(s))
+			return (s);
+		if (i == -1)
+		{
+			while (s[++i])
+				ans[i] = s[i];
+			wid -= i;
+		}
+		else
+			while (i-- > 0)
+			{
+				ans[wid] = s[i];
+				wid--;
+			}
+		i = wid;
+		ans = wzm_help(wid, ans, flag, i);
 	}
 	return (ans);
 }
 
-static char			*zero_flag_u(char *a)
+static char			*spac_plus_u(char *a, t_flags *flag)
 {
-	int				i;
-
-	i = ft_strlen(a) - 1;
-	while ((ft_isdigit(a[i]) == 1) || (a[i] == '-'))
-		i--;
-	while ((ft_is_space(a[i]) == 1) && a[i])
-	{
-		a[i] = '0';
-		i--;
-	}
-	return (a);
-}
-
-static char			*minus_flag_u(char *m)
-{
-	int				j;
-	int				i;
+	char			*s;
 	char			*res;
 
-	j = 0;
-	i = 0;
-	res = ft_strnew(ft_strlen(m));
-	while (ft_is_space(*m) == 1)
+	s = ft_strnew(ft_strlen(a));
+	if (flag->plus == 0)
 	{
-		j++;
-		m++;
+		*s = '-';
+		if (a[0] != '-')
+			*s = ' ';
+		res = ft_strjoin(s, a);
 	}
-	while (*m)
+	else
 	{
-		res[i] = *m;
-		m++;
-		i++;
-	}
-	while (j)
-	{
-		res[i] = ' ';
-		j--;
-		i++;
+		if (*s != '-')
+			*s = '+';
+		else
+			*s = '-';
+		res = ft_strjoin(s, a);
 	}
 	return (res);
 }
 
 void				con_u(va_list options, t_flags *flags, t_val *val)
 {
+	int64_t			a;
 	char			*com;
 
-	com = (char*)ft_memalloc(sizeof(flags));
-	if (flags->length)
-	{
-		if (ft_strcmp(flags->length, "l") == 0)
-			com = l_flag_u(va_arg(options, long));
-		if (ft_strcmp(flags->length, "ll") == 0)
-			com = ll_flag_u(va_arg(options, long long));
-		if (ft_strcmp(flags->length, "h") == 0)
-			*com = (short)h_flag_u(va_arg(options, int));
-		if (ft_strcmp(flags->length, "hh") == 0)
-			*com = (char)hh_flag_u(va_arg(options, int));
-	}
-	if (!flags->length)
-		com = ft_itoa_unsigned(va_arg(options, int));
+	a = 0;
+	if ((ft_strcmp(flags->length, "l") == 0) ||
+		(ft_strcmp(flags->length, "ll") == 0))
+		a = va_arg(options, int64_t);
+	else
+		a = va_arg(options, int32_t);
+	com = ft_itoa_unsigned(a);
 	if (*com == '-')
 	{
 		flags->sign = 1;
@@ -171,11 +145,9 @@ void				con_u(va_list options, t_flags *flags, t_val *val)
 	}
 	if (flags->precis > 0)
 		com = precision_u(flags->precis, com);
-	if (flags->width > 0)
-		com = width_u(flags->width, com);
-	if (flags->zero == 1)
-		com = zero_flag_u(com);
-	if (flags->minus == 1)
-		com = minus_flag_u(com);
+	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
+		com = wid_zer_min_u(flags->width, com, flags);
+	if (flags->space == 1 || flags->plus == 1)
+		com = spac_plus_u(com, flags);
 	val->k += ft_putstr(com);
 }
