@@ -6,7 +6,7 @@
 #    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 17:30:33 by elhampto          #+#    #+#              #
-#    Updated: 2019/06/11 19:49:05 by elhampto         ###   ########.fr        #
+#    Updated: 2019/06/13 12:52:53 by elhampto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ CON = con_% \
 	con_u \
 	con_x \
 	con_xa
-	# con_f
 
 LIB = ft_atoi \
 	ft_is_space \
@@ -60,7 +59,6 @@ LIB = ft_atoi \
 	ft_strsub \
 	ft_tabs \
 	ft_wordcount
-	# ft_itoa_float \
 
 INC = -I ft_printf.h
 
