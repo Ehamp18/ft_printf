@@ -6,7 +6,7 @@
 #    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 17:30:33 by elhampto          #+#    #+#              #
-#    Updated: 2019/06/13 12:52:53 by elhampto         ###   ########.fr        #
+#    Updated: 2019/06/13 21:23:07 by elhampto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ CON = con_% \
 	con_xa
 
 LIB = ft_atoi \
+	ft_bzero \
 	ft_is_space \
 	ft_isdigit \
 	ft_itoa_b \
@@ -45,6 +46,7 @@ LIB = ft_atoi \
 	ft_itoa_x \
 	ft_itoa \
 	ft_memalloc \
+	ft_memset \
 	ft_numlen \
 	ft_putchar \
 	ft_putnbr \

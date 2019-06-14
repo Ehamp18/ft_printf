@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/13 14:09:21 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/13 21:22:55 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int				checks(va_list options, const char *format, t_val *val);
 */
 
 int				ft_atoi(const char *str);
+void			ft_bzero(void *s, size_t n);
 int				ft_is_space(char c);
 int				ft_isdigit(int c);
 char			*ft_itoa_b(int n);
@@ -102,6 +103,7 @@ char			*ft_itoa_unsigned(uint64_t n);
 char			*ft_itoa_x(int64_t n);
 char			*ft_itoa(int64_t n);
 void			*ft_memalloc(size_t size);
+void			*ft_memset(void *b, int c, size_t len);
 int				ft_numlen(int num);
 void			ft_putchar(char c);
 void			ft_putnbr(int n);
