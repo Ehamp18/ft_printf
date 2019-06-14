@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   con_d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehamp <ehamp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:38 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/13 16:38:22 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/13 20:05:36 by ehamp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,18 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 {
 	int				h;
 
-	while (wid > 0 && flag->minus == 0 && flag->width == 1)
+	while (wid > 0 && flag->minus == 0 && flag->width >= 1)
 	{
 		ans[wid] = ' ';
 		wid--;
 	}
 	flag->width = 0;
 	h = -1;
-	while (--i && flag->minus == 1)
+	while (i && flag->minus == 1)
+	{
 		ans[++h] = ' ';
+		i--;
+	}
 	flag->minus = 0;
 	h = ft_strlen(ans) - 1;
 	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1)
@@ -71,16 +74,17 @@ static char			*wid_zer_min_d(int wid, char *s, t_flags *flag)
 	char			*ans;
 
 	ans = ft_strnew(wid);
-	i = ft_strlen(s) + 1;
 	if (flag->minus == 1)
 		i = -1;
-	while (flag->minus == 1 || flag->width == 1 || flag->zero == 1)
+	else
+		i = ft_strlen(s) + 1;
+	while (flag->minus == 1 || flag->width >= 1 || flag->zero == 1)
 	{
-		if (wid < (int)ft_strlen(s))
+		if (ft_strlen(ans) < ft_strlen(s))
 			return (s);
 		if (i == -1)
 		{
-			while (s[++i])
+			while (++s[i])
 				ans[i] = s[i];
 			wid -= i;
 		}
@@ -90,7 +94,7 @@ static char			*wid_zer_min_d(int wid, char *s, t_flags *flag)
 				ans[wid] = s[i];
 				wid--;
 			}
-		i = wid + 1;
+		i = wid;
 		ans = wzm_help(wid, ans, flag, i);
 	}
 	return (ans);
@@ -132,15 +136,9 @@ void				con_d(va_list options, t_flags *flags, t_val *val)
 	else
 		a = va_arg(options, int32_t);
 	com = ft_itoa(a);
-	// if (*com == '-' && flags->minus == 1)
-	// {
-	// 	flags->sign = 1;
-	// 	val->k++;
-	// 	com++;
-	// }
 	if (flags->precis > 0)
 		com = precision_d(flags->precis, com);
-	if (flags->width > 0 || flags->minus == 1 || flags->zero == 1)
+	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 		com = wid_zer_min_d(flags->width, com, flags);
 	if (flags->space == 1 || flags->plus == 1)
 		com = spac_plus_d(com, flags);
