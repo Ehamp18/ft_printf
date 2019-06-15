@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:51 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/10 12:07:03 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/14 21:47:44 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,8 @@ void				con_c(va_list options, t_flags *flags, t_val *val)
 		a = va_arg(options, int64_t);
 	else
 		a = va_arg(options, int32_t);
-	com = ft_itoa(a);
-	if (!flags->length)
-		*com = (char)ft_itoa(va_arg(options, int));
-	if (*com == '-')
-	{
-		flags->sign = 1;
-		com++;
-	}
+	com = ft_strnew(a);
+	*com = (char)ft_itoa(a);
 	if (flags->width > 0)
 		com = width_c(flags->width, com);
 	if (flags->zero == 1)

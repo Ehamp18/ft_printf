@@ -6,43 +6,11 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:36 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/10 00:52:58 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/14 21:49:49 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
-
-static int			h_flag_s(short k)
-{
-	int				h;
-
-	h = ft_atoi_h(k);
-	return (h);
-}
-
-static int			hh_flag_s(char k)
-{
-	int				hh;
-
-	hh = ft_atoi_hh(k);
-	return (hh);
-}
-
-static char			*l_flag_s(long k)
-{
-	char			*l;
-
-	l = ft_itoa_long(k);
-	return (l);
-}
-
-static char			*ll_flag_s(long long k)
-{
-	char			*ll;
-
-	ll = ft_itoa_ll(k);
-	return (ll);
-}
 
 static char			*precision_s(int perc, char *point)
 {
@@ -137,22 +105,15 @@ static char			*minus_flag_s(char *m)
 
 void				con_s(va_list options, t_flags *flags, t_val *val)
 {
+	int64_t			a;
 	char			*com;
 
-	com = (char*)ft_memalloc(sizeof(flags));
-	if (flags->length)
-	{
-		if (ft_strcmp(flags->length, "l") == 0)
-			com = l_flag_s(va_arg(options, long));
-		if (ft_strcmp(flags->length, "ll") == 0)
-			com = ll_flag_s(va_arg(options, long long));
-		if (ft_strcmp(flags->length, "h") == 0)
-			*com = (short)h_flag_s(va_arg(options, int));
-		if (ft_strcmp(flags->length, "hh") == 0)
-			*com = (char)hh_flag_s(va_arg(options, int));
-	}
-	if (!flags->length)
-		com = va_arg(options, char*);
+	com = 0;
+	if ((ft_strcmp(flags->length, "l") == 0) ||
+		(ft_strcmp(flags->length, "ll") == 0))
+		a = va_arg(options, int64_t);
+	else
+		a = va_arg(options, int32_t);
 	if (flags->precis > 0)
 		com = precision_s(flags->precis, com);
 	if (flags->width > 0)
