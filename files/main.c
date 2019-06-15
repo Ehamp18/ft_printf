@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 04:44:46 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/13 22:42:35 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/14 15:38:39 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int			main(void)
 	// printf("real: %% aadaf\n");
 	// ft_printf("mine: %% aadaf\n");
 	// ft_putchar('\n');
-	printf("real d: %5d aadaf\n", 35);
-	ft_printf("mine d: %5d aadaf\n", 35);
+	// printf("real d: %5d aadaf\n", 35);
+	// ft_printf("mine d: %5d aadaf\n", 35);
 	// printf("real i: %i aadaf\n", 999999999);
 	// ft_printf("mine i: %i aadaf\n", 999999999);
 	// ft_putchar('\n');
@@ -30,8 +30,8 @@ int			main(void)
 	// printf("real s: %.s aadaf\n", "This is torturous, ssend help. plz. It started whem I was 6 years.");
 	// ft_printf("mine s: %.s aadaf\n", "This is torturous, ssend help. plz. It started whem I was 6 years.");
 	// ft_putchar('\n');
-	// printf("real x: %x aadaf\n", 99999999);
-	// ft_printf("mine x: %x aadaf\n", 99999999);
+	printf("real x: %#x aadaf\n", 0);
+	ft_printf("mine x: %#x aadaf\n", 0);
 	// ft_putchar('\n');
 	// printf("real X: %X aadaf\n", 156);
 	// ft_printf("mine X: %X aadaf\n", 156);
@@ -42,8 +42,9 @@ int			main(void)
 	// printf("real o: %o aadaf\n", 15);
 	// ft_printf("mine o: %o aadaf\n", 15);
 	// ft_putchar('\n');
-	// printf("real u: %u aadaf\n", 156);
-	// ft_printf("mine u: %u aadaf\n", 156);
+	// printf("real u: %u aadaf\n", 0);
+	// ft_printf("mine u: %u aadaf\n", 0);
 	// ft_putchar('\n');
+	// ft_printf("%x\n", 4294967295);
 	return (0);
 }

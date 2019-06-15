@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/13 21:22:55 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/14 15:26:13 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,12 @@ int				checks(va_list options, const char *format, t_val *val);
 int				ft_atoi(const char *str);
 void			ft_bzero(void *s, size_t n);
 int				ft_is_space(char c);
+int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 char			*ft_itoa_b(int n);
 char			*ft_itoa_base_unsigned(uint64_t n, int base);
 char			*ft_itoa_base(int n, int base);
-char			*ft_itoa_cx(int64_t n);
+char			*ft_itoa_cx(uint64_t n);
 int				ft_atoi_h(short str);
 int				ft_atoi_hh(char str);
 char			*ft_itoa_ll(long long n);
@@ -100,7 +101,7 @@ char			*ft_itoa_long(long n);
 char			*ft_itoa_o_unsigned(uint64_t n);
 char			*ft_itoa_u_p(uint64_t n);
 char			*ft_itoa_unsigned(uint64_t n);
-char			*ft_itoa_x(int64_t n);
+char			*ft_itoa_x(uint64_t n);
 char			*ft_itoa(int64_t n);
 void			*ft_memalloc(size_t size);
 void			*ft_memset(void *b, int c, size_t len);

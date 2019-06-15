@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/14 00:54:33 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/14 14:34:09 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,15 +134,12 @@ void				con_u(va_list options, t_flags *flags, t_val *val)
 	a = 0;
 	if ((ft_strcmp(flags->length, "l") == 0) ||
 		(ft_strcmp(flags->length, "ll") == 0))
-		a = va_arg(options, int64_t);
+		a = va_arg(options, uint64_t);
 	else
-		a = va_arg(options, int32_t);
+		a = va_arg(options, uint32_t);
+	// printf("check1: %llu\n", a);
 	com = ft_itoa_unsigned(a);
-	if (*com == '-')
-	{
-		flags->sign = 1;
-		com++;
-	}
+	// printf("check2: %llu\n", a);
 	if (flags->precis > 0)
 		com = precision_u(flags->precis, com);
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:19 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/14 00:50:26 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/14 16:35:36 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,28 +103,15 @@ static char			*wid_zer_min_o(int wid, char *s, t_flags *flag)
 	return (ans);
 }
 
-static char			*spac_plus_o(char *a, t_flags *flag)
+static char			*hash_o(char *s)
 {
-	char			*s;
-	char			*res;
+	char			*str;
 
-	s = ft_strnew(ft_strlen(a));
-	if (flag->plus == 0)
-	{
-		*s = '-';
-		if (a[0] != '-')
-			*s = ' ';
-		res = ft_strjoin(s, a);
-	}
-	else
-	{
-		if (*s != '-')
-			*s = '+';
-		else
-			*s = '-';
-		res = ft_strjoin(s, a);
-	}
-	return (res);
+	str = ft_strnew(ft_strlen(s));
+	str[0] = '0';
+	if (*s >= 1 || ft_isalpha(*s) == 1)
+		s = ft_strjoin(str, s);
+	return (s);
 }
 
 void				con_o(va_list options, t_flags *flags, t_val *val)
@@ -135,20 +122,15 @@ void				con_o(va_list options, t_flags *flags, t_val *val)
 	a = 0;
 	if ((ft_strcmp(flags->length, "l") == 0) ||
 		(ft_strcmp(flags->length, "ll") == 0))
-		a = va_arg(options, int64_t);
+		a = va_arg(options, uint64_t);
 	else
-		a = va_arg(options, int32_t);
+		a = va_arg(options, uint32_t);
 	com = ft_itoa_o_unsigned(a);
-	if (*com == '-')
-	{
-		flags->sign = 1;
-		com++;
-	}
 	if (flags->precis > 0)
 		com = precision_o(flags->precis, com);
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 		com = wid_zer_min_o(flags->width, com, flags);
-	if (flags->space == 1 || flags->plus == 1)
-		com = spac_plus_o(com, flags);
+	if (flags->hash == 1)
+		com = hash_o(com);
 	val->k += ft_putstr(com);
 }

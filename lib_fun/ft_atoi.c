@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:44:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/03 20:55:23 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/14 16:26:46 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int					ft_atoi(const char *str)
 {
-	int				sign;
 	int				finish;
+	int				sign;
 
 	sign = 1;
 	finish = 0;

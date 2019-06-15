@@ -1,38 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_o_unsigned.c                               :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/16 19:38:52 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/14 16:02:21 by elhampto         ###   ########.fr       */
+/*   Created: 2019/02/12 17:23:43 by elhampto          #+#    #+#             */
+/*   Updated: 2019/06/14 15:25:46 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-char			*ft_itoa_o_unsigned(uint64_t n)
+int					ft_isalpha(int c)
 {
-	const char	index[16] = "0123456789abcdef";
-	int			len;
-	uint64_t	a;
-	char		*asc;
-
-	a = n;
-	len = 0;
-	while (a)
-	{
-		len++;
-		a /= 8;
-	}
-	a = n;
-	if (!(asc = ft_strnew(len)))
-		return (0);
-	while (len--)
-	{
-		asc[len] = index[a % 8];
-		a /= 8;
-	}
-	return (asc);
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	return (0);
 }

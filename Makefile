@@ -6,7 +6,7 @@
 #    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 17:30:33 by elhampto          #+#    #+#              #
-#    Updated: 2019/06/13 21:23:07 by elhampto         ###   ########.fr        #
+#    Updated: 2019/06/14 15:26:37 by elhampto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ CON = con_% \
 LIB = ft_atoi \
 	ft_bzero \
 	ft_is_space \
+	ft_isalpha \
 	ft_isdigit \
 	ft_itoa_b \
 	ft_itoa_base_unsigned \
