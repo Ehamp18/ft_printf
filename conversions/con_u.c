@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/14 14:34:09 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/15 20:40:03 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,7 @@ void				con_u(va_list options, t_flags *flags, t_val *val)
 		a = va_arg(options, uint64_t);
 	else
 		a = va_arg(options, uint32_t);
-	// printf("check1: %llu\n", a);
 	com = ft_itoa_unsigned(a);
-	// printf("check2: %llu\n", a);
 	if (flags->precis > 0)
 		com = precision_u(flags->precis, com);
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
