@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:13 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/14 00:43:59 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/16 13:53:24 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,25 @@ static char			*precision_i(int perc, char *point)
 {
 	int				i;
 	char			*res;
+	int				j;
 
+	j = perc;
 	res = ft_strnew(perc);
 	i = ft_strlen(point);
 	if (perc < i)
 		return (point);
 	if (!perc)
 		perc = 0;
-	perc -= i;
-	while (i >= 0 && perc)
-	{
-		res[i] = point[i];
-		i--;
-	}
 	while (perc >= 0)
 	{
 		res[perc] = '0';
 		perc--;
+	}
+	while (i >= 0 && perc)
+	{
+		res[j] = point[i];
+		i--;
+		j--;
 	}
 	return (res);
 }
@@ -103,7 +105,11 @@ static char			*spac_plus_i(char *a, t_flags *flag)
 {
 	char			*s;
 	char			*res;
+	int				i;
+	int				j;
 
+	i = 0;
+	j = 0;
 	s = ft_strnew(ft_strlen(a));
 	if (flag->plus == 0)
 	{
@@ -114,10 +120,25 @@ static char			*spac_plus_i(char *a, t_flags *flag)
 	}
 	else
 	{
-		if (*s != '-')
-			*s = '+';
-		else
-			*s = '-';
+		while (a[i] == ' ' && a[i])
+		{
+			s[i] = a[i];
+			i++;
+		}
+		a += i;
+		while (a[j] != '-' && a[j])
+		{
+			j++;
+			if (a[j] == '-')
+			{
+				flag->sign = 1;
+				a[j] = a[j - 1];
+			}
+		}
+		if (a[i] != '-')
+			s[i] = '+';
+		else if (flag->sign == 1)
+			s[i] = '-';
 		res = ft_strjoin(s, a);
 	}
 	return (res);
