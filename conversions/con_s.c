@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:36 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/15 20:58:53 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/15 23:05:48 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static char			*precision_s(int perc, char *point)
 
 	res = ft_strnew(perc);
 	i = 0;
-	if (!perc)
-		perc = 0;
 	while (point[i] && perc > 0)
 	{
 		res[i] = point[i];
@@ -102,7 +100,7 @@ void				con_s(va_list options, t_flags *flags, t_val *val)
 		a = va_arg(options, wchar_t*);
 	else
 		com = va_arg(options, char*);
-	if (flags->precis > 0)
+	if (flags->precis > 0 || flags->precis == -1)
 		com = precision_s(flags->precis, com);
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 		com = wid_zer_min_s(flags->width, com, flags);

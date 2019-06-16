@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 13:23:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/09 20:38:32 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/15 22:33:33 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,8 @@ static void				flags_2(const char *format, t_flags *flags)
 		l = (char*)ft_memalloc(ft_strlen(format) + 1);
 		while (ft_isdigit(format[cur]) == 1)
 		{
-			l[j] = format[cur];
+			l[j] = format[cur++];
 			j++;
-			cur++;
 		}
 		flags->width = ft_atoi(l);
 		free(l);
@@ -67,16 +66,16 @@ static void				flags_2(const char *format, t_flags *flags)
 	{
 		j = 0;
 		l = (char*)ft_memalloc(ft_strlen(format) + 1);
-		if (format[flags->check] == '.')
-			while (format[flags->check] == '.' && ft_isdigit(format[cur]) == 1)
-			{
-				l[j] = format[cur++];
-				j++;
-			}
-		else
-			if (format[flags->check] == '.' && !(ft_isdigit(format[cur]) == 1))
-				l[j] = 0;
-		flags->precis = ft_atoi(l);
+		flags->precis = -1;
+		while (format[flags->check] == '.' && ft_isdigit(format[cur]) == 1)
+		{
+			l[j] = format[cur++];
+			j++;
+		}
+		if (j > 0)
+			flags->precis = ft_atoi(l);
+		else if (format[flags->check] == '.' && (ft_isdigit(format[cur]) == 0))
+			flags->precis = -1;
 		free(l);
 		flags->check += ++j;
 	}

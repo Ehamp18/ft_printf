@@ -6,7 +6,7 @@
 #    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 17:30:33 by elhampto          #+#    #+#              #
-#    Updated: 2019/06/14 15:26:37 by elhampto         ###   ########.fr        #
+#    Updated: 2019/06/15 21:07:04 by elhampto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,22 +80,22 @@ CFLAGS = -Wall -Werror -Wextra $(INC)
 all: $(OBJ_DOR) $(NAME)
 
 $(OBJ_DOR):
-	@echo "\033[32mmaking objects...\033[0m"
+	@echo "\033[32mCreating objects...\033[0m"
 	@mkdir -p $(OBJ_DOR)
 
 $(OBJ_DOR)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	@echo "\033[32mmaking lib...\033[0m"
+	@echo "\033[32mCreating library...\033[0m"
 	@ar -rcs $@ $^
 
 clean:
-	@echo "\033[33mcleaning libft repository...\033[0m"
+	@echo "\033[33mCleaning objects...\033[0m"
 	@/bin/rm -rf $(OBJ_DOR)
 
 fclean: clean
-	@echo "\033[33mremoving libft library file...\033[0m"
+	@echo "\033[33mCleaning objects and library...\033[0m"
 	@/bin/rm -rf $(NAME)
 
 re: fclean all
