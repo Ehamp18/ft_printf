@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/14 15:26:13 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:57:19 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <wctype.h>
 
 /*
 **  Testing
@@ -106,7 +107,7 @@ char			*ft_itoa(int64_t n);
 void			*ft_memalloc(size_t size);
 void			*ft_memset(void *b, int c, size_t len);
 int				ft_numlen(int num);
-void			ft_putchar(char c);
+int				ft_putchar(char c);
 void			ft_putnbr(int n);
 int				ft_putstr(char const *s);
 char			*ft_strcat(char *s1, const char *s2);

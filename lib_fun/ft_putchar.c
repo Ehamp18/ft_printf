@@ -6,13 +6,14 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 18:54:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/03 22:45:47 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/15 16:57:01 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-void			ft_putchar(char c)
+int			ft_putchar(char c)
 {
 	write(1, &c, 1);
+	return (1);
 }
