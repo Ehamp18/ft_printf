@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
+#    By: ehamp <ehamp@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 17:30:33 by elhampto          #+#    #+#              #
-#    Updated: 2019/06/15 21:07:04 by elhampto         ###   ########.fr        #
+#    Updated: 2019/06/16 02:01:09 by ehamp            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ LIB = ft_atoi \
 	ft_strjoin \
 	ft_strlen \
 	ft_strnew \
+	ft_strrev_cpy \
 	ft_strsplit \
 	ft_strsub \
 	ft_tabs \

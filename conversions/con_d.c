@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   con_d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehamp <ehamp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:38 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/15 22:37:11 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/16 02:00:43 by ehamp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,12 @@ static char			*spac_plus_d(char *a, t_flags *flag)
 {
 	char			*s;
 	char			*res;
+	int				i;
 
-	s = ft_strnew(ft_strlen(a));
+	i = ft_strlen(a);
+	s = ft_strnew(ft_strlen(a) + 1);
+	res = ft_strnew(ft_strlen(a) + 1);
+	ft_strrev_cpy(res, a);
 	if (flag->plus == 0)
 	{
 		*s = '-';
@@ -116,13 +120,22 @@ static char			*spac_plus_d(char *a, t_flags *flag)
 	}
 	else
 	{
-		if (*s != '-')
-			*s = '+';
+		while (a[i] == ' ' || !(ft_isdigit(a[i]) == 1))
+		{
+			i++;
+			if (ft_isdigit(a[i]) == 1)
+				break ;
+		}
+		i--;
+		if (res[i] != '-')
+			res[i] = '+';
 		else
-			*s = '-';
-		res = ft_strjoin(s, a);
+		{
+			res[i] = res[i - 1];
+			res[0] = '-';
+		}
 	}
-	return (res);
+	return (a);
 }
 
 void				con_d(va_list options, t_flags *flags, t_val *val)

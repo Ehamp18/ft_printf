@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehamp <ehamp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/15 16:57:19 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/16 01:57:41 by ehamp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int				ft_putchar(char c);
 void			ft_putnbr(int n);
 int				ft_putstr(char const *s);
 char			*ft_strcat(char *s1, const char *s2);
+char			*ft_strrev_cpy(char *dst, const char *src);
 int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strjoin(char const *s1, char const *s2);
