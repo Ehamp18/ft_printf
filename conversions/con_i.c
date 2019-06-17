@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:13 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/16 13:53:24 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/16 21:21:15 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ static char			*spac_plus_i(char *a, t_flags *flag)
 	s = ft_strnew(ft_strlen(a));
 	if (flag->plus == 0)
 	{
-		*s = '-';
 		if (a[0] != '-')
 			*s = ' ';
 		res = ft_strjoin(s, a);

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:19 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/14 16:35:36 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/17 00:23:53 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,11 @@ static char			*hash_o(char *s)
 
 	str = ft_strnew(ft_strlen(s));
 	str[0] = '0';
-	if (*s >= 1 || ft_isalpha(*s) == 1)
-		s = ft_strjoin(str, s);
-	return (s);
+	if (*s == '0')
+		return (s);
+	else if (*s >= 1 || ft_isalpha(*s) == 1)
+		str = ft_strjoin(str, s);
+	return (str);
 }
 
 void				con_o(va_list options, t_flags *flags, t_val *val)
@@ -128,9 +130,9 @@ void				con_o(va_list options, t_flags *flags, t_val *val)
 	com = ft_itoa_o_unsigned(a);
 	if (flags->precis > 0)
 		com = precision_o(flags->precis, com);
-	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
-		com = wid_zer_min_o(flags->width, com, flags);
 	if (flags->hash == 1)
 		com = hash_o(com);
+	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
+		com = wid_zer_min_o(flags->width, com, flags);
 	val->k += ft_putstr(com);
 }

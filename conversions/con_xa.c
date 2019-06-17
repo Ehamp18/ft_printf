@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:55 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/15 20:40:34 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/16 22:09:27 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ static char			*precision_xa(int perc, char *point)
 static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 {
 	int				h;
+	int				k;
 
+	k = wid;
 	while (wid >= 0 && flag->minus == 0 && flag->width >= 1)
 	{
 		ans[wid] = ' ';
@@ -59,12 +61,12 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 	}
 	flag->minus = 0;
 	h = ft_strlen(ans) - 1;
-	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1)
-		h--;
-	while (ans[h] && flag->zero == 1)
+	while ((ft_isdigit(ans[k]) == 1 || ans[k] == '-') && flag->zero == 1)
+		k--;
+	while (ans[k] && flag->zero == 1)
 	{
-		ans[h] = '0';
-		h--;
+		ans[k] = '0';
+		k--;
 	}
 	flag->zero = 0;
 	return (ans);
@@ -130,9 +132,9 @@ void				con_xa(va_list options, t_flags *flags, t_val *val)
 	com = ft_itoa_cx(a);
 	if (flags->precis > 0)
 		com = precision_xa(flags->precis, com);
-	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
-		com = wid_zer_min_xa(flags->width, com, flags);
 	if (flags->hash == 1)
 		com = hash_xa(com);
+	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
+		com = wid_zer_min_xa(flags->width, com, flags);
 	val->k += ft_putstr(com);
 }

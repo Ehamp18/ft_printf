@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/14 16:36:13 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/17 00:26:46 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,22 @@ static char			*precision_x(int perc, char *point)
 	char			*res;
 	int				j;
 
-	res = ft_strnew(ft_numlen(perc));
-	j = ft_numlen(perc);
+	j = perc;
+	res = ft_strnew(perc);
 	i = ft_strlen(point);
+	if (perc < i)
+		return (point);
 	if (!perc)
-		return (point);
-	if (perc < (int)ft_strlen(point))
-		return (point);
-	perc -= i;
-	while (i >= 0)
+		perc = 0;
+	while (perc >= 0)
+	{
+		res[perc] = '0';
+		perc--;
+	}
+	while (i >= 0 && perc)
 	{
 		res[j] = point[i];
 		i--;
-		j--;
-	}
-	while ((perc > 0))
-	{
-		res[j] = ('0');
-		perc--;
 		j--;
 	}
 	return (res);
@@ -44,7 +42,9 @@ static char			*precision_x(int perc, char *point)
 static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 {
 	int				h;
+	int				k;
 
+	k = wid;
 	while (wid >= 0 && flag->minus == 0 && flag->width >= 1)
 	{
 		ans[wid] = ' ';
@@ -58,13 +58,12 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		i--;
 	}
 	flag->minus = 0;
-	h = ft_strlen(ans) - 1;
-	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1)
-		h--;
-	while (ans[h] && flag->zero == 1)
+	while ((ft_isdigit(ans[k]) == 1 || ans[k] == '-') && flag->zero == 1)
+		k--;
+	while (ans[k] && flag->zero == 1)
 	{
-		ans[h] = '0';
-		h--;
+		ans[k] = '0';
+		k--;
 	}
 	flag->zero = 0;
 	return (ans);
@@ -87,7 +86,7 @@ static char			*wid_zer_min_x(int wid, char *s, t_flags *flag)
 			return (s);
 		if (i == -1)
 		{
-			while (s[++i])
+			while (s[++i] && s[i])
 				ans[i] = s[i];
 			wid -= i;
 		}
@@ -110,7 +109,7 @@ static char			*hash_x(char *s)
 	str = ft_strnew(ft_strlen(s));
 	str[0] = '0';
 	str[1] = 'x';
-	if (ft_atoi(s) > 0 || ft_isalpha(*s) == 1)
+	if (ft_atoi(s) > 0 || (ft_isalpha(*s) == 1))
 		s = ft_strjoin(str, s);
 	return (s);
 }
@@ -129,9 +128,9 @@ void				con_x(va_list options, t_flags *flags, t_val *val)
 	com = ft_itoa_x(a);
 	if (flags->precis > 0)
 		com = precision_x(flags->precis, com);
-	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
-		com = wid_zer_min_x(flags->width, com, flags);
 	if (flags->hash == 1)
 		com = hash_x(com);
+	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
+		com = wid_zer_min_x(flags->width, com, flags);
 	val->k += ft_putstr(com);
 }
