@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehamp <ehamp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/16 01:57:41 by ehamp            ###   ########.fr       */
+/*   Updated: 2019/06/18 03:24:57 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_flags
 typedef struct	s_count
 {
 	int			k;
+	int			zero;
 }				t_val;
 
 typedef	void	(*t_charat)(va_list conversions, t_flags *flags, t_val *val);
@@ -100,7 +101,7 @@ int				ft_atoi_hh(char str);
 char			*ft_itoa_ll(long long n);
 char			*ft_itoa_long(long n);
 char			*ft_itoa_o_unsigned(uint64_t n);
-char			*ft_itoa_u_p(uint64_t n);
+char			*ft_itoa_u_p(intptr_t n);
 char			*ft_itoa_unsigned(uint64_t n);
 char			*ft_itoa_x(uint64_t n);
 char			*ft_itoa(int64_t n);

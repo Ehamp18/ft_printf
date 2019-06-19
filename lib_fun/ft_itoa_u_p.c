@@ -6,17 +6,17 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 18:40:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/10 15:07:06 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/17 10:04:29 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-char			*ft_itoa_u_p(uint64_t n)
+char			*ft_itoa_u_p(intptr_t n)
 {
 	const char	index[16] = "0123456789abcdef";
 	int			len;
-	uint64_t	a;
+	intptr_t	a;
 	char		*asc;
 
 	a = n;
