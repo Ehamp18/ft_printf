@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:19 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/17 00:23:53 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/19 23:51:43 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 	}
 	flag->minus = 0;
 	h = ft_strlen(ans) - 1;
-	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1)
+	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1
+			&& flag->precis == 0)
 		h--;
-	while (ans[h] && flag->zero == 1)
+	while (ans[h] && flag->zero == 1 && flag->precis == 0)
 	{
 		ans[h] = '0';
 		h--;
@@ -81,25 +82,22 @@ static char			*wid_zer_min_o(int wid, char *s, t_flags *flag)
 	else
 		i = ft_strlen(s);
 	wid--;
-	while (flag->minus == 1 || flag->width >= 1 || flag->zero == 1)
+	if (wid < (int)ft_strlen(s))
+		return (s);
+	if (i == -1)
 	{
-		if (wid < (int)ft_strlen(s))
-			return (s);
-		if (i == -1)
-		{
-			while (s[++i])
-				ans[i] = s[i];
-			wid -= i;
-		}
-		else
-			while (i-- > 0)
-			{
-				ans[wid] = s[i];
-				wid--;
-			}
-		i = wid;
-		ans = wzm_help(wid, ans, flag, i);
+		while (s[++i])
+			ans[i] = s[i];
+		wid -= i;
 	}
+	else
+		while (i-- > 0)
+		{
+			ans[wid] = s[i];
+			wid--;
+		}
+	i = wid;
+	ans = wzm_help(wid, ans, flag, i);
 	return (ans);
 }
 

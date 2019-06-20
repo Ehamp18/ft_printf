@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:30 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/17 10:04:33 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/19 23:50:34 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,72 +39,70 @@ static char			*precision_p(int perc, char *point)
 	return (res);
 }
 
-static char			*width_p(int wid, char *s)
+static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 {
-	int				i;
-	char			*ans;
+	int				h;
 
-	ans = ft_strnew(wid);
-	i = ft_strlen(s);
-	if (wid < i)
-		return (s);
-	// wid -= i;
-	while (i >= 0)
+	while (wid >= 0 && flag->minus == 0 && flag->width >= 1)
 	{
-		ans[i] = s[i];
+		ans[wid] = ' ';
+		wid--;
+	}
+	h = ft_strlen(ans);
+	while (i >= 0 && flag->minus == 1)
+	{
+		ans[h++] = ' ';
 		i--;
 	}
-	while ((wid > 0))
+	h = ft_strlen(ans) - 1;
+	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1 &&
+			flag->precis == 0)
+		h--;
+	while (ans[h] == ' ' && flag->zero == 1 && flag->precis == 0)
 	{
-		ans[wid] = (' ');
-		wid--;
+		ans[h] = '0';
+		h--;
 	}
 	return (ans);
 }
 
-
-static char			*zero_flag_p(char *a)
+static char			*wid_zer_min_p(int wid, char *s, t_flags *flag)
 {
 	int				i;
-
-	i = ft_strlen(a) - 1;
-	while ((ft_isdigit(a[i]) == 1) || (a[i] == '-'))
-		i--;
-	while ((ft_is_space(a[i]) == 1) && a[i])
-	{
-		a[i] = '0';
-		i--;
-	}
-	return (a);
-}
-
-static char			*minus_flag_p(char *m)
-{
 	int				j;
-	int				i;
-	char			*res;
+	char			*ans;
 
 	j = 0;
-	i = 0;
-	res = ft_strnew(ft_strlen(m));
-	while (ft_is_space(*m) == 1)
+	ans = ft_strnew(wid);
+	if (flag->minus == 1)
+		i = 0;
+	else
+		i = ft_strlen(s);
+	wid--;
+	if (wid < (int)ft_strlen(s))
+		return (s);
+	if (flag->minus == 1)
 	{
-		j++;
-		m++;
+		while (s[i])
+		{
+			if (ft_isdigit(s[i]) == 1 || s[i] == '-')
+			{
+				ans[j] = s[i];
+				j++;
+			}
+			i++;
+		}
+		wid -= j;
 	}
-	while (*m)
-	{
-		res[i] = *m;
-		m++;
-		i++;
-	}
-	while (j)
-	{
-		res[i] = ' ';
-		j--;
-		i++;
-	}
-	return (res);
+	else
+		while (i-- > 0)
+		{
+			ans[wid] = s[i];
+			wid--;
+		}
+	i = wid;
+	ans = wzm_help(wid, ans, flag, i);
+	return (ans);
 }
 
 void				con_p(va_list options, t_flags *flags, t_val *val)
@@ -116,12 +114,8 @@ void				con_p(va_list options, t_flags *flags, t_val *val)
 	com = ft_itoa_u_p(a);
 	if (flags->precis > 0)
 		com = precision_p(flags->precis, com);
-	if (flags->width > 0)
-		com = width_p(flags->width, com);
-	if (flags->zero == 1)
-		com = zero_flag_p(com);
-	if (flags->minus == 1)
-		com = minus_flag_p(com);
+	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
+		com = wid_zer_min_p(flags->width, com, flags);
 	val->k += ft_putstr("0x");
 	val->k += ft_putstr(com);
 }

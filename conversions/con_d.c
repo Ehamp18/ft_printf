@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:38 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/18 23:18:14 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/19 23:39:12 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		i--;
 	}
 	h = ft_strlen(ans) - 1;
-	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1)
+	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1 &&
+			flag->precis == 0)
 		h--;
-	while (ans[h] && flag->zero == 1)
+	while (ans[h] == ' ' && flag->zero == 1 && flag->precis == 0)
 	{
 		ans[h] = '0';
 		h--;

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:05 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/11 19:11:44 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/06/19 23:41:40 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,6 @@ void				con_f(va_list options, t_flags *flags, t_val *val)
 		flags->sign = 1;
 		com++;
 	}
-	/*if(flags->hash == 1)
-	**	com = hash_f(com);
-	*/
 	if (flags->width > 0)
 		com = width_f(flags->width, com);
 	if (flags->zero == 1)
