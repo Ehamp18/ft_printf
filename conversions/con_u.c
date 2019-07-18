@@ -6,11 +6,12 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/19 23:42:47 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/01 19:18:50 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
+#include <stdio.h>
 
 static char			*precision_u(int perc, char *point)
 {
@@ -21,8 +22,8 @@ static char			*precision_u(int perc, char *point)
 	res = ft_strnew(ft_numlen(perc));
 	j = ft_numlen(perc);
 	i = ft_strlen(point);
-	if (!perc)
-		return (point);
+	if (perc == -1)
+		return ("\0");
 	if (perc < (int)ft_strlen(point))
 		return (point);
 	perc -= i;
@@ -32,14 +33,15 @@ static char			*precision_u(int perc, char *point)
 		i--;
 		j--;
 	}
-	while ((perc > 0))
+	while (perc > 0)
 	{
-		res[j] = ('0');
+		res[j] = '0';
 		perc--;
 		j--;
 	}
 	return (res);
 }
+
 static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 {
 	int				h;
@@ -55,7 +57,6 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		ans[h++] = ' ';
 		i--;
 	}
- 
 	h = ft_strlen(ans) - 1;
 	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1
 			&& flag->precis == 0)
@@ -76,24 +77,14 @@ static char			*wid_zer_min_u(int wid, char *s, t_flags *flag)
 
 	ans = ft_strnew(wid);
 	j = 0;
-	if (flag->minus == 1)
-		i = 0;
-	else
-		i = ft_strlen(s);
-	wid--;
-	if (wid < (int)ft_strlen(s))
+	i = flag->minus == 1 ? -1 : ft_strlen(s);
+	if (wid-- < (int)ft_strlen(s))
 		return (s);
-	if (flag->minus == 1)
+	if (i == -1)
 	{
-		while (s[i])
-		{
+		while (s[++i])
 			if (ft_isdigit(s[i]) == 1 || s[i] == '-')
-			{
-				ans[j] = s[i];
-				j++;
-			}
-			i++;
-		}
+				ans[j++] = s[i];
 		wid -= j;
 	}
 	else

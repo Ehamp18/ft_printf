@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_isdigit_c.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/12 22:56:29 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/20 14:34:28 by elhampto         ###   ########.fr       */
+/*   Created: 2019/07/01 18:08:13 by elhampto          #+#    #+#             */
+/*   Updated: 2019/07/01 18:08:32 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-int				ft_putstr(char const *s)
+int				ft_isint(int c)
 {
-	int			i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
-	{
-		ft_putchar(s[i]);
-		i++;
-	}
-	return (i);
+	if (c >= 0 && c <= 9)
+		return (1);
+	return (0);
 }

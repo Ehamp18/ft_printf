@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:19 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/19 23:51:43 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/11 13:23:40 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,12 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		ans[wid] = ' ';
 		wid--;
 	}
-	flag->width = 0;
 	h = ft_strlen(ans);
 	while (i >= 0 && flag->minus == 1)
 	{
 		ans[h++] = ' ';
 		i--;
 	}
-	flag->minus = 0;
 	h = ft_strlen(ans) - 1;
 	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1
 			&& flag->precis == 0)
@@ -67,7 +65,6 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		ans[h] = '0';
 		h--;
 	}
-	flag->zero = 0;
 	return (ans);
 }
 
@@ -77,10 +74,7 @@ static char			*wid_zer_min_o(int wid, char *s, t_flags *flag)
 	char			*ans;
 
 	ans = ft_strnew(wid);
-	if (flag->minus == 1)
-		i = -1;
-	else
-		i = ft_strlen(s);
+	i = flag->minus == 1 ? -1 : ft_strlen(s);
 	wid--;
 	if (wid < (int)ft_strlen(s))
 		return (s);
@@ -104,6 +98,7 @@ static char			*wid_zer_min_o(int wid, char *s, t_flags *flag)
 static char			*hash_o(char *s)
 {
 	char			*str;
+	char			*tmp;
 
 	str = ft_strnew(ft_strlen(s));
 	str[0] = '0';
@@ -111,7 +106,9 @@ static char			*hash_o(char *s)
 		return (s);
 	else if (*s >= 1 || ft_isalpha(*s) == 1)
 		str = ft_strjoin(str, s);
-	return (str);
+	tmp = str;
+	free(str);
+	return (tmp);
 }
 
 void				con_o(va_list options, t_flags *flags, t_val *val)

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 18:40:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/14 15:52:00 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/01 22:18:23 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char			*ft_itoa_x(uint64_t n)
 	uint64_t	a;
 	char		*asc;
 
+	if (n == 0)
+		return ("0");
 	a = n;
 	len = 0;
 	while (a)

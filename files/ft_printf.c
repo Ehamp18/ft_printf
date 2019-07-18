@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 18:37:14 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/17 16:18:59 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/10 19:45:59 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int				ft_printf(const char *format, ...)
 {
 	va_list		options;
 	int			num;
+	int			i;
 	t_val		*val;
 
 	va_start(options, format);
@@ -35,5 +36,7 @@ int				ft_printf(const char *format, ...)
 		format++;
 	}
 	va_end(options);
-	return (val->k);
+	i = val->k;
+	free(val);
+	return (i);
 }

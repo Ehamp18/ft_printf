@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:38 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/19 23:39:12 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/17 19:02:09 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,22 @@ static char			*precision_d(int perc, char *point, t_val *val)
 {
 	int				i;
 	char			*res;
-	int				j;
 
-	j = perc;
-	res = ft_strnew(perc);
+	val->in = 1;
 	i = ft_strlen(point);
 	if (perc == -1)
 		return (0);
 	if (perc <= i)
 		return (point);
-	while (i >= 0 && j)
+	res = per_help(point, perc, val);
+	perc = val->count;
+	while (perc >= 0)
 	{
-		if (point[i] == '-')
-		{
-			point[i] = '0';
-			val->zero = 1;
-		}
-		res[j] = point[i];
-		i--;
-		j--;
+		res[perc] = '0';
 		perc--;
 	}
-	while (j >= 0)
-	{
-		res[j] = '0';
-		j--;
-	}
-	return (res);
+	free(point);
+	return (val->in == -1 ? ft_cstrjoin('-', res) : res);
 }
 
 static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
@@ -55,59 +44,48 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		wid--;
 	}
 	h = ft_strlen(ans);
-	while (i >= 0 && flag->minus == 1)
-	{
+	while (i-- >= 0 && flag->minus == 1)
 		ans[h++] = ' ';
-		i--;
-	}
 	h = ft_strlen(ans) - 1;
-	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1 &&
-			flag->precis == 0)
-		h--;
-	while (ans[h] == ' ' && flag->zero == 1 && flag->precis == 0)
+	if (flag->precis == 0 && flag->minus == 0 && flag->zero == 1)
 	{
-		ans[h] = '0';
-		h--;
+		while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-'))
+			h--;
+		while (ans[h] == ' ' && flag->zero == 1)
+		{
+			ans[h] = '0';
+			h--;
+		}
 	}
+	if (flag->si == '-')
+		ans[0] = '-';
 	return (ans);
 }
 
-static char			*wid_zer_min_d(int wid, char *s, t_flags *flag)
+static char			*wid_zer_min_d(int wid, char *s, t_flags *flag, t_val *val)
 {
 	int				i;
-	int				j;
 	char			*ans;
 
-	j = 0;
+	flag->si = ' ';
 	ans = ft_strnew(wid);
-	if (flag->minus == 1)
-		i = 0;
-	else
-		i = ft_strlen(s);
 	wid--;
 	if (wid < (int)ft_strlen(s))
 		return (s);
 	if (flag->minus == 1)
 	{
-		while (s[i])
-		{
-			if (ft_isdigit(s[i]) == 1 || s[i] == '-')
-			{
-				ans[j] = s[i];
-				j++;
-			}
-			i++;
-		}
-		wid -= j;
+		ans = min_help(s, ans, flag, val);
+		wid -= val->count;
 	}
 	else
-		while (i-- > 0)
-		{
-			ans[wid] = s[i];
-			wid--;
-		}
+	{
+		val->wid = wid;
+		ans = min_help2(s, ans, flag, val);
+		wid = val->wid;
+	}
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
+	free(s);
 	return (ans);
 }
 
@@ -119,23 +97,17 @@ static char			*spac_plus_d(char *a, t_flags *flag, t_val *val)
 
 	i = 0;
 	s = ft_strnew(ft_strlen(a));
-	res = ft_strnew(ft_strlen(a));
-	if (flag->plus == 1)
+	if (flag->plus)
+		res = plus_help(flag, a, s, val);
+	else
 	{
 		while (a[i] == ' ' || ft_isdigit(a[i]) == 0)
 			i++;
-		if (s[i] != '-' && val->zero != 1)
-			s[i] = '+';
-		else
-			val->zero = 1;
+		s[i] = !val->zero ? ' ' : '-';
 		res = ft_strjoin(s, a);
 	}
-	else
-	{
-		if (a[0] != '-')
-			*s = ' ';
-		res = ft_strjoin(s, a);
-	}
+	free(s);
+	free(a);
 	return (res);
 }
 
@@ -143,26 +115,20 @@ void				con_d(va_list options, t_flags *flags, t_val *val)
 {
 	int64_t			a;
 	char			*com;
-	char			*s;
 
 	a = 0;
-	if ((ft_strcmp(flags->length, "l") == 0) ||
-		(ft_strcmp(flags->length, "ll") == 0))
-		a = va_arg(options, int64_t);
-	else
-		a = va_arg(options, int32_t);
+	a = (ft_strcmp(flags->length, "l") == 0) ||
+		(ft_strcmp(flags->length, "ll") == 0) ?
+		va_arg(options, int64_t) : va_arg(options, int32_t);
 	com = ft_itoa(a);
-	s = ft_strnew(ft_strlen(com));
+	if (a < 0)
+		val->zero = 1;
 	if (flags->precis > 0 || flags->precis == -1)
 		com = precision_d(flags->precis, com, val);
+	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
+		com = wid_zer_min_d(flags->width, com, flags, val);
 	if (flags->space == 1 || flags->plus == 1)
 		com = spac_plus_d(com, flags, val);
-	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
-		com = wid_zer_min_d(flags->width, com, flags);
-	if (val->zero == 1)
-	{
-		*s = '-';
-		com = ft_strjoin(s, com);
-	}
 	val->k += ft_putstr(com);
+	free(com);
 }

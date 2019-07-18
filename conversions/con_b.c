@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:50:06 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/19 23:54:13 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/08 21:20:07 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,32 +76,20 @@ static char			*wid_zer_min_b(int wid, char *s, t_flags *flag)
 
 	j = 0;
 	ans = ft_strnew(wid);
-	if (flag->minus == 1)
-		i = 0;
-	else
-		i = ft_strlen(s);
+	i = flag->minus == 1 ? 0 : ft_strlen(s);
 	wid--;
 	if (wid < (int)ft_strlen(s))
 		return (s);
 	if (flag->minus == 1)
 	{
 		while (s[i])
-		{
-			if (ft_isdigit(s[i]) == 1 || s[i] == '-')
-			{
-				ans[j] = s[i];
-				j++;
-			}
-			i++;
-		}
+			if (ft_isdigit(s[i]) == 1 || s[i++] == '-')
+				ans[j++] = s[i];
 		wid -= j;
 	}
 	else
 		while (i-- > 0)
-		{
-			ans[wid] = s[i];
-			wid--;
-		}
+			DEC((ans[wid] = s[i]), wid);
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
 	return (ans);
@@ -141,7 +129,7 @@ void				con_b(va_list options, t_flags *flags, t_val *val)
 	char			*s;
 
 	com = (char*)ft_memalloc(sizeof(flags));
-	com = ft_itoa_b(va_arg(options, int));
+	com = ft_itoa_b(va_arg(options, int64_t));
 	s = ft_strnew(ft_strlen(com));
 	if (flags->precis > 0 || flags->precis == -1)
 		com = precision_b(flags->precis, com);

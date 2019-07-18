@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_ccstrjoin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/12 22:56:29 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/20 14:34:28 by elhampto         ###   ########.fr       */
+/*   Created: 2019/07/17 19:33:45 by elhampto          #+#    #+#             */
+/*   Updated: 2019/07/17 19:35:52 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-int				ft_putstr(char const *s)
+char			*ft_ccstrjoin(char s1, char s2, char *s3)
 {
-	int			i;
+	char		*str;
+	size_t		len;
 
-	i = 0;
-	if (!s)
+	if (!s1 || !s2 || !s3)
+		return (NULL);
+	len = ft_strlen(s3) + 2;
+	if (!(str = ft_strnew(len)))
 		return (0);
-	while (s[i] != '\0')
-	{
-		ft_putchar(s[i]);
-		i++;
-	}
-	return (i);
+	str[0] = s1;
+	str[1] = s2;
+	ft_strcat(str, s3);
+	free(s3);
+	return (str);
 }

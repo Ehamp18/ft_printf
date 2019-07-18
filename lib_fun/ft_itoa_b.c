@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:51:16 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/07 00:57:29 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/08 20:47:46 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char			*ft_itoa_b(int n)
 	long		a;
 	char		*asc;
 
+	RETZE(n == 0);
 	a = n;
 	len = (n <= 0) ? 1 : 0;
 	while (a)
@@ -27,8 +28,7 @@ char			*ft_itoa_b(int n)
 		a /= 2;
 	}
 	a = n;
-	if (a < 0)
-		a *= -1;
+	CHECK(a < 0, a);
 	if (!(asc = ft_strnew(len)))
 		return (0);
 	while (len--)

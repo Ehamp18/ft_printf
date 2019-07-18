@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/18 03:24:57 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/17 19:36:40 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,19 @@
 # include <fcntl.h>
 # include <wctype.h>
 
-/*
-**  Testing
-*/
-# include <stdio.h>
-
 # define BREAK(x) if (x) break
 # define ZERO(x) if (x) return (0)
 # define NEG_CHECK(x) if (x < 0) x *= -1
 # define NEG_SI_PRNT(x, y) if (x < 0) y = '-'
 # define FREE(x, y, z) z = ft_strjoin(x, y); free(x); x = z;
+# define FE(x, y) x = y; free(y)
+# define CPY(x, y) y = ft_strcat(y, x); free(x)
 # define ERROR(x) if (x) return (-1)
+# define CHECK(x, y) if (x) y *= -1
+# define RETZE(x) if (x) return ("0")
+# define RETY(x, y) if (x) return (y)
+# define INC(x, y) if (x) y++
+# define DEC(x, y) if (x) y--
 
 typedef struct	s_flags
 {
@@ -46,13 +48,17 @@ typedef struct	s_flags
 	int			width;
 	int			precis;
 	int			sign;
+	char		si;
 	char		*length;
 }				t_flags;
 
 typedef struct	s_count
 {
 	int			k;
+	int			in;
+	int			count;
 	int			zero;
+	int			wid;
 }				t_val;
 
 typedef	void	(*t_charat)(va_list conversions, t_flags *flags, t_val *val);
@@ -62,7 +68,6 @@ typedef struct	s_conv_check
 	char		op;
 	t_charat	kl;
 }				t_check;
-
 
 extern t_check	g_conver_check[];
 
@@ -80,8 +85,13 @@ void			con_xa(va_list options, t_flags *flags, t_val *val);
 void			con_p(va_list options, t_flags *flags, t_val *val);
 void			con_o(va_list options, t_flags *flags, t_val *val);
 void			con_u(va_list options, t_flags *flags, t_val *val);
-void			con_per(t_flags *flags, t_val *val);
+void			con_b(va_list options, t_flags *flags, t_val *val);
+int				con_per(t_flags *flags, t_val *val);
 int				checks(va_list options, const char *format, t_val *val);
+char			*plus_help(t_flags *flag, char *a, char *s, t_val *val);
+char			*per_help(char *point, int perc, t_val *val);
+char			*min_help(char *s, char *ans, t_flags *flag, t_val *val);
+char			*min_help2(char *s, char *ans, t_flags *flag, t_val *val);
 
 /*
 ** Libary_functions
@@ -89,9 +99,12 @@ int				checks(va_list options, const char *format, t_val *val);
 
 int				ft_atoi(const char *str);
 void			ft_bzero(void *s, size_t n);
+char			*ft_cstrjoin(char s1, char *s2);
+char			*ft_ccstrjoin(char s1, char s2, char *s3);
 int				ft_is_space(char c);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
+int				ft_isint(int c);
 char			*ft_itoa_b(int n);
 char			*ft_itoa_base_unsigned(uint64_t n, int base);
 char			*ft_itoa_base(int n, int base);
@@ -115,6 +128,7 @@ char			*ft_strcat(char *s1, const char *s2);
 char			*ft_strrev_cpy(char *dst, const char *src);
 int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_strcpy(char *dst, const char *src);
+char			*ft_strdup(char *src);
 char			*ft_strjoin(char const *s1, char const *s2);
 size_t			ft_strlen(const char *s);
 char			*ft_strnew(size_t size);

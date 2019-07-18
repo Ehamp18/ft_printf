@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:51 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/17 18:22:48 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/05 17:06:05 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,11 @@ static char			*wid_zer_min_c(int wid, char *s, t_flags *flag)
 	char			*ans;
 
 	ans = ft_strnew(wid);
-	if (flag->minus == 1)
-		i = -1;
-	else
-		i = ft_strlen(s);
-	wid--;
+	i = flag->minus == 1 ? -1 : ft_strlen(s);
+	if (wid-- < ((int)ft_strlen(s) - 1))
+		return (s);
 	while (flag->minus == 1 || flag->width >= 1 || flag->zero == 1)
 	{
-		if (wid < (int)ft_strlen(s))
-			return (s);
 		if (i == -1)
 		{
 			while (s[++i])
@@ -100,18 +96,26 @@ static char			*spac_plus_c(char *a, t_flags *flag)
 
 void				con_c(va_list options, t_flags *flags, t_val *val)
 {
-	wint_t			a;
 	char			*com;
+	int				si;
 
-	a = 0;
+	si = 0;
 	com = ft_strnew(sizeof(char*));
 	if (ft_strcmp(flags->length, "l") == 0)
-		a = va_arg(options, wint_t);
+		*com = va_arg(options, wint_t);
 	else
-		*com = (char)va_arg(options, int);
+		*com = va_arg(options, int);
+	if (*com == 0)
+		si = 1;
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 		com = wid_zer_min_c(flags->width, com, flags);
 	if (flags->space == 1 || flags->plus == 1)
 		com = spac_plus_c(com, flags);
+	if (si == 1)
+	{
+		ft_putchar('\0');
+		val->k++;
+		com++;
+	}
 	val->k += ft_putstr(com);
 }

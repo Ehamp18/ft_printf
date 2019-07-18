@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/19 23:38:15 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/17 19:38:59 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static char			*precision_x(int perc, char *point)
 		i--;
 		j--;
 	}
+	free(point);
 	return (res);
 }
 
@@ -73,12 +74,8 @@ static char			*wid_zer_min_x(int wid, char *s, t_flags *flag)
 	char			*ans;
 
 	ans = ft_strnew(wid);
-	if (flag->minus == 1)
-		i = -1;
-	else
-		i = ft_strlen(s);
-	wid--;
-	if (wid < (int)ft_strlen(s))
+	i = flag->minus == 1 ? -1 : ft_strlen(s);
+	if (wid-- < (int)ft_strlen(s))
 		return (s);
 	if (i == -1)
 	{
@@ -94,18 +91,14 @@ static char			*wid_zer_min_x(int wid, char *s, t_flags *flag)
 		}
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
+	free(s);
 	return (ans);
 }
 
 static char			*hash_x(char *s)
 {
-	char			*str;
-
-	str = ft_strnew(ft_strlen(s));
-	str[0] = '0';
-	str[1] = 'x';
-	if (ft_atoi(s) > 0 || (ft_isalpha(*s) == 1))
-		s = ft_strjoin(str, s);
+	if ((ft_atoi(s) > 0 || (ft_isalpha(*s) == 1)) && *s != 0)
+		s = ft_ccstrjoin('0', 'x', s);
 	return (s);
 }
 
@@ -121,11 +114,12 @@ void				con_x(va_list options, t_flags *flags, t_val *val)
 	else
 		a = va_arg(options, uint32_t);
 	com = ft_itoa_x(a);
-	if (flags->precis > 0)
+	if (flags->precis > 0 || flags->precis == -1)
 		com = precision_x(flags->precis, com);
 	if (flags->hash == 1)
 		com = hash_x(com);
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 		com = wid_zer_min_x(flags->width, com, flags);
 	val->k += ft_putstr(com);
+	free(com);
 }

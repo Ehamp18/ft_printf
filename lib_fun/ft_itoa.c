@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 17:17:07 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/10 01:24:59 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/16 14:08:07 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char			*ft_itoa(int64_t n)
 	int64_t		a;
 	char		*asc;
 
+	RETZE(n == 0);
 	a = n;
 	len = (n <= 0) ? 1 : 0;
 	while (a)

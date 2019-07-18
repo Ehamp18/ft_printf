@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:36 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/17 19:45:03 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/17 22:19:15 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,12 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		ans[wid] = ' ';
 		wid--;
 	}
-	flag->width = 0;
 	h = ft_strlen(ans);
 	while (i >= 0 && flag->minus == 1)
 	{
 		ans[h++] = ' ';
 		i--;
 	}
-	flag->minus = 0;
 	h = ft_strlen(ans) - 1;
 	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1)
 		h--;
@@ -55,7 +53,6 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		ans[h] = '0';
 		h--;
 	}
-	flag->zero = 0;
 	return (ans);
 }
 
@@ -65,30 +62,24 @@ static char			*wid_zer_min_s(int wid, char *s, t_flags *flag)
 	char			*ans;
 
 	ans = ft_strnew(wid);
-	if (flag->minus == 1)
-		i = -1;
-	else
-		i = ft_strlen(s);
+	i = flag->minus == 1 ? -1 : ft_strlen(s);
 	wid--;
-	while (flag->minus == 1 || flag->width >= 1 || flag->zero == 1)
+	if (wid < (int)ft_strlen(s))
+		return (s);
+	if (i == -1)
 	{
-		if (wid < (int)ft_strlen(s))
-			return (s);
-		if (i == -1)
-		{
-			while (s[++i])
-				ans[i] = s[i];
-			wid -= i;
-		}
-		else
-			while (i-- > 0)
-			{
-				ans[wid] = s[i];
-				wid--;
-			}
-		i = wid;
-		ans = wzm_help(wid, ans, flag, i);
+		while (s[++i])
+			ans[i] = s[i];
+		wid -= i;
 	}
+	else
+		while (i-- > 0)
+		{
+			ans[wid] = s[i];
+			wid--;
+		}
+	i = wid;
+	ans = wzm_help(wid, ans, flag, i);
 	return (ans);
 }
 

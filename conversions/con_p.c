@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:30 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/19 23:50:34 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/08 18:45:57 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,32 +74,22 @@ static char			*wid_zer_min_p(int wid, char *s, t_flags *flag)
 
 	j = 0;
 	ans = ft_strnew(wid);
-	if (flag->minus == 1)
-		i = 0;
-	else
-		i = ft_strlen(s);
-	wid--;
-	if (wid < (int)ft_strlen(s))
+	i = flag->minus == 1 ? 0 : ft_strlen(s);
+	if (wid-- < (int)ft_strlen(s) - 1)
 		return (s);
 	if (flag->minus == 1)
 	{
-		while (s[i])
-		{
-			if (ft_isdigit(s[i]) == 1 || s[i] == '-')
+		while (s[i++])
+			if (ft_isdigit(s[i]) == 1 || ft_isalpha(s[i]))
 			{
 				ans[j] = s[i];
 				j++;
 			}
-			i++;
-		}
 		wid -= j;
 	}
 	else
-		while (i-- > 0)
-		{
+		while (i-- > 0 && wid--)
 			ans[wid] = s[i];
-			wid--;
-		}
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
 	return (ans);
@@ -109,13 +99,19 @@ void				con_p(va_list options, t_flags *flags, t_val *val)
 {
 	intptr_t		a;
 	char			*com;
+	char			*str;
+	int				j;
 
+	j = -1;
 	a = va_arg(options, intptr_t);
+	str = ft_strnew(sizeof(flags));
 	com = ft_itoa_u_p(a);
 	if (flags->precis > 0)
 		com = precision_p(flags->precis, com);
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 		com = wid_zer_min_p(flags->width, com, flags);
-	val->k += ft_putstr("0x");
+	str[0] = '0';
+	str[1] = 'x';
+	com = ft_strjoin(str, com);
 	val->k += ft_putstr(com);
 }

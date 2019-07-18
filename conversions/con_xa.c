@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:55 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/19 23:42:17 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/17 20:10:00 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,7 @@ static char			*wid_zer_min_xa(int wid, char *s, t_flags *flag)
 	char			*ans;
 
 	ans = ft_strnew(wid);
-	if (flag->minus == 1)
-		i = -1;
-	else
-		i = ft_strlen(s);
+	i = flag->minus == 1 ? -1 : ft_strlen(s);
 	wid--;
 	if (wid < (int)ft_strlen(s))
 		return (s);
@@ -99,17 +96,10 @@ static char			*wid_zer_min_xa(int wid, char *s, t_flags *flag)
 	ans = wzm_help(wid, ans, flag, i);
 	return (ans);
 }
-
-
 static char			*hash_xa(char *s)
 {
-	char			*str;
-
-	str = ft_strnew(ft_strlen(s));
-	str[0] = '0';
-	str[1] = 'X';
-	if (ft_atoi(s) > 0 || ft_isalpha(*s) == 1)
-		s = ft_strjoin(str, s);
+	if ((ft_atoi(s) > 0 || (ft_isalpha(*s) == 1)) && *s != 0)
+		s = ft_ccstrjoin('0', 'X', s);
 	return (s);
 }
 
@@ -132,4 +122,5 @@ void				con_xa(va_list options, t_flags *flags, t_val *val)
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 		com = wid_zer_min_xa(flags->width, com, flags);
 	val->k += ft_putstr(com);
+	free(com);
 }
