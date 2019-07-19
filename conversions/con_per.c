@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:42:18 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/11 18:57:40 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 21:04:55 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static char			*wid_zer_min(int wid, char *s, t_flags *flag)
 	}
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
+	free(s);
 	return (ans);
 }
 
@@ -72,5 +73,6 @@ int					con_per(t_flags *flags, t_val *val)
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 		com = wid_zer_min(flags->width, com, flags);
 	val->k += ft_putstr(com);
+	free(com);
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:51 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/05 17:06:05 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 20:59:12 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		ans[wid] = ' ';
 		wid--;
 	}
-	flag->width = 0;
 	h = ft_strlen(ans);
 	while (i >= 0 && flag->minus == 1)
 	{
 		ans[h++] = ' ';
 		i--;
 	}
-	flag->minus = 0;
 	h = ft_strlen(ans) - 1;
 	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1)
 		h--;
@@ -37,7 +35,6 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		ans[h] = '0';
 		h--;
 	}
-	flag->zero = 0;
 	return (ans);
 }
 
@@ -50,46 +47,41 @@ static char			*wid_zer_min_c(int wid, char *s, t_flags *flag)
 	i = flag->minus == 1 ? -1 : ft_strlen(s);
 	if (wid-- < ((int)ft_strlen(s) - 1))
 		return (s);
-	while (flag->minus == 1 || flag->width >= 1 || flag->zero == 1)
+	if (i == -1)
 	{
-		if (i == -1)
-		{
-			while (s[++i])
-				ans[i] = s[i];
-			wid -= i;
-		}
-		else
-			while (i-- > 0)
-			{
-				ans[wid] = s[i];
-				wid--;
-			}
-		i = wid;
-		ans = wzm_help(wid, ans, flag, i);
+		while (s[++i])
+			ans[i] = s[i];
+		wid -= i;
 	}
+	else
+		while (i-- > 0)
+		{
+			ans[wid] = s[i];
+			wid--;
+		}
+	i = wid;
+	ans = wzm_help(wid, ans, flag, i);
+	free(s);
 	return (ans);
 }
 
 static char			*spac_plus_c(char *a, t_flags *flag)
 {
-	char			*s;
 	char			*res;
 
-	s = ft_strnew(ft_strlen(a));
 	if (flag->plus == 0)
 	{
-		*s = '-';
 		if (a[0] != '-')
-			*s = ' ';
-		res = ft_strjoin(s, a);
+			res = ft_cstrjoin('+', a);
+		else
+			res = ft_cstrjoin('-', a);
 	}
 	else
 	{
-		if (*s != '-')
-			*s = '+';
+		if (a[0] != '-')
+			res = ft_cstrjoin('+', a);
 		else
-			*s = '-';
-		res = ft_strjoin(s, a);
+			res = ft_cstrjoin('-', a);
 	}
 	return (res);
 }
@@ -101,10 +93,8 @@ void				con_c(va_list options, t_flags *flags, t_val *val)
 
 	si = 0;
 	com = ft_strnew(sizeof(char*));
-	if (ft_strcmp(flags->length, "l") == 0)
-		*com = va_arg(options, wint_t);
-	else
-		*com = va_arg(options, int);
+	*com = ft_strcmp(flags->length, "l") == 0 ?
+		va_arg(options, wint_t) : va_arg(options, int);
 	if (*com == 0)
 		si = 1;
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
@@ -118,4 +108,5 @@ void				con_c(va_list options, t_flags *flags, t_val *val)
 		com++;
 	}
 	val->k += ft_putstr(com);
+	free(com); // made me fail 2 tests
 }

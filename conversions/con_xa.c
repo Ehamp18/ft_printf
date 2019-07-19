@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:55 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/17 20:10:00 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 21:07:56 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static char			*precision_xa(int perc, char *point)
 		perc--;
 		j--;
 	}
+	free(point);
 	return (res);
 }
 
@@ -94,6 +95,7 @@ static char			*wid_zer_min_xa(int wid, char *s, t_flags *flag)
 		}
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
+	free(s);
 	return (ans);
 }
 static char			*hash_xa(char *s)
