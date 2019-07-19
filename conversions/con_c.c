@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:51 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 20:59:12 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 23:20:30 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,5 @@ void				con_c(va_list options, t_flags *flags, t_val *val)
 		com++;
 	}
 	val->k += ft_putstr(com);
-	free(com); // made me fail 2 tests
+	free(com);
 }

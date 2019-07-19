@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:19 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 17:06:17 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 23:21:04 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char			*precision_o(int perc, char *point)
 		perc--;
 		j--;
 	}
-	free(point); // makes me fail 14 tests
+	free(point);
 	return (res);
 }
 
@@ -93,16 +93,12 @@ static char			*wid_zer_min_o(int wid, char *s, t_flags *flag)
 		}
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
-	free(s); // makes me fail 12 tests
+	free(s);
 	return (ans);
 }
 
 static char			*hash_o(char *s)
 {
-	// char			*str;
-
-	// str = ft_strnew(ft_strlen(s));
-	// str[0] = '0';
 	if (*s == '0')
 		return (s);
 	else if (*s >= 1 || ft_isalpha(*s) == 1)
@@ -129,5 +125,5 @@ void				con_o(va_list options, t_flags *flags, t_val *val)
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 		com = wid_zer_min_o(flags->width, com, flags);
 	val->k += ft_putstr(com);
-	free(com); //makes me fail 40 tests
+	free(com);
 }

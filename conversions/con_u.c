@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 17:25:42 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 23:21:32 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char			*precision_u(int perc, char *point)
 		perc--;
 		j--;
 	}
-	free(point); //made me fail 5 test
+	free(point);
 	return (res);
 }
 
@@ -96,7 +96,7 @@ static char			*wid_zer_min_u(int wid, char *s, t_flags *flag)
 		}
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
-	free(s); // Made me fail 3 test
+	free(s);
 	return (ans);
 }
 
@@ -140,5 +140,5 @@ void				con_u(va_list options, t_flags *flags, t_val *val)
 	if (flags->space == 1 || flags->plus == 1)
 		com = spac_plus_u(com, flags);
 	val->k += ft_putstr(com);
-	free(com); // made me fail 1 test
+	free(com);
 }
