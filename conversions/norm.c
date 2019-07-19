@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:42:20 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/16 21:07:08 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 23:45:26 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char			*min_help2(char *s, char *ans, t_flags *flag, t_val *val)
 		else if (s[i] == '-')
 		{
 			flag->si = '-';
-			s[i] = ' ';	
+			s[i] = ' ';
 			ans[val->count++] = s[i];
 		}
 	}

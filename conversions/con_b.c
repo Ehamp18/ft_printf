@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:50:06 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 23:15:21 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 23:49:14 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,16 @@ static char			*wid_zer_min_b(int wid, char *s, t_flags *flag)
 	char			*ans;
 
 	j = 0;
-	i = flag->minus == 1 ? 0 : ft_strlen(s);
+	i = flag->minus == 1 ? -1 : ft_strlen(s);
 	wid--;
 	if (wid < (int)ft_strlen(s))
 		return (s);
 	ans = ft_strnew(wid);
-	if (flag->minus == 1)
+	if (flag->minus == -1)
 	{
-		while (s[i])
-		{
+		while (s[++i])
 			if (ft_isdigit(s[i]) == 1 || s[i] == '+')
 				ans[j++] = s[i];
-			i++;
-		}
 		wid -= j;
 	}
 	else

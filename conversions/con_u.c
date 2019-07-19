@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 23:21:32 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 23:48:16 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ static char			*precision_u(int perc, char *point)
 	perc -= i;
 	while (i >= 0)
 	{
-		res[j] = point[i];
-		i--;
+		res[j] = point[i--];
 		j--;
 	}
 	while (perc > 0)
@@ -79,8 +78,7 @@ static char			*wid_zer_min_u(int wid, char *s, t_flags *flag)
 	ans = ft_strnew(wid);
 	j = 0;
 	i = flag->minus == 1 ? -1 : ft_strlen(s);
-	if (wid-- < (int)ft_strlen(s))
-		return (s);
+	RETY((wid-- < (int)ft_strlen(s)), s);
 	if (i == -1)
 	{
 		while (s[++i])

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:55 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 21:07:56 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 23:44:30 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ static char			*precision_xa(int perc, char *point)
 	res = ft_strnew(ft_numlen(perc));
 	j = ft_numlen(perc);
 	i = ft_strlen(point);
-	if (!perc)
-		return (point);
-	if (perc < (int)ft_strlen(point))
+	if (!perc || perc < (int)ft_strlen(point))
 		return (point);
 	perc -= i;
 	while (i >= 0)
@@ -98,6 +96,7 @@ static char			*wid_zer_min_xa(int wid, char *s, t_flags *flag)
 	free(s);
 	return (ans);
 }
+
 static char			*hash_xa(char *s)
 {
 	if ((ft_atoi(s) > 0 || (ft_isalpha(*s) == 1)) && *s != 0)

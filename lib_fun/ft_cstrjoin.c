@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 20:18:15 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/16 20:27:16 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 23:43:12 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ char			*ft_cstrjoin(char s1, char *s2)
 		return (0);
 	str[0] = s1;
 	ft_strcat(str, s2);
-    free(s2);
+	free(s2);
 	return (str);
 }

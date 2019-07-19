@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:19 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 23:21:04 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/18 23:49:44 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ static char			*precision_o(int perc, char *point)
 	res = ft_strnew(ft_numlen(perc));
 	j = ft_numlen(perc);
 	i = ft_strlen(point);
-	if (!perc)
-		return (point);
-	if (perc < (int)ft_strlen(point))
+	if (!perc || perc < (int)ft_strlen(point))
 		return (point);
 	perc -= i;
 	while (i >= 0)
