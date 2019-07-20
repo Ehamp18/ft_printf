@@ -6,39 +6,11 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:42:20 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 23:45:26 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/19 15:53:00 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
-
-char			*plus_help(t_flags *flag, char *a, char *s, t_val *val)
-{
-	static int	i = 0;
-	char		*res;
-
-	while (*a == ' ' && a)
-	{
-		s[i] = *a;
-		i++;
-		a++;
-	}
-	if (flag->minus && a[ft_strlen(a) - 1] == ' ')
-		a[ft_strlen(a) - 1] = '\0';
-	if (*a == '-')
-	{
-		res = ft_strjoin(s, a);
-		return (res);
-	}
-	if (flag->plus && flag->width && i)
-		i--;
-	if (flag->minus)
-		s[0] = !val->zero ? '+' : '-';
-	else
-		s[i] = !val->zero ? '+' : '-';
-	res = ft_strjoin(s, a);
-	return (res);
-}
 
 char			*per_help(char *point, int perc, t_val *val)
 {

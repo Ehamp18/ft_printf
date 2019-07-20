@@ -6,12 +6,11 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:50:06 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 23:49:14 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/19 16:26:13 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
-#include <stdio.h>
 
 static char			*precision_b(int perc, char *point)
 {
@@ -99,11 +98,12 @@ static char			*spac_plus_b(char *a, t_flags *flag, t_val *val)
 
 	i = 0;
 	res = ft_strnew(ft_strlen(a));
+	val->count = 0;
 	if (flag->plus == 1)
 	{
 		while (a[i] == ' ' || ft_isdigit(a[i]) == 0)
 			i++;
-		if (!val->zero)
+		if (a[i] != '-')
 			res = ft_cstrjoin('+', a);
 		else
 			res = ft_cstrjoin('-', a);
@@ -112,7 +112,7 @@ static char			*spac_plus_b(char *a, t_flags *flag, t_val *val)
 	{
 		while (a[i] == ' ' || ft_isdigit(a[i]) == 0)
 			i++;
-		if (!val->zero)
+		if (a[i] != '-')
 			res = ft_cstrjoin('+', a);
 		else
 			res = ft_cstrjoin('-', a);

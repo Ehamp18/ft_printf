@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/17 19:36:40 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/19 02:25:39 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void			con_u(va_list options, t_flags *flags, t_val *val);
 void			con_b(va_list options, t_flags *flags, t_val *val);
 int				con_per(t_flags *flags, t_val *val);
 int				checks(va_list options, const char *format, t_val *val);
-char			*plus_help(t_flags *flag, char *a, char *s, t_val *val);
+char			*plus_help(t_flags *flag, char *a, t_val *val);
 char			*per_help(char *point, int perc, t_val *val);
 char			*min_help(char *s, char *ans, t_flags *flag, t_val *val);
 char			*min_help2(char *s, char *ans, t_flags *flag, t_val *val);
@@ -100,6 +100,7 @@ char			*min_help2(char *s, char *ans, t_flags *flag, t_val *val);
 int				ft_atoi(const char *str);
 void			ft_bzero(void *s, size_t n);
 char			*ft_cstrjoin(char s1, char *s2);
+char			*ft_cstrjoini(char s1, char *s2, t_flags *flag);
 char			*ft_ccstrjoin(char s1, char s2, char *s3);
 int				ft_is_space(char c);
 int				ft_isalpha(int c);

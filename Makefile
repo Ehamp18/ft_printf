@@ -6,7 +6,7 @@
 #    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 17:30:33 by elhampto          #+#    #+#              #
-#    Updated: 2019/07/17 19:38:18 by elhampto         ###   ########.fr        #
+#    Updated: 2019/07/19 02:24:10 by elhampto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC = files/checks.c files/dispatch.c files/ft_printf.c conversions/con_per.c \
 	conversions/con_i.c conversions/con_o.c conversions/con_p.c \
 	conversions/con_s.c conversions/con_u.c conversions/con_x.c \
 	conversions/con_xa.c lib_fun/ft_atoi.c lib_fun/ft_bzero.c \
+	lib_fun/ft_cstrjoini.c \
 	conversions/norm.c lib_fun/ft_strdup.c lib_fun/ft_cstrjoin.c \
 	lib_fun/ft_is_space.c lib_fun/ft_isalpha.c lib_fun/ft_isdigit.c \
 	lib_fun/ft_isint.c lib_fun/ft_itoa_b.c lib_fun/ft_itoa_base_unsigned.c \
@@ -35,7 +36,7 @@ OBJ = checks.o dispatch.o ft_printf.o con_per.o \
 	con_b.o con_c.o con_d.o ft_strdup.o\
 	con_i.o con_o.o con_p.o ft_cstrjoin.o\
 	con_s.o con_u.o con_x.o norm.o ft_ccstrjoin.o\
-	con_xa.o ft_atoi.o ft_bzero.o \
+	con_xa.o ft_atoi.o ft_bzero.o ft_cstrjoini.o\
 	ft_is_space.o ft_isalpha.o ft_isdigit.o \
 	ft_isint.o ft_itoa_b.o ft_itoa_base_unsigned.o \
 	ft_itoa_base.o ft_itoa_cx.o ft_itoa_h.o \

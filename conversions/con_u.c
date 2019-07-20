@@ -6,12 +6,11 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 23:48:16 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/19 16:26:12 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
-#include <stdio.h>
 
 static char			*precision_u(int perc, char *point)
 {

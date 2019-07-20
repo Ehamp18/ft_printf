@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:38 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/17 19:02:09 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/19 15:45:10 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,22 +91,24 @@ static char			*wid_zer_min_d(int wid, char *s, t_flags *flag, t_val *val)
 
 static char			*spac_plus_d(char *a, t_flags *flag, t_val *val)
 {
-	char			*s;
 	char			*res;
 	int				i;
 
 	i = 0;
-	s = ft_strnew(ft_strlen(a));
 	if (flag->plus)
-		res = plus_help(flag, a, s, val);
+	{
+		if (!val->zero)
+			res = ft_cstrjoini('+', a, flag);
+		else
+			res = ft_cstrjoini('-', a, flag);
+	}
 	else
 	{
-		while (a[i] == ' ' || ft_isdigit(a[i]) == 0)
-			i++;
-		s[i] = !val->zero ? ' ' : '-';
-		res = ft_strjoin(s, a);
+		if (!val->zero)
+			res = ft_cstrjoini(' ', a, flag);
+		else
+			res = ft_cstrjoini('-', a, flag);
 	}
-	free(s);
 	free(a);
 	return (res);
 }

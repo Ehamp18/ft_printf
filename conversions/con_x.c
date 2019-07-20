@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/17 19:38:59 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/19 16:18:17 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char			*precision_x(int perc, char *point)
 	return (res);
 }
 
-static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
+static void			wzm_help(int wid, char *ans, t_flags *flag, int i)
 {
 	int				h;
 	int				k;
@@ -65,7 +65,6 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		ans[k] = '0';
 		k--;
 	}
-	return (ans);
 }
 
 static char			*wid_zer_min_x(int wid, char *s, t_flags *flag)
@@ -73,10 +72,10 @@ static char			*wid_zer_min_x(int wid, char *s, t_flags *flag)
 	int				i;
 	char			*ans;
 
-	ans = ft_strnew(wid);
 	i = flag->minus == 1 ? -1 : ft_strlen(s);
 	if (wid-- < (int)ft_strlen(s))
 		return (s);
+	ans = ft_strnew(wid);
 	if (i == -1)
 	{
 		while (s[++i] && s[i])
@@ -90,7 +89,7 @@ static char			*wid_zer_min_x(int wid, char *s, t_flags *flag)
 			wid--;
 		}
 	i = wid;
-	ans = wzm_help(wid, ans, flag, i);
+	wzm_help(wid, ans, flag, i);
 	free(s);
 	return (ans);
 }
