@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:36 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 21:27:11 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/23 19:29:00 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static char			*precision_s(int perc, char *point)
 		perc--;
 	}
 	point = res;
-	free(res);
 	return (point);
 }
 
@@ -81,26 +80,39 @@ static char			*wid_zer_min_s(int wid, char *s, t_flags *flag)
 			wid--;
 		}
 	i = wid;
-	s = wzm_help(wid, ans, flag, i);
-	free(ans);
-	return (s);
+	ans = wzm_help(wid, ans, flag, i);
+	return (ans);
 }
 
 void				con_s(va_list options, t_flags *flags, t_val *val)
 {
 	wchar_t			*a;
 	char			*com;
+	char			*tmp;
 
-	com = 0;
+	a = 0;
+	com = ft_strnew(sizeof(char));
+	tmp = ft_strnew(sizeof(char));
 	if (ft_strcmp(flags->length, "l") == 0)
 		a = va_arg(options, wchar_t*);
 	else
 		com = va_arg(options, char*);
+	if (a)
+		com = (char*)a;
 	if (com == NULL)
 		com = "(null)";
 	if (flags->precis > 0 || flags->precis == -1)
-		com = precision_s(flags->precis, com);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = precision_s(flags->precis, tmp);
+	}
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
-		com = wid_zer_min_s(flags->width, com, flags);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = wid_zer_min_s(flags->width, tmp, flags);
+	}
 	val->k += ft_putstr(com);
+	free(tmp);
 }

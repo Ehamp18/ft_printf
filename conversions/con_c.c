@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:51 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 23:20:30 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/23 19:07:10 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static char			*wid_zer_min_c(int wid, char *s, t_flags *flag)
 		}
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
-	free(s);
 	return (ans);
 }
 
@@ -90,17 +89,27 @@ void				con_c(va_list options, t_flags *flags, t_val *val)
 {
 	char			*com;
 	int				si;
+	char			*tmp;
 
 	si = 0;
+	tmp = ft_strnew(sizeof(char));
 	com = ft_strnew(sizeof(char*));
 	*com = ft_strcmp(flags->length, "l") == 0 ?
 		va_arg(options, wint_t) : va_arg(options, int);
 	if (*com == 0)
 		si = 1;
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
-		com = wid_zer_min_c(flags->width, com, flags);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = wid_zer_min_c(flags->width, tmp, flags);
+	}
 	if (flags->space == 1 || flags->plus == 1)
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
 		com = spac_plus_c(com, flags);
+	}
 	if (si == 1)
 	{
 		ft_putchar('\0');
@@ -109,4 +118,5 @@ void				con_c(va_list options, t_flags *flags, t_val *val)
 	}
 	val->k += ft_putstr(com);
 	free(com);
+	free(tmp);
 }

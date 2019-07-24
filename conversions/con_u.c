@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/19 16:26:12 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/23 19:32:44 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static char			*precision_u(int perc, char *point)
 		perc--;
 		j--;
 	}
-	free(point);
 	return (res);
 }
 
@@ -93,7 +92,6 @@ static char			*wid_zer_min_u(int wid, char *s, t_flags *flag)
 		}
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
-	free(s);
 	return (ans);
 }
 
@@ -122,20 +120,33 @@ void				con_u(va_list options, t_flags *flags, t_val *val)
 {
 	int64_t			a;
 	char			*com;
+	char			*tmp;
 
 	a = 0;
-	if ((ft_strcmp(flags->length, "l") == 0) ||
-		(ft_strcmp(flags->length, "ll") == 0))
-		a = va_arg(options, uint64_t);
-	else
-		a = va_arg(options, uint32_t);
+	tmp = ft_strnew(sizeof(char));
+	a = (ft_strcmp(flags->length, "l") == 0) ||
+		(ft_strcmp(flags->length, "ll") == 0) ?
+		va_arg(options, uint64_t) : va_arg(options, uint32_t);
 	com = ft_itoa_unsigned(a);
 	if (flags->precis > 0)
-		com = precision_u(flags->precis, com);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = precision_u(flags->precis, tmp);
+	}
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
-		com = wid_zer_min_u(flags->width, com, flags);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = wid_zer_min_u(flags->width, tmp, flags);
+	}
 	if (flags->space == 1 || flags->plus == 1)
-		com = spac_plus_u(com, flags);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = spac_plus_u(tmp, flags);
+	}
 	val->k += ft_putstr(com);
 	free(com);
+	free(tmp);
 }

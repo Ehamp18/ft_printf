@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:55 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/18 23:44:30 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/23 19:37:36 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static char			*precision_xa(int perc, char *point)
 		perc--;
 		j--;
 	}
-	free(point);
 	return (res);
 }
 
@@ -93,7 +92,6 @@ static char			*wid_zer_min_xa(int wid, char *s, t_flags *flag)
 		}
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
-	free(s);
 	return (ans);
 }
 
@@ -108,20 +106,29 @@ void				con_xa(va_list options, t_flags *flags, t_val *val)
 {
 	int64_t			a;
 	char			*com;
+	char			*tmp;
 
 	a = 0;
-	if ((ft_strcmp(flags->length, "l") == 0) ||
-		(ft_strcmp(flags->length, "ll") == 0))
-		a = va_arg(options, uint64_t);
-	else
-		a = va_arg(options, uint32_t);
+	tmp = ft_strnew(sizeof(char));
+	a = (ft_strcmp(flags->length, "l") == 0) ||
+		(ft_strcmp(flags->length, "ll") == 0) ?
+		va_arg(options, uint64_t) : va_arg(options, uint32_t);
 	com = ft_itoa_cx(a);
 	if (flags->precis > 0)
-		com = precision_xa(flags->precis, com);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = precision_xa(flags->precis, tmp);
+	}
 	if (flags->hash == 1)
 		com = hash_xa(com);
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
-		com = wid_zer_min_xa(flags->width, com, flags);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = wid_zer_min_xa(flags->width, tmp, flags);
+	}
 	val->k += ft_putstr(com);
 	free(com);
+	free(tmp);
 }

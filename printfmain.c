@@ -43,7 +43,7 @@ int         main(void)
     i = ft_printf("2 l: %ld\n", 9999999999);
     printf("2 return value: %d\n\n", i);
 
-     /* i flag test*/
+    //  /* i flag test*/
     printf("%s\n\n", "I flags");
     i = printf("1 no flags: %i\n", 153);
     printf("1 return value: %d\n", i);
@@ -105,20 +105,20 @@ int         main(void)
     i = ft_printf("2 l: %lo\n", 9999999999);
     printf("2 return value: %d\n\n", i);
 
-     /* p flag test*/
-    printf("%s\n\n", "P flags");
-    i = printf("1 no flags: %p\n", str);
-    printf("1 return value: %d\n", i);
-    i = ft_printf("2 no flags: %p\n", str);
-    printf("2 return value: %d\n\n", i);
-    i = printf("1 width: %5p\n", str);
-    printf("1 return value: %d\n", i);
-    i = ft_printf("2 width: %5p\n", str);
-    printf("2 return value: %d\n\n", i);
-    i = printf("1 minus: %-5p\n", str);
-    printf("1 return value: %d\n", i);
-    i = ft_printf("2 minus: %-5p\n", str);
-    printf("2 return value: %d\n\n", i);
+    //  /* p flag test*/
+    // printf("%s\n\n", "P flags");
+    // i = printf("1 no flags: %p\n", str);
+    // printf("1 return value: %d\n", i);
+    // i = ft_printf("2 no flags: %p\n", str);
+    // printf("2 return value: %d\n\n", i);
+    // i = printf("1 width: %5p\n", str);
+    // printf("1 return value: %d\n", i);
+    // i = ft_printf("2 width: %5p\n", str);
+    // printf("2 return value: %d\n\n", i);
+    // i = printf("1 minus: %-5p\n", str);
+    // printf("1 return value: %d\n", i);
+    // i = ft_printf("2 minus: %-5p\n", str);
+    // printf("2 return value: %d\n\n", i);
 
      /* x flag test*/
     printf("%s\n\n", "x flags");
@@ -216,39 +216,50 @@ int         main(void)
     i = ft_printf("2 minus: %-5c\n", '$');
     printf("2 return value: %d\n\n", i);
 
-     /* S flag test*/
-    printf("%s\n\n", "S flags");
-    i = printf("1 no flags: %s\n", str);
+    //  /* S flag test*/
+    // printf("%s\n\n", "S flags");
+    // i = printf("1 no flags: %s\n", str);
+    // printf("1 return value: %d\n", i);
+    // i = ft_printf("2 no flags: %s\n", str);
+    // printf("2 return value: %d\n\n", i);
+    // i = printf("1 width: %5s\n", str);
+    // printf("1 return value: %d\n", i);
+    // i = ft_printf("2 width: %5s\n", str);
+    // printf("2 return value: %d\n\n", i);
+    // i = printf("1 precision: %.5s\n", str);
+    // printf("1 return value: %d\n", i);
+    // i = ft_printf("2 precision: %.5s\n", str);
+    // printf("2 return value: %d\n\n", i);
+    // i = printf("1 minus: %-5s\n", str);
+    // printf("1 return value: %d\n", i);
+    // i = ft_printf("2 minus: %-5s\n", str);
+    // printf("2 return value: %d\n\n", i);
+
+    /* % flag test*/
+    printf("%s\n\n", "Percent Sign");
+    i = printf("1 no flag: %%\n");
     printf("1 return value: %d\n", i);
-    i = ft_printf("2 no flags: %s\n", str);
+    i = ft_printf("2 no flag: %%\n");
     printf("2 return value: %d\n\n", i);
-    i = printf("1 width: %5s\n", str);
+    i = printf("1 width: %5%\n");
     printf("1 return value: %d\n", i);
-    i = ft_printf("2 width: %5s\n", str);
-    printf("2 return value: %d\n\n", i);
-    i = printf("1 precision: %.5s\n", str);
-    printf("1 return value: %d\n", i);
-    i = ft_printf("2 precision: %.5s\n", str);
-    printf("2 return value: %d\n\n", i);
-    i = printf("1 minus: %-5s\n", str);
-    printf("1 return value: %d\n", i);
-    i = ft_printf("2 minus: %-5s\n", str);
+    i = ft_printf("2 width: %5%\n");
     printf("2 return value: %d\n\n", i);
 
      /* MIX test*/
-    printf("%s\n\n", "MIX");
-    i = printf("1 d: %+5d s: %10s c: %9c\n", 13, str, '$');
-    printf("1 return value: %d\n", i);
-    i = ft_printf("2 d: %+5d s: %10s c: %9c\n", 13, str, '$');
-    printf("2 return value: %d\n\n", i);
-    i = printf("1 s: %.5s o: %#9.7o x: %#4.8x i:  %+15i\n", str, 25, 63, 85);
-    printf("1 return value: %d\n", i);
-    i = ft_printf("2 s: %.5s o: %#9.7o x: %#4.8x i:  %+15i\n", str, 25, 63, 85);
-    printf("2 return value: %d\n\n", i);
-    i = printf("1 p: %6p d: %+.6d c: %3c\n", str, 1675, '$');
-    printf("1 return value: %d\n", i);
-    i = ft_printf("2 p: %6p d: %+.6d c: %3c\n", str, 1675, '$');
-    printf("2 return value: %d\n\n", i);
+    // printf("%s\n\n", "MIX");
+    // i = printf("1 d: %+5d s: %10s c: %9c\n", 13, str, '$');
+    // printf("1 return value: %d\n", i);
+    // i = ft_printf("2 d: %+5d s: %10s c: %9c\n", 13, str, '$');
+    // printf("2 return value: %d\n\n", i);
+    // i = printf("1 s: %.5s o: %#9.7o x: %#4.8x i:  %+15i\n", str, 25, 63, 85);
+    // printf("1 return value: %d\n", i);
+    // i = ft_printf("2 s: %.5s o: %#9.7o x: %#4.8x i:  %+15i\n", str, 25, 63, 85);
+    // printf("2 return value: %d\n\n", i);
+    // i = printf("1 p: %6p d: %+.6d c: %3c\n", str, 1675, '$');
+    // printf("1 return value: %d\n", i);
+    // i = ft_printf("2 p: %6p d: %+.6d c: %3c\n", str, 1675, '$');
+    // printf("2 return value: %d\n\n", i);
 
     system("leaks test");
 

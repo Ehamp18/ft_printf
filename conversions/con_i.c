@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:38 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/19 15:48:47 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/23 19:03:50 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static char			*precision_d(int perc, char *point, t_val *val)
 		res[perc] = '0';
 		perc--;
 	}
-	free(point);
 	return (val->in == -1 ? ft_cstrjoin('-', res) : res);
 }
 
@@ -85,7 +84,6 @@ static char			*wid_zer_min_d(int wid, char *s, t_flags *flag, t_val *val)
 	}
 	i = wid;
 	ans = wzm_help(wid, ans, flag, i);
-	free(s);
 	return (ans);
 }
 
@@ -109,7 +107,6 @@ static char			*spac_plus_d(char *a, t_flags *flag, t_val *val)
 		else
 			res = ft_cstrjoini('-', a, flag);
 	}
-	free(a);
 	return (res);
 }
 
@@ -117,8 +114,10 @@ void				con_i(va_list options, t_flags *flags, t_val *val)
 {
 	int64_t			a;
 	char			*com;
+	char			*tmp;
 
 	a = 0;
+	tmp = ft_strnew(sizeof(char));
 	a = (ft_strcmp(flags->length, "l") == 0) ||
 		(ft_strcmp(flags->length, "ll") == 0) ?
 		va_arg(options, int64_t) : va_arg(options, int32_t);
@@ -126,11 +125,24 @@ void				con_i(va_list options, t_flags *flags, t_val *val)
 	if (a < 0)
 		val->zero = 1;
 	if (flags->precis > 0 || flags->precis == -1)
-		com = precision_d(flags->precis, com, val);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = precision_d(flags->precis, tmp, val);
+	}
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
-		com = wid_zer_min_d(flags->width, com, flags, val);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = wid_zer_min_d(flags->width, tmp, flags, val);
+	}
 	if (flags->space == 1 || flags->plus == 1)
-		com = spac_plus_d(com, flags, val);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = spac_plus_d(tmp, flags, val);
+	}
 	val->k += ft_putstr(com);
 	free(com);
+	free(tmp);
 }

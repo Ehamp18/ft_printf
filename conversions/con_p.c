@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:30 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/19 01:48:40 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/23 19:16:55 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static char			*precision_p(int perc, char *point)
 		i--;
 		j--;
 	}
-	free(point);
 	return (res);
 }
 
@@ -89,7 +88,6 @@ static char			*wid_zer_min_p(int wid, char *s, t_flags *flag)
 			ans[wid] = s[i];
 	i = wid;
 	wzm_help(wid, ans, flag, i);
-	free(s);
 	return (ans);
 }
 
@@ -97,14 +95,27 @@ void				con_p(va_list options, t_flags *flags, t_val *val)
 {
 	intptr_t		a;
 	char			*com;
+	char			*tmp;
 
+	tmp = ft_strnew(sizeof(char));
 	a = va_arg(options, intptr_t);
 	com = ft_itoa_u_p(a);
 	if (flags->precis > 0)
-		com = precision_p(flags->precis, com);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = precision_p(flags->precis, tmp);
+	}
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
-		com = wid_zer_min_p(flags->width, com, flags);
-	com = ft_ccstrjoin('0', 'x', com);
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
+		com = wid_zer_min_p(flags->width, tmp, flags);
+	}
+	tmp = ft_strcpy(tmp, com);
+	free(com);
+	com = ft_ccstrjoin('0', 'x', tmp);
 	val->k += ft_putstr(com);
 	free(com);
+	free(tmp);
 }
