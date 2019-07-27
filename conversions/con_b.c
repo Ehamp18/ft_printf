@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:50:06 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/23 19:04:49 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/25 15:10:59 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char			*precision_b(int perc, char *point)
 	char			*res;
 
 	if (!perc || perc < (int)ft_strlen(point))
-		return (point);
+		return (ft_strdup(point));
 	if (perc == -1)
 		return (0);
 	res = ft_strnew(ft_numlen(perc));
@@ -72,7 +72,7 @@ static char			*wid_zer_min_b(int wid, char *s, t_flags *flag)
 	i = flag->minus == 1 ? -1 : ft_strlen(s);
 	wid--;
 	if (wid < (int)ft_strlen(s))
-		return (s);
+		return (ft_strdup(s));
 	ans = ft_strnew(wid);
 	if (flag->minus == -1)
 	{

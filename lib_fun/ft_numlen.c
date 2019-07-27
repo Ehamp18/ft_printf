@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 16:31:37 by elhampto          #+#    #+#             */
-/*   Updated: 2019/06/03 22:45:37 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/24 23:30:23 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int				ft_numlen(int num)
 	while (num)
 	{
 		len++;
-		num--;
+		num /= 10;
 	}
 	return (len);
 }

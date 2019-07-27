@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/23 19:32:44 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/25 14:57:16 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ static char			*precision_u(int perc, char *point)
 	res = ft_strnew(ft_numlen(perc));
 	j = ft_numlen(perc);
 	i = ft_strlen(point);
+	res[0] = '\0';
 	if (perc == -1)
-		return ("\0");
+		return (res);
 	if (perc < (int)ft_strlen(point))
-		return (point);
+		return (ft_strdup(point));
 	perc -= i;
 	while (i >= 0)
 	{
@@ -76,7 +77,7 @@ static char			*wid_zer_min_u(int wid, char *s, t_flags *flag)
 	ans = ft_strnew(wid);
 	j = 0;
 	i = flag->minus == 1 ? -1 : ft_strlen(s);
-	RETY((wid-- < (int)ft_strlen(s)), s);
+	RETY((wid-- < (int)ft_strlen(s)), ft_strdup(s));
 	if (i == -1)
 	{
 		while (s[++i])
@@ -113,7 +114,7 @@ static char			*spac_plus_u(char *a, t_flags *flag)
 		else
 			res = ft_cstrjoin('-', a);
 	}
-	return (res);
+	return (ft_strdup(res));
 }
 
 void				con_u(va_list options, t_flags *flags, t_val *val)

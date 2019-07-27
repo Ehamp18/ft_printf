@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:36 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/23 19:29:00 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/25 22:00:33 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ static char			*precision_s(int perc, char *point)
 		i++;
 		perc--;
 	}
-	point = res;
-	return (point);
+	return (res);
 }
 
-static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
+static void			wzm_help(int wid, char *ans, t_flags *flag, int i)
 {
 	int				h;
 
@@ -54,7 +53,6 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 		ans[h] = '0';
 		h--;
 	}
-	return (ans);
 }
 
 static char			*wid_zer_min_s(int wid, char *s, t_flags *flag)
@@ -66,7 +64,7 @@ static char			*wid_zer_min_s(int wid, char *s, t_flags *flag)
 	i = flag->minus == 1 ? -1 : ft_strlen(s);
 	wid--;
 	if (wid < (int)ft_strlen(s))
-		return (s);
+		return (ft_strdup(s));
 	if (i == -1)
 	{
 		while (s[++i])
@@ -80,7 +78,7 @@ static char			*wid_zer_min_s(int wid, char *s, t_flags *flag)
 			wid--;
 		}
 	i = wid;
-	ans = wzm_help(wid, ans, flag, i);
+	wzm_help(wid, ans, flag, i);
 	return (ans);
 }
 
@@ -91,12 +89,11 @@ void				con_s(va_list options, t_flags *flags, t_val *val)
 	char			*tmp;
 
 	a = 0;
-	com = ft_strnew(sizeof(char));
 	tmp = ft_strnew(sizeof(char));
 	if (ft_strcmp(flags->length, "l") == 0)
 		a = va_arg(options, wchar_t*);
 	else
-		com = va_arg(options, char*);
+		com = ft_strdup(va_arg(options, char*));
 	if (a)
 		com = (char*)a;
 	if (com == NULL)
@@ -114,5 +111,6 @@ void				con_s(va_list options, t_flags *flags, t_val *val)
 		com = wid_zer_min_s(flags->width, tmp, flags);
 	}
 	val->k += ft_putstr(com);
+	free(com);
 	free(tmp);
 }

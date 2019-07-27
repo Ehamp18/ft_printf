@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:30 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/23 19:16:55 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/25 16:36:38 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char			*precision_p(int perc, char *point)
 	res = ft_strnew(perc);
 	i = ft_strlen(point);
 	if (perc < i)
-		return (point);
+		return (ft_strdup(point));
 	if (!perc)
 		perc = 0;
 	while (perc >= 0)
@@ -72,7 +72,7 @@ static char			*wid_zer_min_p(int wid, char *s, t_flags *flag)
 	char			*ans;
 
 	if (wid-- < (int)ft_strlen(s) - 1)
-		return (s);
+		return (ft_strdup(s));
 	ans = ft_strnew(wid);
 	j = -1;
 	i = flag->minus == 1 ? 0 : ft_strlen(s);
@@ -93,13 +93,13 @@ static char			*wid_zer_min_p(int wid, char *s, t_flags *flag)
 
 void				con_p(va_list options, t_flags *flags, t_val *val)
 {
-	intptr_t		a;
+	// intptr_t		a;
 	char			*com;
 	char			*tmp;
 
 	tmp = ft_strnew(sizeof(char));
-	a = va_arg(options, intptr_t);
-	com = ft_itoa_u_p(a);
+	// a = va_arg(options, intptr_t);
+	com = ft_itoa_u_p(va_arg(options, intptr_t));
 	if (flags->precis > 0)
 	{
 		tmp = ft_strcpy(tmp, com);

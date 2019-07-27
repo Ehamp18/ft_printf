@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:38 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/23 19:03:50 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/26 16:19:49 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,23 @@ static char			*precision_d(int perc, char *point, t_val *val)
 
 	val->in = 1;
 	i = ft_strlen(point);
-	if (perc == -1)
-		return (0);
 	if (perc <= i)
-		return (point);
-	res = per_help(point, perc, val);
+		return (ft_strdup(point));
+	res = ft_strnew(perc);
+	if (perc == -1)
+		return (res);
+	i = ft_strlen(point);
+	while (i >= 0)
+	{
+		if (point[i] == '-')
+		{
+			val->in = -1;
+			point[i] = '0';
+		}
+		res[perc] = point[i--];
+		perc--;
+	}
+	val->count = perc;
 	perc = val->count;
 	while (perc >= 0)
 	{
@@ -67,10 +79,10 @@ static char			*wid_zer_min_d(int wid, char *s, t_flags *flag, t_val *val)
 	char			*ans;
 
 	flag->si = ' ';
+	if (wid < (int)ft_strlen(s))
+		return (ft_strdup(s));
 	ans = ft_strnew(wid);
 	wid--;
-	if (wid < (int)ft_strlen(s))
-		return (s);
 	if (flag->minus == 1)
 	{
 		ans = min_help(s, ans, flag, val);
@@ -93,20 +105,18 @@ static char			*spac_plus_d(char *a, t_flags *flag, t_val *val)
 	int				i;
 
 	i = 0;
+	while (a[i])
+	{
+		if (a[i] == '-')
+			return (ft_strdup(a));
+		i++;
+	}
 	if (flag->plus)
-	{
-		if (!val->zero)
-			res = ft_cstrjoini('+', a, flag);
-		else
-			res = ft_cstrjoini('-', a, flag);
-	}
+		res = !val->zero ?
+			ft_cstrjoini('+', a, flag) : ft_cstrjoini('-', a, flag);
 	else
-	{
-		if (!val->zero)
-			res = ft_cstrjoini(' ', a, flag);
-		else
-			res = ft_cstrjoini('-', a, flag);
-	}
+		res = !val->zero ?
+			ft_cstrjoini(' ', a, flag) : ft_cstrjoini('-', a, flag);
 	return (res);
 }
 
@@ -138,11 +148,13 @@ void				con_i(va_list options, t_flags *flags, t_val *val)
 	}
 	if (flags->space == 1 || flags->plus == 1)
 	{
-		tmp = ft_strcpy(tmp, com);
+		free(tmp);
+		ft_bzero(tmp, ft_strlen(tmp));
+		tmp = ft_strjoin(tmp, com);
 		free(com);
 		com = spac_plus_d(tmp, flags, val);
 	}
 	val->k += ft_putstr(com);
-	free(com);
 	free(tmp);
+	free(com);
 }

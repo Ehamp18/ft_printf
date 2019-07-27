@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 18:40:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/01 22:18:23 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/25 14:49:04 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ char			*ft_itoa_x(uint64_t n)
 	uint64_t	a;
 	char		*asc;
 
+	ZERO(!(asc = ft_strnew(ft_numlen(n))));
+	asc[0] = '0';
 	if (n == 0)
-		return ("0");
+		return (asc);
 	a = n;
 	len = 0;
 	while (a)
@@ -29,8 +31,6 @@ char			*ft_itoa_x(uint64_t n)
 		a /= 16;
 	}
 	a = n;
-	if (!(asc = ft_strnew(len)))
-		return (0);
 	while (len--)
 	{
 		asc[len] = index[a % 16];

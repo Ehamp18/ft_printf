@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:42:18 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/23 19:18:33 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/25 14:57:53 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char			*wid_zer_min(int wid, char *s, t_flags *flag)
 	char			*ans;
 
 	if (wid <= (int)ft_strlen(s))
-		return (s);
+		return (ft_strdup(s));
 	i = ft_strlen(s);
 	ans = ft_strnew(wid);
 	wid--;

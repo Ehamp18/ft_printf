@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/19 02:25:39 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:06:42 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define ERROR(x) if (x) return (-1)
 # define CHECK(x, y) if (x) y *= -1
 # define RETZE(x) if (x) return ("0")
+# define REZE(x, y) if (x) y = "0"
 # define RETY(x, y) if (x) return (y)
 # define INC(x, y) if (x) y++
 # define DEC(x, y) if (x) y--

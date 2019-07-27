@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/23 19:35:12 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/25 14:50:56 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char			*precision_x(int perc, char *point)
 	res = ft_strnew(perc);
 	i = ft_strlen(point);
 	if (perc < i)
-		return (point);
+		return (ft_strdup(point));
 	if (!perc)
 		perc = 0;
 	while (perc >= 0)
@@ -73,7 +73,7 @@ static char			*wid_zer_min_x(int wid, char *s, t_flags *flag)
 
 	i = flag->minus == 1 ? -1 : ft_strlen(s);
 	if (wid-- < (int)ft_strlen(s))
-		return (s);
+		return (ft_strdup(s));
 	ans = ft_strnew(wid);
 	if (i == -1)
 	{
@@ -96,7 +96,7 @@ static char			*hash_x(char *s)
 {
 	if ((ft_atoi(s) > 0 || (ft_isalpha(*s) == 1)) && *s != 0)
 		s = ft_ccstrjoin('0', 'x', s);
-	return (s);
+	return (ft_strdup(s));
 }
 
 void				con_x(va_list options, t_flags *flags, t_val *val)
