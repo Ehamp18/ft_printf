@@ -81,10 +81,10 @@ int         main(void)
 
      /* o flag test*/
     printf("%s\n\n", "O flags");
-    i = printf("1 no flags: %#9.7o\n", 153);
+    i = printf("1 no flags: %o\n", 698334);
     printf("1 return value: %d\n", i);
-    i = ft_printf("2 no flags: %#9.7o\n", 153);
-    // printf("2 return value: %d\n\n", i);
+    i = ft_printf("2 no flags: %o\n", 698334);
+    printf("2 return value: %d\n\n", i);
     // i = printf("1 width: %5o\n", 153);
     // printf("1 return value: %d\n", i);
     // i = ft_printf("2 width: %5o\n", 153);

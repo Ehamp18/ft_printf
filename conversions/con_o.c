@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:19 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/26 16:31:13 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/28 18:07:45 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,23 @@ static char			*precision_o(int perc, char *point)
 {
 	int				i;
 	char			*res;
-	int				j;
 
-	if (!perc || perc < (int)ft_strlen(point))
+	res = ft_strnew(perc);
+	if (perc == 0)
+		return (res);
+	if (perc <= (int)ft_strlen(point))
 		return (ft_strdup(point));
-	res = ft_strnew(ft_numlen(perc));
-	j = ft_numlen(perc);
 	i = ft_strlen(point);
-	perc -= i;
 	while (i >= 0)
 	{
-		res[j] = point[i];
+		res[perc] = point[i];
 		i--;
-		j--;
-	}
-	while ((perc > 0))
-	{
-		res[j] = ('0');
 		perc--;
-		j--;
+	}
+	while ((perc >= 0))
+	{
+		res[perc] = ('0');
+		perc--;
 	}
 	return (res);
 }
@@ -74,7 +72,7 @@ static char			*wid_zer_min_o(int wid, char *s, t_flags *flag)
 	i = flag->minus == 1 ? -1 : ft_strlen(s);
 	ans = ft_strnew(wid);
 	wid--;
-	if (wid < (int)ft_strlen(s))
+	if (wid <= (int)ft_strlen(s))
 		return (ft_strdup(s));
 	if (i == -1)
 	{
@@ -95,11 +93,19 @@ static char			*wid_zer_min_o(int wid, char *s, t_flags *flag)
 
 static char			*hash_o(char *s)
 {
+	// char			*tmp;
+
+	// tmp = ft_strnew(ft_strlen(s));
 	if (*s == '0')
-		return (ft_strdup(s));
+		return (s);
 	else if (*s >= 1 || ft_isalpha(*s) == 1)
+	{
+		// tmp = ft_strcpy(tmp, s);
+		// free(s);
 		s = ft_cstrjoin('0', s);
-	return (ft_strdup(s));
+	}
+	// free(tmp);
+	return (s);
 }
 
 void				con_o(va_list options, t_flags *flags, t_val *val)
@@ -121,11 +127,7 @@ void				con_o(va_list options, t_flags *flags, t_val *val)
 		com = precision_o(flags->precis, tmp);
 	}
 	if (flags->hash == 1)
-	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
 		com = hash_o(com);
-	}
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 	{
 		tmp = ft_strcpy(tmp, com);
