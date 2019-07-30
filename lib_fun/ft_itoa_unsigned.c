@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 19:37:02 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/25 14:56:05 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/29 15:49:37 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char			*ft_itoa_unsigned(uint64_t n)
 	uint64_t	a;
 	char		*asc;
 
-	ZERO(!(asc = ft_strnew(ft_numlen(n))));
+	ZERO(!(asc = ft_strnew(ft_unumlen(n))));
 	asc[0] = '0';
 	if (n == 0)
 		return (asc);

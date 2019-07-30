@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/26 14:06:42 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/29 22:52:03 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void			ft_bzero(void *s, size_t n);
 char			*ft_cstrjoin(char s1, char *s2);
 char			*ft_cstrjoini(char s1, char *s2, t_flags *flag);
 char			*ft_ccstrjoin(char s1, char s2, char *s3);
+char			*ft_ccstrjoini(char s1, char s2, char *s3, t_flags *flag);
 int				ft_is_space(char c);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
@@ -122,7 +123,7 @@ char			*ft_itoa_x(uint64_t n);
 char			*ft_itoa(int64_t n);
 void			*ft_memalloc(size_t size);
 void			*ft_memset(void *b, int c, size_t len);
-int				ft_numlen(int num);
+int				ft_numlen(uint64_t num);
 int				ft_putchar(char c);
 void			ft_putnbr(int n);
 int				ft_putstr(char const *s);
@@ -137,6 +138,7 @@ char			*ft_strnew(size_t size);
 char			**ft_strsplit(char const *s, char c);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 int				ft_tabs(char c);
+int				ft_unumlen(uint64_t num);
 size_t			ft_wordcount(char const *s, char c);
 
 #endif

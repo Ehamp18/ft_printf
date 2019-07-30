@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/25 14:50:56 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/29 16:06:16 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,10 @@ static char			*hash_x(char *s)
 
 void				con_x(va_list options, t_flags *flags, t_val *val)
 {
-	int64_t			a;
+	uint64_t		a;
 	char			*com;
 	char			*tmp;
 
-	a = 0;
 	tmp = ft_strnew(sizeof(char));
 	a = (ft_strcmp(flags->length, "l") == 0) ||
 		(ft_strcmp(flags->length, "ll") == 0) ?

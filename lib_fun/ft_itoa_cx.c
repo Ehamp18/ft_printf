@@ -6,12 +6,12 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 18:40:48 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/25 14:53:11 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/29 21:13:30 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
-
+#include <stdio.h>
 char			*ft_itoa_cx(uint64_t n)
 {
 	const char	index[16] = "0123456789ABCDEF";
@@ -19,7 +19,7 @@ char			*ft_itoa_cx(uint64_t n)
 	uint64_t	a;
 	char		*asc;
 
-	ZERO(!(asc = ft_strnew(ft_numlen(n))));
+	ZERO(!(asc = ft_strnew(ft_unumlen(n))));
 	asc[0] = '0';
 	if (n == 0)
 		return (asc);

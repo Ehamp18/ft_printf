@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:19 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/28 18:07:45 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/29 23:39:37 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,20 +93,31 @@ static char			*wid_zer_min_o(int wid, char *s, t_flags *flag)
 
 static char			*hash_o(char *s)
 {
-	// char			*tmp;
+	char			*tmp;
 
-	// tmp = ft_strnew(ft_strlen(s));
-	if (*s == '0')
+	tmp = ft_strnew(sizeof(char));
+	if (ft_atoi(s) == 0)
 		return (s);
 	else if (*s >= 1 || ft_isalpha(*s) == 1)
 	{
-		// tmp = ft_strcpy(tmp, s);
-		// free(s);
+		tmp = ft_strcpy(tmp, s);
+		free(s);
 		s = ft_cstrjoin('0', s);
 	}
-	// free(tmp);
-	return (s);
+	free(tmp);
+	return (ft_strdup(s));
 }
+
+// {
+// 	if ((ft_atoi(s) > 0 || (ft_isalpha(*s) == 1)) && *s != 0)
+// 	{
+// 		tmp = ft_strcpy(tmp, s);
+// 		free(s);
+// 		s = ft_ccstrjoini('0', 'X', tmp, flag);
+// 	}
+// 	free(tmp);
+// 	return (ft_strdup(s));
+// }
 
 void				con_o(va_list options, t_flags *flags, t_val *val)
 {
@@ -118,7 +129,7 @@ void				con_o(va_list options, t_flags *flags, t_val *val)
 	tmp = ft_strnew(sizeof(char));
 	a = (ft_strcmp(flags->length, "l") == 0) ||
 		(ft_strcmp(flags->length, "ll") == 0) ?
-		va_arg(options, uint64_t) : va_arg(options, uint32_t);
+		va_arg(options, unsigned long long) : va_arg(options, unsigned long);
 	com = ft_itoa_o_unsigned(a);
 	if (flags->precis > 0)
 	{
@@ -127,7 +138,11 @@ void				con_o(va_list options, t_flags *flags, t_val *val)
 		com = precision_o(flags->precis, tmp);
 	}
 	if (flags->hash == 1)
+	{
+		tmp = ft_strcpy(tmp, com);
+		free(com);
 		com = hash_o(com);
+	}
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 	{
 		tmp = ft_strcpy(tmp, com);

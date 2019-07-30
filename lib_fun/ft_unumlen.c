@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_unumlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/18 12:38:03 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/29 13:02:50 by elhampto         ###   ########.fr       */
+/*   Created: 2019/07/29 12:50:57 by elhampto          #+#    #+#             */
+/*   Updated: 2019/07/29 12:51:34 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-void				ft_bzero(void *s, size_t n)
+int				ft_unumlen(uint64_t num)
 {
-	ft_memset(s, 0, n);
+	uint64_t	len;
+
+	len = 0;
+	while (num)
+	{
+		len++;
+		num /= 10;
+	}
+	return (len);
 }

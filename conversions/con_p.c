@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:30 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/25 16:36:38 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/29 15:35:11 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ static char			*wid_zer_min_p(int wid, char *s, t_flags *flag)
 
 void				con_p(va_list options, t_flags *flags, t_val *val)
 {
-	// intptr_t		a;
 	char			*com;
 	char			*tmp;
+	int				i;
 
+	i = 0;
 	tmp = ft_strnew(sizeof(char));
-	// a = va_arg(options, intptr_t);
 	com = ft_itoa_u_p(va_arg(options, intptr_t));
 	if (flags->precis > 0)
 	{
@@ -114,7 +114,7 @@ void				con_p(va_list options, t_flags *flags, t_val *val)
 	}
 	tmp = ft_strcpy(tmp, com);
 	free(com);
-	com = ft_ccstrjoin('0', 'x', tmp);
+	com = ft_ccstrjoini('0', 'x', tmp, flags);
 	val->k += ft_putstr(com);
 	free(com);
 	free(tmp);
