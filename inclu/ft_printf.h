@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/31 22:50:30 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/31 23:43:59 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void			con_p(va_list options, t_flags *flags, t_val *val);
 void			con_o(va_list options, t_flags *flags, t_val *val);
 void			con_u(va_list options, t_flags *flags, t_val *val);
 void			con_b(va_list options, t_flags *flags, t_val *val);
-void			con_f(va_list options, t_flags *flags, t_val *val);
 int				con_per(t_flags *flags, t_val *val);
 int				checks(va_list options, const char *format, t_val *val);
 char			*plus_help(t_flags *flag, char *a, t_val *val);
