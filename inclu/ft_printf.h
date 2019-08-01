@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/29 22:52:03 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/31 22:50:30 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void			con_p(va_list options, t_flags *flags, t_val *val);
 void			con_o(va_list options, t_flags *flags, t_val *val);
 void			con_u(va_list options, t_flags *flags, t_val *val);
 void			con_b(va_list options, t_flags *flags, t_val *val);
+void			con_f(va_list options, t_flags *flags, t_val *val);
 int				con_per(t_flags *flags, t_val *val);
 int				checks(va_list options, const char *format, t_val *val);
 char			*plus_help(t_flags *flag, char *a, t_val *val);
@@ -108,7 +109,7 @@ int				ft_is_space(char c);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isint(int c);
-char			*ft_itoa_b(int n);
+char			*ft_itoa_b(uint64_t n);
 char			*ft_itoa_base_unsigned(uint64_t n, int base);
 char			*ft_itoa_base(int n, int base);
 char			*ft_itoa_cx(uint64_t n);

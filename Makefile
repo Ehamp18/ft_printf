@@ -6,7 +6,7 @@
 #    By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 17:30:33 by elhampto          #+#    #+#              #
-#    Updated: 2019/07/29 14:36:56 by elhampto         ###   ########.fr        #
+#    Updated: 2019/07/31 22:50:57 by elhampto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC = files/checks.c files/dispatch.c files/ft_printf.c conversions/con_per.c \
 	conversions/con_b.c conversions/con_c.c conversions/con_d.c \
 	conversions/con_i.c conversions/con_o.c conversions/con_p.c \
 	conversions/con_s.c conversions/con_u.c conversions/con_x.c \
+	conversions/con_f.c \
 	conversions/con_xa.c lib_fun/ft_atoi.c lib_fun/ft_bzero.c \
 	lib_fun/ft_cstrjoini.c lib_fun/ft_unumlen.c lib_fun/ft_ccstrjoini.c\
 	conversions/norm.c lib_fun/ft_strdup.c lib_fun/ft_cstrjoin.c \
@@ -32,7 +33,7 @@ SRC = files/checks.c files/dispatch.c files/ft_printf.c conversions/con_per.c \
 	lib_fun/ft_strrev_cpy.c lib_fun/ft_strsplit.c lib_fun/ft_strsub.c \
 	lib_fun/ft_tabs.c lib_fun/ft_wordcount.c
 
-OBJ = checks.o dispatch.o ft_printf.o con_per.o \
+OBJ = checks.o dispatch.o ft_printf.o con_per.o con_f.o\
 	con_b.o con_c.o con_d.o ft_strdup.o ft_unumlen.o\
 	con_i.o con_o.o con_p.o ft_cstrjoin.o ft_ccstrjoini.o\
 	con_s.o con_u.o con_x.o norm.o ft_ccstrjoin.o\

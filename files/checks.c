@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 13:23:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/16 20:12:31 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/07/30 19:56:22 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int						checks(va_list options, const char *format, t_val *val)
 	i = 0;
 	ft_bzero(&flags, sizeof(t_flags));
 	flags.check = 1;
-	while (*format == '%' && format[flags.check])
+	while (*format == '%' && format[flags.check] && format[flags.check] != '\n')
 	{
 		flags_1(format, &flags);
 		flags_2(format, &flags);
