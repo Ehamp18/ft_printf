@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:38 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/26 16:19:49 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/01 23:35:53 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ static char			*precision_d(int perc, char *point, t_val *val)
 
 	val->in = 1;
 	i = ft_strlen(point);
-	if (perc <= i)
-		return (ft_strdup(point));
+	RETY(perc <= i, ft_strdup(point));
 	res = ft_strnew(perc);
-	if (perc == -1)
-		return (res);
+	RETY(perc == -1, res);
 	i = ft_strlen(point);
 	while (i >= 0)
 	{
@@ -35,8 +33,6 @@ static char			*precision_d(int perc, char *point, t_val *val)
 		res[perc] = point[i--];
 		perc--;
 	}
-	val->count = perc;
-	perc = val->count;
 	while (perc >= 0)
 	{
 		res[perc] = '0';
@@ -122,39 +118,29 @@ static char			*spac_plus_d(char *a, t_flags *flag, t_val *val)
 
 void				con_i(va_list options, t_flags *flags, t_val *val)
 {
-	int64_t			a;
 	char			*com;
 	char			*tmp;
 
-	a = 0;
 	tmp = ft_strnew(sizeof(char));
-	a = (ft_strcmp(flags->length, "l") == 0) ||
+	com = ft_itoa((ft_strcmp(flags->length, "l") == 0) ||
 		(ft_strcmp(flags->length, "ll") == 0) ?
-		va_arg(options, int64_t) : va_arg(options, int32_t);
-	com = ft_itoa(a);
-	if (a < 0)
-		val->zero = 1;
+		va_arg(options, int64_t) : va_arg(options, int32_t));
+	ONE(ft_atoi(com) < 0, val->zero);
 	if (flags->precis > 0 || flags->precis == -1)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		tmp = freeing(com, tmp);
 		com = precision_d(flags->precis, tmp, val);
 	}
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		tmp = freeing(com, tmp);
 		com = wid_zer_min_d(flags->width, tmp, flags, val);
 	}
 	if (flags->space == 1 || flags->plus == 1)
 	{
-		free(tmp);
-		ft_bzero(tmp, ft_strlen(tmp));
-		tmp = ft_strjoin(tmp, com);
-		free(com);
+		tmp = freeing(com, tmp);
 		com = spac_plus_d(tmp, flags, val);
 	}
 	val->k += ft_putstr(com);
-	free(tmp);
-	free(com);
+	just_free(com, tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/31 22:41:36 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/01 01:18:26 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,15 @@ static char			*wid_zer_min_x(int wid, char *s, t_flags *flag)
 	if (flag->minus)
 		while (s[++i])
 		{
-			ans[i] = s[i];
-			wid--;
+			DEC((ans[i] = s[i]), wid);
 		}
 	else
 		while (i-- > 0)
-		{
-			wid--;
-			ans[wid] = s[i];
-		}
+			DEC((ans[wid] = s[i]), wid);
 	wzm_help(wid, ans, flag);
 	if (flag->hash == 1)
-		ans = (flag->width >= 1 || flag->minus) ? hash_x(ans, flag) : hash_x(s, flag);
+		ans = (flag->width >= 1 || flag->minus) ?
+			hash_x(ans, flag) : hash_x(s, flag);
 	return (ans);
 }
 
@@ -115,15 +112,13 @@ void				con_x(va_list options, t_flags *flags, t_val *val)
 	com = ft_itoa_x(a);
 	if (flags->precis > 0 || flags->precis == -1)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		FREE(((tmp = ft_strcpy(tmp, com))), com);
 		com = precision_x(flags->precis, tmp);
 	}
 	if (flags->hash == 1 || flags->width >= 1 || flags->minus == 1 ||
 		flags->zero == 1)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		FREE(((tmp = ft_strcpy(tmp, com))), com);
 		com = wid_zer_min_x(flags->width, tmp, flags);
 	}
 	val->k += ft_putstr(com);

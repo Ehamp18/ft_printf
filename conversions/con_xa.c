@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:55 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/29 22:20:07 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/01 01:42:08 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,23 +119,18 @@ void				con_xa(va_list options, t_flags *flags, t_val *val)
 	com = ft_itoa_cx(a);
 	if (flags->precis > 0 || flags->precis == -1)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		FREE(((tmp = ft_strcpy(tmp, com))), com);
 		com = precision_x(flags->precis, tmp);
 	}
 	if (flags->hash == 1)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		FREE(((tmp = ft_strcpy(tmp, com))), com);
 		com = hash_x(tmp, flags);
 	}
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		FREE(((tmp = ft_strcpy(tmp, com))), com);
 		com = wid_zer_min_x(flags->width, tmp, flags);
 	}
-	val->k += ft_putstr(com);
-	free(com);
-	free(tmp);
+	FREE2((val->k += ft_putstr(com)), com, tmp);
 }

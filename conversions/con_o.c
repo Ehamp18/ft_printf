@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:19 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/31 22:44:30 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/01 00:58:44 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void				con_o(va_list options, t_flags *flags, t_val *val)
 	char			*com;
 	char			*tmp;
 
-	a = 0;
 	tmp = ft_strnew(sizeof(char));
 	a = (ft_strcmp(flags->length, "l") == 0) ||
 		(ft_strcmp(flags->length, "ll") == 0) ?
@@ -117,14 +116,12 @@ void				con_o(va_list options, t_flags *flags, t_val *val)
 	com = ft_itoa_o_unsigned(a);
 	if (flags->precis > 0)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		FREE(((tmp = ft_strcpy(tmp, com))), com);
 		com = precision_o(flags->precis, tmp);
 	}
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		FREE(((tmp = ft_strcpy(tmp, com))), com);
 		com = wid_zer_min_o(flags->width, tmp, flags);
 	}
 	if (flags->hash == 1)

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/31 23:43:59 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/01 23:33:39 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 # define ZERO(x) if (x) return (0)
 # define NEG_CHECK(x) if (x < 0) x *= -1
 # define NEG_SI_PRNT(x, y) if (x < 0) y = '-'
-# define FREE(x, y, z) z = ft_strjoin(x, y); free(x); x = z;
+# define FREE(x, y) if x free(y)
+# define FREE2(x, y, z) if x free(y); free(z)
 # define FE(x, y) x = y; free(y)
 # define CPY(x, y) y = ft_strcat(y, x); free(x)
 # define ERROR(x) if (x) return (-1)
@@ -37,6 +38,7 @@
 # define RETY(x, y) if (x) return (y)
 # define INC(x, y) if (x) y++
 # define DEC(x, y) if (x) y--
+# define ONE(x, y) if (x) y = 1
 
 typedef struct	s_flags
 {
@@ -93,6 +95,8 @@ char			*plus_help(t_flags *flag, char *a, t_val *val);
 char			*per_help(char *point, int perc, t_val *val);
 char			*min_help(char *s, char *ans, t_flags *flag, t_val *val);
 char			*min_help2(char *s, char *ans, t_flags *flag, t_val *val);
+char			*freeing(char *com, char *tmp);
+void			just_free(char *com, char *tmp);
 
 /*
 ** Libary_functions

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/29 15:47:20 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/01 23:17:07 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,19 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 static char			*wid_zer_min_u(int wid, char *s, t_flags *flag)
 {
 	int				i;
-	int				j;
 	char			*ans;
 
 	ans = ft_strnew(wid);
-	j = 0;
 	i = flag->minus == 1 ? -1 : ft_strlen(s);
 	RETY((wid-- < (int)ft_strlen(s)), ft_strdup(s));
-	if (i == -1)
+	if (flag->minus)
 	{
 		while (s[++i])
 			if (ft_isdigit(s[i]) == 1 || s[i] == '-')
-				ans[j++] = s[i];
-		wid -= j;
+			{
+				ans[i] = s[i];
+				wid--;
+			}
 	}
 	else
 		while (i-- > 0)
@@ -95,54 +95,37 @@ static char			*spac_plus_u(char *a, t_flags *flag)
 {
 	char			*res;
 
-	if (flag->plus == 0)
-	{
-		if (a[0] != '-')
-			res = ft_cstrjoin('+', a);
-		else
-			res = ft_cstrjoin('-', a);
-	}
+	if (flag->plus)
+		res = a[0] != '-' ? ft_cstrjoin('+', a) : ft_cstrjoin('-', a);
 	else
-	{
-		if (a[0] != '-')
-			res = ft_cstrjoin('+', a);
-		else
-			res = ft_cstrjoin('-', a);
-	}
+		res = a[0] != '-' ? ft_cstrjoin(' ', a) : ft_cstrjoin('-', a);
 	return (ft_strdup(res));
 }
 
 void				con_u(va_list options, t_flags *flags, t_val *val)
 {
-	int64_t			a;
 	char			*com;
 	char			*tmp;
 
-	a = 0;
 	tmp = ft_strnew(sizeof(char));
-	a = (ft_strcmp(flags->length, "l") == 0) ||
+	com = ft_itoa_unsigned((ft_strcmp(flags->length, "l") == 0) ||
 		(ft_strcmp(flags->length, "ll") == 0) ?
-		va_arg(options, uint64_t) : va_arg(options, uint32_t);
-	com = ft_itoa_unsigned(a);
+		va_arg(options, uint64_t) : va_arg(options, uint32_t));
 	if (flags->precis > 0)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		tmp = freeing(com, tmp);
 		com = precision_u(flags->precis, tmp);
 	}
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		tmp = freeing(com, tmp);
 		com = wid_zer_min_u(flags->width, tmp, flags);
 	}
 	if (flags->space == 1 || flags->plus == 1)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		tmp = freeing(com, tmp);
 		com = spac_plus_u(tmp, flags);
 	}
 	val->k += ft_putstr(com);
-	free(com);
-	free(tmp);
+	just_free(com, tmp);
 }

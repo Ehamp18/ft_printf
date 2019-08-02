@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:42:20 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/26 14:07:29 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/01 22:49:25 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,19 @@ char			*min_help2(char *s, char *ans, t_flags *flag, t_val *val)
 		}
 	}
 	return (ans);
+}
+
+char			*freeing(char *com, char *tmp)
+{
+	free(tmp);
+	ft_bzero(tmp, ft_strlen(tmp));
+	tmp = ft_strjoin(tmp, com);
+	free(com);
+	return (tmp);
+}
+
+void			just_free(char *com, char *tmp)
+{
+	free(tmp);
+	free(com);
 }
