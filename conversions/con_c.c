@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   con_c.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehamp <ehamp@student.42.fr>                +#+  +:+       +#+        */
+/*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:51 by elhampto          #+#    #+#             */
-/*   Updated: 2019/08/02 21:59:12 by ehamp            ###   ########.fr       */
+/*   Updated: 2019/08/02 22:26:34 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,18 @@ static char			*wid_zer_min_c(int wid, char *s, t_flags *flag)
 	return (ans);
 }
 
-static char			*spac_plus_c(char *a, t_flags *flag)
+static	void		printing(char *com, char c, t_flags *flags)
 {
-	char			*res;
-
-	if (flag->plus == 0)
+	if (flags->minus)
 	{
-		if (a[0] != '-')
-			res = ft_cstrjoin('+', a);
-		else
-			res = ft_cstrjoin('-', a);
+		ft_putchar(c);
+		ft_putstr(com);
 	}
 	else
 	{
-		if (a[0] != '-')
-			res = ft_cstrjoin('+', a);
-		else
-			res = ft_cstrjoin('-', a);
+		ft_putstr(com);
+		ft_putchar(c);
 	}
-	return (ft_strdup(res));
 }
 
 void				con_c(va_list options, t_flags *flags, t_val *val)
@@ -99,32 +92,12 @@ void				con_c(va_list options, t_flags *flags, t_val *val)
 		va_arg(options, int);
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
+		FREE(((tmp = ft_strcpy(tmp, com))), com);
 		com = wid_zer_min_c(flags->width, tmp, flags);
-	}
-	if (flags->space == 1 || flags->plus == 1)
-	{
-		tmp = ft_strcpy(tmp, com);
-		free(com);
-		com = spac_plus_c(com, flags);
-	}
-	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
-	{
-		if (flags->minus)
-		{
-			ft_putchar(c);
-			ft_putstr(com);
-		}
-		else
-		{
-			ft_putstr(com);
-			ft_putchar(c);
-		}
+		printing(com, c, flags);
 	}
 	else
 		ft_putchar(c);
 	val->k += flags->width > 1 ? flags->width : 1;
-	free(com);
-	free(tmp);
+	just_free(com, tmp);
 }
