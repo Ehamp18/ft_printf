@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   con_c.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehamp <ehamp@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:27:51 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/31 21:51:01 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/02 21:59:12 by ehamp            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 {
 	int				h;
 
-	while (wid >= 0 && flag->minus == 0 && flag->width >= 1)
+	while (wid > 0 && flag->minus == 0 && flag->width >= 1)
 	{
-		ans[wid] = ' ';
 		wid--;
+		ans[wid] = ' ';
 	}
 	h = ft_strlen(ans);
-	while (i >= 0 && flag->minus == 1)
+	while (i > 0 && flag->minus == 1)
 	{
-		ans[h++] = ' ';
 		i--;
+		ans[h++] = ' ';
 	}
 	h = ft_strlen(ans) - 1;
 	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1)
@@ -43,18 +43,20 @@ static char			*wid_zer_min_c(int wid, char *s, t_flags *flag)
 	int				i;
 	char			*ans;
 
-	ans = ft_strnew(wid);
 	if (wid-- < ((int)ft_strlen(s) - 1))
 		return (ft_strdup(s));
+	ans = ft_strnew(wid);
 	i = flag->minus == 1 ? -1 : ft_strlen(s);
-	if (i == -1)
+	if (flag->minus)
 	{
 		while (s[++i])
+		{
 			ans[i] = s[i];
-		wid -= i;
+			wid--;
+		}
 	}
 	else
-		while (i-- > 0)
+		while (i--)
 		{
 			ans[wid] = s[i];
 			wid--;
@@ -88,14 +90,13 @@ static char			*spac_plus_c(char *a, t_flags *flag)
 void				con_c(va_list options, t_flags *flags, t_val *val)
 {
 	char			*com;
-	int				si;
 	char			*tmp;
+	char			c;
 
-	si = 0;
 	tmp = ft_strnew(sizeof(char));
 	com = ft_strnew(sizeof(char));
-	*com = ft_strcmp(flags->length, "l") == 0 ?
-		va_arg(options, wint_t) : va_arg(options, int);
+	c = ft_strcmp(flags->length, "l") == 0 ? va_arg(options, wint_t) :
+		va_arg(options, int);
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 	{
 		tmp = ft_strcpy(tmp, com);
@@ -108,7 +109,21 @@ void				con_c(va_list options, t_flags *flags, t_val *val)
 		free(com);
 		com = spac_plus_c(com, flags);
 	}
-	ft_putstr(com);
+	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
+	{
+		if (flags->minus)
+		{
+			ft_putchar(c);
+			ft_putstr(com);
+		}
+		else
+		{
+			ft_putstr(com);
+			ft_putchar(c);
+		}
+	}
+	else
+		ft_putchar(c);
 	val->k += flags->width > 1 ? flags->width : 1;
 	free(com);
 	free(tmp);
