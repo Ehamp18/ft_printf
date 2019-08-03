@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/08/01 23:33:39 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/03 00:36:18 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void			ft_bzero(void *s, size_t n);
 char			*ft_cstrjoin(char s1, char *s2);
 char			*ft_cstrjoini(char s1, char *s2, t_flags *flag);
 char			*ft_ccstrjoin(char s1, char s2, char *s3);
-char			*ft_ccstrjoini(char s1, char s2, char *s3, t_flags *flag);
+char			*ft_ccstrjoini(char s1, char s2, char *s3);
 int				ft_is_space(char c);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);

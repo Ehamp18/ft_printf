@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:55 by elhampto          #+#    #+#             */
-/*   Updated: 2019/08/01 01:42:08 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/03 00:37:45 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static char			*wid_zer_min_x(int wid, char *s, t_flags *flag)
 	return (ans);
 }
 
-static char			*hash_x(char *s, t_flags *flag)
+static char			*hash_x(char *s)
 {
 	char			*tmp;
 
@@ -100,7 +100,7 @@ static char			*hash_x(char *s, t_flags *flag)
 	{
 		tmp = ft_strcpy(tmp, s);
 		free(s);
-		s = ft_ccstrjoini('0', 'X', tmp, flag);
+		s = ft_ccstrjoini('0', 'X', tmp);
 	}
 	free(tmp);
 	return (ft_strdup(s));
@@ -125,7 +125,7 @@ void				con_xa(va_list options, t_flags *flags, t_val *val)
 	if (flags->hash == 1)
 	{
 		FREE(((tmp = ft_strcpy(tmp, com))), com);
-		com = hash_x(tmp, flags);
+		com = hash_x(tmp);
 	}
 	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
 	{

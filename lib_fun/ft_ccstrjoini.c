@@ -6,13 +6,13 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 14:33:46 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/30 20:30:57 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/03 00:40:29 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-char			*ft_ccstrjoini(char s1, char s2, char *s3, t_flags *flag)
+char			*ft_ccstrjoini(char s1, char s2, char *s3)
 {
 	char		*str;
 	int			i;
@@ -25,10 +25,7 @@ char			*ft_ccstrjoini(char s1, char s2, char *s3, t_flags *flag)
 		str[i] = *s3++;
 		i++;
 	}
-	if (flag->width && flag->minus)
-		flag->si = 1;
-	str[i] = s1;
-	i++;
+	str[i++] = s1;
 	str[i] = s2;
 	ft_strcat(str, s3);
 	return (str);

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:45 by elhampto          #+#    #+#             */
-/*   Updated: 2019/08/01 01:18:26 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/03 01:04:16 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ static char			*precision_x(int perc, char *point)
 		return (ft_strdup(point));
 	if (!perc)
 		perc = 0;
-	while (i >= 0 && perc)
+	while (i >= 0)
 	{
-		res[perc] = point[i];
-		i--;
+		res[perc] = point[i--];
 		perc--;
 	}
-	while (perc > 0)
+	while (perc >= 0)
 	{
 		res[perc] = '0';
 		perc--;
@@ -37,10 +36,10 @@ static char			*precision_x(int perc, char *point)
 	return (res);
 }
 
-static char			*hash_x(char *s, t_flags *flag)
+static char			*hash_x(char *s)
 {
-	if ((ft_atoi(s) > 0 || (ft_isalpha(*s) == 1)) && *s)
-		s = ft_ccstrjoini('0', 'x', s, flag);
+	if ((ft_atoi(s) > 0 || (ft_isalpha(*s) == 1)))
+		s = ft_ccstrjoini('0', 'x', s);
 	return (ft_strdup(s));
 }
 
@@ -50,21 +49,20 @@ static void			wzm_help(int wid, char *ans, t_flags *flag)
 	int				k;
 
 	k = wid;
-	while (wid > 0 && flag->minus == 0 && flag->width >= 1)
+	while (wid > 0 && !flag->minus)
 	{
 		--wid;
 		ans[wid] = ' ';
 	}
 	h = ft_strlen(ans);
-	while (wid > 0 && flag->minus == 1)
+	while (wid > 0 && flag->minus)
 	{
-		wid--;
+		--wid;
 		ans[h++] = ' ';
 	}
-	while ((ft_isdigit(ans[k]) == 1 || ans[k] == '-') && flag->zero == 1 &&
-		flag->precis == 0)
+	while (ft_isdigit(ans[k]) == 1 && flag->zero && !flag->precis)
 		k--;
-	while (ans[k] && flag->zero == 1 && flag->precis == 0)
+	while (ans[k] && flag->zero && !flag->precis)
 	{
 		ans[k] = '0';
 		k--;
@@ -76,26 +74,22 @@ static char			*wid_zer_min_x(int wid, char *s, t_flags *flag)
 	int				i;
 	char			*ans;
 
-	i = flag->minus == 1 ? -1 : ft_strlen(s);
-	ans = ft_strnew(wid);
 	if (wid < (int)ft_strlen(s))
 	{
-		if (flag->hash)
-			ans = hash_x(s, flag);
+		ans = flag->hash ? ft_strdup(hash_x(s)) : 0;
 		return (flag->hash ? ans : ft_strdup(s));
 	}
+	i = flag->minus? -1 : ft_strlen(s);
+	ans = ft_strnew(wid);
 	if (flag->minus)
-		while (s[++i])
-		{
-			DEC((ans[i] = s[i]), wid);
-		}
+		while (s[++i] && wid--)
+			ans[i] = s[i];
 	else
 		while (i-- > 0)
-			DEC((ans[wid] = s[i]), wid);
+			ans[--wid] = s[i];
 	wzm_help(wid, ans, flag);
-	if (flag->hash == 1)
-		ans = (flag->width >= 1 || flag->minus) ?
-			hash_x(ans, flag) : hash_x(s, flag);
+	if (flag->hash)
+		ans = hash_x(ans);
 	return (ans);
 }
 
@@ -112,16 +106,19 @@ void				con_x(va_list options, t_flags *flags, t_val *val)
 	com = ft_itoa_x(a);
 	if (flags->precis > 0 || flags->precis == -1)
 	{
-		FREE(((tmp = ft_strcpy(tmp, com))), com);
+		tmp = freeing(com, tmp);
 		com = precision_x(flags->precis, tmp);
 	}
-	if (flags->hash == 1 || flags->width >= 1 || flags->minus == 1 ||
-		flags->zero == 1)
+	if (flags->width >= 1)
 	{
-		FREE(((tmp = ft_strcpy(tmp, com))), com);
+		tmp = freeing(com, tmp);
 		com = wid_zer_min_x(flags->width, tmp, flags);
 	}
+	if (flags->hash && !flags->width)
+	{
+		tmp = freeing(com, tmp);
+		com = hash_x(tmp);
+	}
 	val->k += ft_putstr(com);
-	free(com);
-	free(tmp);
+	just_free(com, tmp);
 }
