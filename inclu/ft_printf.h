@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:52:49 by elhampto          #+#    #+#             */
-/*   Updated: 2019/08/03 00:36:18 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/04 03:17:54 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <fcntl.h>
 # include <wctype.h>
 
-# define BREAK(x) if (x) break
+# define BREAK(x) if (x) break ;
 # define ZERO(x) if (x) return (0)
 # define NEG_CHECK(x) if (x < 0) x *= -1
 # define NEG_SI_PRNT(x, y) if (x < 0) y = '-'
@@ -52,7 +52,7 @@ typedef struct	s_flags
 	int			precis;
 	int			sign;
 	char		si;
-	char		*length;
+	int			length;
 }				t_flags;
 
 typedef struct	s_count
@@ -80,7 +80,6 @@ extern t_check	g_conver_check[];
 
 int				ft_printf(const char *format, ...);
 void			con_d(va_list options, t_flags *flags, t_val *val);
-void			con_i(va_list options, t_flags *flags, t_val *val);
 void			con_c(va_list options, t_flags *flags, t_val *val);
 void			con_s(va_list options, t_flags *flags, t_val *val);
 void			con_x(va_list options, t_flags *flags, t_val *val);
@@ -89,7 +88,7 @@ void			con_p(va_list options, t_flags *flags, t_val *val);
 void			con_o(va_list options, t_flags *flags, t_val *val);
 void			con_u(va_list options, t_flags *flags, t_val *val);
 void			con_b(va_list options, t_flags *flags, t_val *val);
-int				con_per(t_flags *flags, t_val *val);
+void			con_per(t_flags *flags, t_val *val);
 int				checks(va_list options, const char *format, t_val *val);
 char			*plus_help(t_flags *flag, char *a, t_val *val);
 char			*per_help(char *point, int perc, t_val *val);

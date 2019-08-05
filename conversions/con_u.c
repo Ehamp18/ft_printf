@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/08/01 23:17:07 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/03 19:30:27 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char			*precision_u(int perc, char *point)
 	int				i;
 	char			*res;
 
-	res = ft_strnew(ft_numlen(perc) + 1);
+	res = ft_strnew(ft_unumlen(perc));
 	i = ft_strlen(point);
 	if (perc == -1)
 		return (res);
@@ -36,42 +36,40 @@ static char			*precision_u(int perc, char *point)
 	return (res);
 }
 
-static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
+static void			wzm_help(int wid, char *ans, t_flags *fl)
 {
 	int				h;
 
-	while (wid >= 0 && flag->minus == 0 && flag->width >= 1)
+	while (wid > 0 && !fl->minus && fl->width)
 	{
-		ans[wid] = ' ';
 		wid--;
+		ans[wid] = ' ';
 	}
 	h = ft_strlen(ans);
-	while (i >= 0 && flag->minus == 1)
+	while (wid > 0 && fl->minus)
 	{
+		wid--;
 		ans[h++] = ' ';
-		i--;
 	}
 	h = ft_strlen(ans) - 1;
-	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1
-			&& flag->precis == 0)
+	while (ft_isdigit(ans[h]) && fl->zero && !fl->precis)
 		h--;
-	while (ans[h] && flag->zero == 1 && flag->precis == 0)
+	while (ans[h] && fl->zero && !fl->precis)
 	{
 		ans[h] = '0';
 		h--;
 	}
-	return (ans);
 }
 
-static char			*wid_zer_min_u(int wid, char *s, t_flags *flag)
+static char			*wid_zer_min_u(int wid, char *s, t_flags *fl)
 {
 	int				i;
 	char			*ans;
 
+	i = fl->minus ? -1 : ft_strlen(s);
+	RETY((wid < (int)ft_strlen(s)), ft_strdup(s));
 	ans = ft_strnew(wid);
-	i = flag->minus == 1 ? -1 : ft_strlen(s);
-	RETY((wid-- < (int)ft_strlen(s)), ft_strdup(s));
-	if (flag->minus)
+	if (fl->minus)
 	{
 		while (s[++i])
 			if (ft_isdigit(s[i]) == 1 || s[i] == '-')
@@ -83,48 +81,30 @@ static char			*wid_zer_min_u(int wid, char *s, t_flags *flag)
 	else
 		while (i-- > 0)
 		{
-			ans[wid] = s[i];
 			wid--;
+			ans[wid] = s[i];
 		}
-	i = wid;
-	ans = wzm_help(wid, ans, flag, i);
+	wzm_help(wid, ans, fl);
 	return (ans);
 }
 
-static char			*spac_plus_u(char *a, t_flags *flag)
-{
-	char			*res;
-
-	if (flag->plus)
-		res = a[0] != '-' ? ft_cstrjoin('+', a) : ft_cstrjoin('-', a);
-	else
-		res = a[0] != '-' ? ft_cstrjoin(' ', a) : ft_cstrjoin('-', a);
-	return (ft_strdup(res));
-}
-
-void				con_u(va_list options, t_flags *flags, t_val *val)
+void				con_u(va_list options, t_flags *fls, t_val *val)
 {
 	char			*com;
 	char			*tmp;
 
 	tmp = ft_strnew(sizeof(char));
-	com = ft_itoa_unsigned((ft_strcmp(flags->length, "l") == 0) ||
-		(ft_strcmp(flags->length, "ll") == 0) ?
+	com = ft_itoa_unsigned((fls->length == 108 || fls->length == 216) ?
 		va_arg(options, uint64_t) : va_arg(options, uint32_t));
-	if (flags->precis > 0)
+	if (fls->precis)
 	{
 		tmp = freeing(com, tmp);
-		com = precision_u(flags->precis, tmp);
+		com = precision_u(fls->precis, tmp);
 	}
-	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
+	if (fls->width)
 	{
 		tmp = freeing(com, tmp);
-		com = wid_zer_min_u(flags->width, tmp, flags);
-	}
-	if (flags->space == 1 || flags->plus == 1)
-	{
-		tmp = freeing(com, tmp);
-		com = spac_plus_u(tmp, flags);
+		com = wid_zer_min_u(fls->width, tmp, fls);
 	}
 	val->k += ft_putstr(com);
 	just_free(com, tmp);

@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:28:36 by elhampto          #+#    #+#             */
-/*   Updated: 2019/08/01 01:22:19 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/04 02:43:16 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,83 +30,76 @@ static char			*precision_s(int perc, char *point)
 	return (res);
 }
 
-static void			wzm_help(int wid, char *ans, t_flags *flag, int i)
+static void			wzm_help(int wid, char *ans, t_flags *fl)
 {
 	int				h;
 
-	while (wid >= 0 && flag->minus == 0 && flag->width >= 1)
+	while (wid > 0 && !fl->minus && fl->width)
 	{
-		ans[wid] = ' ';
 		wid--;
+		ans[wid] = ' ';
 	}
 	h = ft_strlen(ans);
-	while (i >= 0 && flag->minus == 1)
+	while (wid > 0 && fl->minus)
 	{
+		wid--;
 		ans[h++] = ' ';
-		i--;
 	}
 	h = ft_strlen(ans) - 1;
-	while ((ft_isdigit(ans[h]) == 1 || ans[h] == '-') && flag->zero == 1)
+	while ((ft_isdigit(ans[h]) || ans[h] == '-') && fl->zero)
 		h--;
-	while (ans[h] && flag->zero == 1)
+	while (ans[h] && fl->zero)
 	{
 		ans[h] = '0';
 		h--;
 	}
 }
 
-static char			*wid_zer_min_s(int wid, char *s, t_flags *flag)
+static char			*wid_zer_min_s(int wid, char *s, t_flags *fl)
 {
 	int				i;
 	char			*ans;
 
-	ans = ft_strnew(wid);
-	i = flag->minus == 1 ? -1 : ft_strlen(s);
-	wid--;
+	i = fl->minus ? -1 : ft_strlen(s);
 	if (wid < (int)ft_strlen(s))
 		return (ft_strdup(s));
-	if (i == -1)
-	{
+	ans = ft_strnew(wid);
+	if (fl->minus)
 		while (s[++i])
+		{
 			ans[i] = s[i];
-		wid -= i;
-	}
+			wid--;
+		}
 	else
 		while (i-- > 0)
 		{
-			ans[wid] = s[i];
 			wid--;
+			ans[wid] = s[i];
 		}
-	i = wid;
-	wzm_help(wid, ans, flag, i);
+	wzm_help(wid, ans, fl);
 	return (ans);
 }
 
-void				con_s(va_list options, t_flags *flags, t_val *val)
+void				con_s(va_list options, t_flags *fl, t_val *val)
 {
-	wchar_t			*a;
 	char			*com;
 	char			*tmp;
 
-	a = 0;
 	tmp = ft_strnew(sizeof(char));
-	if (ft_strcmp(flags->length, "l") == 0)
-		a = va_arg(options, wchar_t*);
+	if (fl->length == 108)
+		com = (char*)va_arg(options, wchar_t*);
 	else if (!(com = ft_strdup(va_arg(options, char*))))
 		com = ft_strdup("(null)");
-	if (a)
-		com = (char*)a;
-	if (flags->precis > 0 || flags->precis == -1)
+	if (fl->precis || fl->precis == -1)
 	{
-		FREE(((tmp = ft_strcpy(tmp, com))), com);
-		com = precision_s(flags->precis, tmp);
+		tmp = freeing(com, tmp);
+		com = precision_s(fl->precis, tmp);
 	}
-	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
+	if (fl->width)
 	{
-		FREE(((tmp = ft_strcpy(tmp, com))), com);
-		com = wid_zer_min_s(flags->width, tmp, flags);
+		tmp = freeing(com, tmp);
+		com = wid_zer_min_s(fl->width, tmp, fl);
 	}
 	val->k += ft_putstr(com);
-	free(com);
-	free(tmp);
+	just_free(com, tmp);
 }

@@ -6,26 +6,26 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 00:42:18 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/25 14:57:53 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/03 20:25:11 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
+static char			*wzm_help(int wid, char *ans, t_flags *fl, int i)
 {
 	int				h;
 
-	while (wid >= 0 && flag->minus == 0 && flag->width >= 1)
+	while (wid >= 0 && !fl->minus && fl->width)
 	{
 		ans[wid] = ' ';
 		wid--;
 	}
 	wid = i;
 	h = ft_strlen(ans);
-	while (i-- >= 0 && flag->minus == 1)
+	while (i-- >= 0 && fl->minus)
 		ans[h++] = ' ';
-	if (flag->minus == 0 && flag->zero == 1)
+	if (!fl->minus && fl->zero)
 	{
 		while (ans[wid] == ' ')
 		{
@@ -36,7 +36,7 @@ static char			*wzm_help(int wid, char *ans, t_flags *flag, int i)
 	return (ans);
 }
 
-static char			*wid_zer_min(int wid, char *s, t_flags *flag)
+static char			*wid_zer_min(int wid, char *s, t_flags *fl)
 {
 	int				i;
 	char			*ans;
@@ -46,39 +46,35 @@ static char			*wid_zer_min(int wid, char *s, t_flags *flag)
 	i = ft_strlen(s);
 	ans = ft_strnew(wid);
 	wid--;
-	if (flag->width >= 1 && flag->minus == 0)
+	if (fl->width && !fl->minus)
 	{
 		ans[wid] = s[0];
 		wid--;
 	}
-	else if (flag->minus == 1)
+	else if (fl->minus)
 	{
 		ans[0] = s[0];
 		wid--;
 	}
-	i = wid;
-	ans = wzm_help(wid, ans, flag, i);
+	wzm_help(wid, ans, fl, i);
 	return (ans);
 }
 
-int					con_per(t_flags *flags, t_val *val)
+void				con_per(t_flags *fl, t_val *val)
 {
 	char			*com;
 	char			*tmp;
-	int				i;
 
 	tmp = ft_strnew(sizeof(char));
-	com = (char*)ft_memalloc(sizeof(flags));
+	com = (char*)ft_memalloc(sizeof(fl));
 	*com = '%';
-	i = ft_strlen(com);
-	if (flags->width >= 1 || flags->minus == 1 || flags->zero == 1)
+	if (fl->width)
 	{
 		tmp = ft_strcpy(tmp, com);
 		free(com);
-		com = wid_zer_min(flags->width, tmp, flags);
+		com = wid_zer_min(fl->width, tmp, fl);
 	}
 	val->k += ft_putstr(com);
 	free(com);
 	free(tmp);
-	return (i);
 }

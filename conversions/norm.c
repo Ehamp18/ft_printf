@@ -6,7 +6,7 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:42:20 by elhampto          #+#    #+#             */
-/*   Updated: 2019/08/01 22:49:25 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/03 18:22:12 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char			*per_help(char *point, int perc, t_val *val)
 	return (res);
 }
 
-char			*min_help(char *s, char *ans, t_flags *flag, t_val *val)
+char			*min_help(char *s, char *ans, t_flags *fl, t_val *val)
 {
 	int			i;
 
@@ -45,7 +45,7 @@ char			*min_help(char *s, char *ans, t_flags *flag, t_val *val)
 			ans[val->count++] = s[i];
 		else if (s[i] == '-')
 		{
-			flag->si = '-';
+			fl->si = '-';
 			s[i] = ' ';
 			ans[val->count++] = s[i];
 		}
@@ -54,7 +54,7 @@ char			*min_help(char *s, char *ans, t_flags *flag, t_val *val)
 	return (ans);
 }
 
-char			*min_help2(char *s, char *ans, t_flags *flag, t_val *val)
+char			*min_help2(char *s, char *ans, t_flags *fl, t_val *val)
 {
 	int			i;
 
@@ -66,7 +66,7 @@ char			*min_help2(char *s, char *ans, t_flags *flag, t_val *val)
 			ans[val->wid--] = s[i];
 		else if (s[i] == '-')
 		{
-			flag->si = '-';
+			fl->si = '-';
 			s[i] = ' ';
 			ans[val->count++] = s[i];
 		}

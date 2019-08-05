@@ -204,9 +204,9 @@ int         main(void)
 
     //   /* C flag test*/
     // printf("%s\n\n", "C flags");
-    i = printf("1 no flags: |%f|\n", (double)0);
+    i = printf("1 no flags: |%%| |%d|\n", 4450);
     printf("1 return value: %d\n", i);
-    i = ft_printf("2 no flags: |%f|\n", (double)0);
+    i = ft_printf("2 no flags: |%%| |%d|\n", 4450);
     printf("2 return value: %d\n\n", i);
     // i = printf("1 width: %5c\n", '$');
     // printf("1 return value: %d\n", i);

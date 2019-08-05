@@ -6,104 +6,122 @@
 /*   By: elhampto <elhampto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 13:23:40 by elhampto          #+#    #+#             */
-/*   Updated: 2019/07/30 19:56:22 by elhampto         ###   ########.fr       */
+/*   Updated: 2019/08/04 02:37:19 by elhampto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inclu/ft_printf.h"
 
-static void				flags_1(const char *format, t_flags *flags)
+static void		fl_1(const char *str, t_flags *fl)
 {
-	while (format[flags->check] == '-' || format[flags->check] == '+' ||
-		format[flags->check] == '0' || format[flags->check] == ' ' ||
-		format[flags->check] == '#')
+	while (str[fl->check] == '-' || str[fl->check] == '+' ||
+		str[fl->check] == '0' || str[fl->check] == ' ' || str[fl->check] == '#')
 	{
-		if (format[flags->check] == '-')
-			INC((flags->minus = 1), flags->check);
-		if (format[flags->check] == '+')
-			INC((flags->plus = 1), flags->check);
-		if (format[flags->check] == '0')
-			INC((flags->zero = 1), flags->check);
-		if (format[flags->check] == ' ')
-			INC((flags->space = 1), flags->check);
-		if (format[flags->check] == '#')
-			INC((flags->hash = 1), flags->check);
+		if (str[fl->check] == '-')
+			INC((fl->minus = 1), fl->check);
+		if (str[fl->check] == '+')
+			INC((fl->plus = 1), fl->check);
+		if (str[fl->check] == '0')
+			INC((fl->zero = 1), fl->check);
+		if (str[fl->check] == ' ')
+			INC((fl->space = 1), fl->check);
+		if (str[fl->check] == '#')
+			INC((fl->hash = 1), fl->check);
 	}
 }
 
-static void				fl_2_help(const char *format, t_flags *flags, int cur)
+static void		op_ch(const char *str, t_flags *fl, int cur, va_list options)
 {
-	int					j;
-	char				*l;
+	char		*l;
+	int			j;
 
-	if (format[flags->check] == '.')
+	j = 0;
+	l = ft_strnew(ft_strlen(str));
+	if (str[fl->check] == '.' && str[cur] == '*')
 	{
-		j = 0;
-		l = ft_strnew(ft_strlen(format));
-		while (format[flags->check] == '.' && ft_isdigit(format[cur]) == 1)
-			INC((l[j] = format[cur++]), j);
-		flags->precis = j > 0 ? ft_atoi(l) : -1;
-		free(l);
-		flags->check += ++j;
+		fl->precis = va_arg(options, int);
+		fl->check += 2;
 	}
-	if (format[flags->check] == 'l' || format[flags->check] == 'h')
+	else if (str[fl->check] == '.')
 	{
-		if (format[flags->check] == 'l' && format[cur] == 'l')
+		while (str[fl->check] == '.' && ft_isdigit(str[cur]))
+			INC((l[j] = str[cur++]), j);
+		fl->precis = j > 0 ? ft_atoi(l) : -1;
+		fl->check += ++j;
+	}
+	free(l);
+}
+
+static void		fl_2_length(const char *str, t_flags *fl, int cur)
+{
+	if (str[fl->check] == 'l' || str[fl->check] == 'h')
+	{
+		if (str[fl->check] == 'l' && str[cur] == 'l')
 		{
-			INC((flags->length = "ll"), flags->check);
+			INC((fl->length = 216), fl->check);
 		}
-		else if (format[flags->check] == 'h' && format[cur] == 'h')
-			flags->check++;
-		else if (format[flags->check] == 'l')
-			flags->length = "l";
-		flags->check++;
+		else if (str[fl->check] == 'h' && str[cur] == 'h')
+			fl->check++;
+		else if (str[fl->check] == 'l')
+			fl->length = 108;
+		fl->check++;
 	}
 }
 
-static void				flags_2(const char *format, t_flags *flags)
+static void		fl_2(const char *str, t_flags *fl, va_list options)
 {
-	int					cur;
-	char				*l;
-	int					j;
+	int			cur;
+	char		*l;
+	int			j;
 
-	cur = flags->check;
-	if (ft_isdigit(format[flags->check]) == 1)
+	cur = fl->check;
+	j = 0;
+	if (ft_isdigit(str[fl->check]) || str[fl->check] == '*')
 	{
-		j = 0;
-		l = ft_strnew(ft_strlen(format));
-		while (ft_isdigit(format[cur]) == 1)
-			INC((l[j] = format[cur++]), j);
-		flags->width = ft_atoi(l);
+		l = ft_strnew(ft_strlen(str));
+		if (str[fl->check] == '*')
+		{
+			INC((fl->width = va_arg(options, int)), fl->check);
+		}
+		else if (ft_isdigit(str[fl->check]))
+		{
+			while (ft_isdigit(str[cur]) == 1)
+				INC((l[j] = str[cur++]), j);
+			fl->width = ft_atoi(l);
+			fl->check += j;
+		}
 		free(l);
-		flags->check += j;
 	}
-	cur = flags->check + 1;
-	fl_2_help(format, flags, cur);
+	cur = fl->check + 1;
+	op_ch(str, fl, cur, options);
+	fl_2_length(str, fl, cur);
 }
 
-int						checks(va_list options, const char *format, t_val *val)
+int				checks(va_list options, const char *str, t_val *val)
 {
-	t_flags				flags;
-	int					i;
+	t_flags		fl;
+	int			i;
+	int			k;
 
 	i = 0;
-	ft_bzero(&flags, sizeof(t_flags));
-	flags.check = 1;
-	while (*format == '%' && format[flags.check] && format[flags.check] != '\n')
+	ft_bzero(&fl, sizeof(t_flags));
+	fl.check = 1;
+	while (*str == '%' && str[fl.check] && str[fl.check] != '\n')
 	{
-		flags_1(format, &flags);
-		flags_2(format, &flags);
-		if (format[flags.check] == '%')
+		k = fl.check;
+		fl_1(str, &fl);
+		fl_2(str, &fl, options);
+		if (str[fl.check] == '%')
 		{
-			con_per(&flags, val);
+			con_per(&fl, val);
 			break ;
 		}
-		if (g_conver_check[i].op == format[flags.check])
+		if (str[fl.check] == g_conver_check[i].op)
 		{
-			g_conver_check[i].kl(options, &flags, val);
+			g_conver_check[i].kl(options, &fl, val);
 			break ;
 		}
-		i++;
+		i += k == fl.check ? 1 : 0;
 	}
-	return (flags.check);
+	return (fl.check);
 }
